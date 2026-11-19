@@ -50,6 +50,7 @@ input,textarea,select,td,th,.asset-amount,.metric-value,code{-webkit-user-select
 .secondary{background:#edf1f5;color:#45566a;border:1px solid var(--line)}
 .secondary:hover{background:#e2e8ef}
 .danger-btn{background:#fdf0f0;color:var(--red);border:1px solid #f2d5d5}
+.danger-btn:hover{background:#fae2e2}
 .mobile-menu{display:none}
 .page{display:none}
 .page.active{display:block}
@@ -110,6 +111,10 @@ th{font-size:9.5px;color:#8794a4;letter-spacing:.6px;font-weight:700;text-transf
 .small-btn:hover{background:#e2e8ef}
 .small-btn.dca{background:#e8f4f0;color:#1d7258}
 .small-btn.dca:hover{background:#d6ece5}
+.small-btn.sell{background:#fff4e8;color:#b85d19}
+.small-btn.sell:hover{background:#fde6cf}
+.small-btn.del{background:#fdf0f0;color:#c85a5a}
+.small-btn.del:hover{background:#fae0e0}
 .alert-pill{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700}
 .alert-pill.warn{background:#fcf3e3;color:#9c6818}
 .alert-pill.due{background:#fdf0f0;color:#c85a5a}
@@ -212,7 +217,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <button type="button" class="nav-item" data-page="reports">▦ <span>Báo cáo</span></button>
       <button type="button" class="nav-item" data-page="settings">⚙ <span>Cài đặt & dữ liệu</span></button>
     </nav>
-    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.0 · 5 Khoản mục phân bổ</div>
+    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.1 · Bán ra & Rút tiền</div>
   </aside>
 
   <main class="main">
@@ -305,7 +310,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
     <section id="assetsPage" class="page">
       <div class="section-toolbar">
-        <div><h2>Tất cả tài sản</h2><p>Ghi nhận số lượng, giá vốn, giá trị hiện tại và thông tin từng khoản.</p></div>
+        <div><h2>Tất cả tài sản</h2><p>Ghi nhận số lượng, giá vốn, giá trị hiện tại, bán ra/rút tiền và xóa khoản.</p></div>
         <button type="button" class="primary" id="addAsset">＋ Thêm tài sản</button>
       </div>
       <div class="filter-row">
@@ -324,14 +329,17 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
     <section id="transactionsPage" class="page">
       <div class="section-toolbar">
-        <div><h2>Sổ giao dịch</h2><p>Ghi nhận mua, bán, gửi thêm, rút và điều chuyển vốn.</p></div>
-        <button type="button" class="primary" id="addTransaction">＋ Ghi giao dịch</button>
+        <div><h2>Sổ giao dịch</h2><p>Ghi nhận mua thêm, bán ra, gửi thêm, rút tiền và điều chuyển vốn.</p></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button type="button" class="secondary" id="quickSellTxBtn">− Bán ra / Rút tiền</button>
+          <button type="button" class="primary" id="addTransaction">＋ Ghi giao dịch</button>
+        </div>
       </div>
       <article class="panel table-panel">
         <div class="table-scroll">
           <table>
-            <thead><tr><th>Ngày</th><th>Loại</th><th>Tài sản</th><th>Số lượng</th><th>Giá trị (₫)</th><th>Lãi/lỗ chốt</th><th>Ghi chú</th><th></th></tr></thead>
-            <tbody id="transactionRows"><tr><td colspan="8" class="empty">Chưa có giao dịch.</td></tr></tbody>
+            <thead><tr><th>Ngày</th><th>Loại</th><th>Danh mục</th><th>Tài sản</th><th>Số lượng</th><th>Giá trị (₫)</th><th>Lãi/lỗ chốt</th><th>Ghi chú</th><th></th></tr></thead>
+            <tbody id="transactionRows"><tr><td colspan="9" class="empty">Chưa có giao dịch.</td></tr></tbody>
           </table>
         </div>
       </article>
@@ -339,15 +347,27 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
     <section id="cashflowPage" class="page">
       <div class="section-toolbar">
-        <div><h2>Dòng tiền</h2><p>Theo dõi thu nhập, chi tiêu và tiền chuyển vào đầu tư.</p></div>
+        <div><h2>Dòng tiền & Tổng kết bán ra theo tháng</h2><p>Theo dõi thu nhập, chi tiêu và tổng tiền bán ra/rút tiền theo từng tháng và từng danh mục.</p></div>
         <button type="button" class="primary" id="addCashflow">＋ Thêm dòng tiền</button>
       </div>
       <div class="metric-grid three">
         <article class="metric-card"><div class="metric-label">TỔNG THU</div><div class="metric-value" id="incomeTotal">0 ₫</div></article>
         <article class="metric-card"><div class="metric-label">TỔNG CHI</div><div class="metric-value" id="expenseTotal">0 ₫</div></article>
-        <article class="metric-card"><div class="metric-label">DÒNG TIỀN RÒNG</div><div class="metric-value" id="cashflowNet">0 ₫</div></article>
+        <article class="metric-card"><div class="metric-label">TỔNG BÁN RA / RÚT TIỀN</div><div class="metric-value" id="cashflowSellTotal">0 ₫</div></article>
       </div>
       <article class="panel table-panel">
+        <div class="panel-head">
+          <div><h3>Tổng kết bán ra theo từng tháng & từng danh mục</h3><p>Gộp toàn bộ giao dịch bán tài sản và rút tiền gửi/quỹ theo tháng</p></div>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Tháng</th><th>Tiền gửi</th><th>Quỹ cơ hội</th><th>Vàng</th><th>Bitcoin</th><th>Chứng khoán VN</th><th>Quỹ khẩn cấp</th><th>Tổng bán ra</th></tr></thead>
+            <tbody id="monthlySellRows"><tr><td colspan="8" class="empty">Chưa có giao dịch bán ra hoặc rút tiền.</td></tr></tbody>
+          </table>
+        </div>
+      </article>
+      <article class="panel table-panel">
+        <div class="panel-head"><div><h3>Sổ thu chi</h3><p>Các khoản thu nhập và chi tiêu đã ghi nhận</p></div></div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Ngày</th><th>Loại</th><th>Nội dung</th><th>Số tiền</th><th></th></tr></thead>
@@ -367,6 +387,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <span id="goldStatus" class="status-badge">Nguồn: giavang.doji.vn · Binance PAXG</span>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="primary" id="dcaGoldBtn">＋ Mua thêm vàng (TB giá)</button>
+          <button type="button" class="secondary" id="sellGoldBtn">− Bán vàng</button>
           <button type="button" class="secondary" id="refreshDojiBtn">↻ Cập nhật giá DOJI</button>
         </div>
       </div>
@@ -423,6 +444,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <span id="btcStatus" class="status-badge">Nguồn: Binance · CoinGecko · Alternative.me</span>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <button type="button" class="primary" id="dcaBtcBtn">＋ Mua thêm Crypto (TB giá)</button>
+          <button type="button" class="secondary" id="sellBtcBtn">− Bán Crypto</button>
           <input id="inFxRate" class="inline-input" style="width:150px" type="number" step="10" placeholder="Tỷ giá USD/VND">
           <button type="button" class="secondary" id="applyFxBtn">Lưu tỷ giá tay</button>
         </div>
@@ -462,9 +484,10 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <div><div class="eyebrow">ĐẦU TƯ</div><h2>Chứng khoán & Quỹ mở Việt Nam</h2><p>Chỉ số VN-Index, VN30, HNX, UPCoM và danh mục cổ phiếu / chứng chỉ quỹ (NAV Fmarket).</p></div>
       </div>
       <div class="market-bar">
-        <span id="stockStatus" class="status-badge">Nguồn: TCBS · DNSE · VPS · VNDirect · Fmarket</span>
+        <span id="stockStatus" class="status-badge">Nguồn: VNDIRECT · TCBS · DNSE · VPS · Fmarket</span>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="primary" id="dcaStockBtn">＋ Mua thêm CK / Quỹ (TB giá)</button>
+          <button type="button" class="secondary" id="sellStockBtn">− Bán CK / Quỹ</button>
           <button type="button" class="secondary" id="refreshStocksBtn">↻ Làm mới chỉ số & giá CK</button>
         </div>
       </div>
@@ -473,6 +496,20 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <div class="mini-card"><small>VN30</small><b id="idxVN30">—</b><span id="chgVN30">Đang tải…</span></div>
         <div class="mini-card"><small>HNX-INDEX</small><b id="idxHNX">—</b><span id="chgHNX">Đang tải…</span></div>
         <div class="mini-card"><small>UPCoM-INDEX</small><b id="idxUPCOM">—</b><span id="chgUPCOM">Đang tải…</span></div>
+      </div>
+      <div class="panel" style="padding:12px 14px">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <span class="muted">Cập nhật nhanh chỉ số nếu mạng chặn API:</span>
+          <select id="manualIdxKey" class="inline-input" style="width:130px">
+            <option value="VNINDEX">VN-INDEX</option>
+            <option value="VN30">VN30</option>
+            <option value="HNX">HNX-INDEX</option>
+            <option value="UPCOM">UPCoM-INDEX</option>
+          </select>
+          <input id="manualIdxVal" class="inline-input" style="width:130px" type="number" step="0.01" placeholder="Điểm số">
+          <input id="manualIdxChg" class="inline-input" style="width:110px" type="number" step="0.01" placeholder="+/- điểm">
+          <button type="button" class="secondary" id="saveManualIdxBtn">Lưu chỉ số</button>
+        </div>
       </div>
       <div class="metric-grid three">
         <article class="metric-card"><div class="metric-label">GIÁ TRỊ CHỨNG KHOÁN</div><div class="metric-value" id="stockValue">0 ₫</div></article>
@@ -498,11 +535,14 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
     <section id="depositsPage" class="page">
       <div class="module-hero deposit-hero">
         <div class="module-symbol">🏦</div>
-        <div><div class="eyebrow">TIỀN GỬI</div><h2>Tiền gửi tiết kiệm</h2><p>Theo dõi sổ tiết kiệm do bạn tự nhập số dư, lãi suất, kỳ hạn và cảnh báo đáo hạn.</p></div>
+        <div><div class="eyebrow">TIỀN GỬI</div><h2>Tiền gửi tiết kiệm</h2><p>Theo dõi sổ tiết kiệm do bạn tự nhập số dư, lãi suất, kỳ hạn, rút tiền và cảnh báo đáo hạn.</p></div>
       </div>
       <div class="section-toolbar">
-        <div><h2>Danh sách tiền gửi tiết kiệm</h2><p>Không tự ghi đè giá trị/lãi suất ngân hàng; cảnh báo khi còn ≤14 ngày đáo hạn hoặc đã tới hạn.</p></div>
-        <button type="button" class="primary" data-add-deposit-kind="deposit">＋ Thêm tiền gửi tiết kiệm</button>
+        <div><h2>Danh sách tiền gửi tiết kiệm</h2><p>Không tự ghi đè giá trị/lãi suất ngân hàng; hỗ trợ Rút tiền và Xoá từng khoản.</p></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button type="button" class="secondary" data-withdraw-kind="deposit">− Rút tiền tiết kiệm</button>
+          <button type="button" class="primary" data-add-deposit-kind="deposit">＋ Thêm tiền gửi tiết kiệm</button>
+        </div>
       </div>
       <div class="metric-grid three">
         <article class="metric-card"><div class="metric-label">TỔNG TIỀN GỬI TIẾT KIỆM</div><div class="metric-value" id="depSavingTotal">0 ₫</div></article>
@@ -518,8 +558,11 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <div><div class="eyebrow">TIỀN GỬI</div><h2>Quỹ cơ hội</h2><p>Nguồn tiền gửi / thanh khoản chủ động sẵn sàng giải ngân khi thị trường xuất hiện cơ hội tốt.</p></div>
       </div>
       <div class="section-toolbar">
-        <div><h2>Danh sách Quỹ cơ hội</h2><p>Tính vào tài sản chung; theo dõi lãi suất và mốc đáo hạn nếu gửi có kỳ hạn.</p></div>
-        <button type="button" class="primary" data-add-deposit-kind="op">＋ Thêm Quỹ cơ hội</button>
+        <div><h2>Danh sách Quỹ cơ hội</h2><p>Tính vào tài sản chung; hỗ trợ Rút tiền và Xoá từng khoản.</p></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button type="button" class="secondary" data-withdraw-kind="op">− Rút Quỹ cơ hội</button>
+          <button type="button" class="primary" data-add-deposit-kind="op">＋ Thêm Quỹ cơ hội</button>
+        </div>
       </div>
       <div class="metric-grid three">
         <article class="metric-card"><div class="metric-label">TỔNG QUỸ CƠ HỘI</div><div class="metric-value" id="opTotalVal">0 ₫</div></article>
@@ -535,8 +578,11 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <div><div class="eyebrow">TIỀN GỬI · DỰ PHÒNG RIÊNG</div><h2>Quỹ khẩn cấp</h2><p>Tách riêng hoàn toàn khỏi tài sản chung và biểu đồ phân bổ đầu tư để bảo vệ an toàn tài chính cá nhân.</p></div>
       </div>
       <div class="section-toolbar">
-        <div><h2>Danh sách Quỹ khẩn cấp</h2><p>Không cộng vào Tổng tài sản ròng của tài sản chung.</p></div>
-        <button type="button" class="primary" data-add-deposit-kind="em">＋ Thêm Quỹ khẩn cấp</button>
+        <div><h2>Danh sách Quỹ khẩn cấp</h2><p>Không cộng vào Tổng tài sản ròng của tài sản chung; hỗ trợ Rút tiền và Xoá từng khoản.</p></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button type="button" class="secondary" data-withdraw-kind="em">− Rút Quỹ khẩn cấp</button>
+          <button type="button" class="primary" data-add-deposit-kind="em">＋ Thêm Quỹ khẩn cấp</button>
+        </div>
       </div>
       <div class="metric-grid three">
         <article class="metric-card reserve-card"><div class="metric-label">TỔNG QUỸ KHẨN CẤP (RIÊNG)</div><div class="metric-value" id="emPageTotalVal">0 ₫</div></article>
@@ -581,7 +627,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
               <h3>☁ Cập nhật ứng dụng trực tiếp từ đám mây (Không cần cài lại .app)</h3>
               <p>Tải phiên bản giao diện & công thức mới từ GitHub về thẳng ứng dụng. Toàn bộ dữ liệu tài sản của bạn được giữ nguyên 100%.</p>
             </div>
-            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.0-ota</span>
+            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.1-ota</span>
           </div>
 
           <label style="font-size:11px;color:#45566a;font-weight:600;display:block;margin-top:8px">
@@ -636,10 +682,35 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
     </section>
 
-    <footer>WealthOS 0.4.0 · 5 Khoản mục phân bổ (Tiền gửi · Quỹ cơ hội · Vàng · Bitcoin · Chứng khoán VN)</footer>
+    <footer>WealthOS 0.4.1 · Bán ra & Rút tiền · Tổng kết bán ra theo tháng · Chỉ số VN</footer>
   </main>
 </div>
 
+<!-- MODAL BÁN RA / RÚT TIỀN -->
+<dialog id="sellDialog">
+  <form method="dialog" id="sellForm" class="dialog-form">
+    <div class="dialog-head">
+      <div><div class="eyebrow">SELL / WITHDRAW</div><h2 id="sellDialogTitle">Bán ra / Rút tiền</h2></div>
+      <button type="button" class="icon-btn" data-close-dialog aria-label="Đóng">×</button>
+    </div>
+    <label>Chọn khoản tài sản / tiền gửi<select id="sellAssetSelect"></select></label>
+    <div class="form-grid" id="sellQtyRow">
+      <label>Số lượng bán ra (nếu có)<input id="sellQty" type="number" min="0" step="any" placeholder="Ví dụ: 10"></label>
+      <label>Tổng tiền thu về / rút ra (VND)<input id="sellAmount" type="number" min="1" step="1" required placeholder="Ví dụ: 5000000"></label>
+    </div>
+    <div class="form-grid">
+      <label>Ngày giao dịch<input id="sellDate" type="date" required></label>
+      <label>Ghi chú<input id="sellNote" maxlength="120" placeholder="Chốt lời, cơ cấu, rút tất toán…"></label>
+    </div>
+    <div class="dca-preview" id="sellPreview">Nhập số tiền thu về / rút ra để xem số dư và lãi/lỗ chốt.</div>
+    <div class="dialog-actions">
+      <button type="button" class="secondary" data-close-dialog>Huỷ</button>
+      <button type="submit" class="primary" id="confirmSellBtn">Xác nhận</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- MODAL MUA THÊM / TRUNG BÌNH GIÁ (DCA) -->
 <dialog id="dcaDialog">
   <form method="dialog" id="dcaForm" class="dialog-form">
     <div class="dialog-head">
@@ -663,6 +734,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
+<!-- MODAL THÊM / SỬA TÀI SẢN & TIỀN GỬI -->
 <dialog id="assetDialog">
   <form method="dialog" id="assetForm" class="dialog-form">
     <div class="dialog-head">
@@ -709,6 +781,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
+<!-- MODAL GIAO DỊCH -->
 <dialog id="transactionDialog">
   <form method="dialog" id="transactionForm" class="dialog-form">
     <div class="dialog-head">
@@ -744,6 +817,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
+<!-- MODAL DÒNG TIỀN -->
 <dialog id="cashDialog">
   <form method="dialog" id="cashForm" class="dialog-form">
     <div class="dialog-head">
@@ -763,6 +837,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
+<!-- MODAL CHỈ BÁO -->
 <dialog id="indicatorDialog">
   <form method="dialog" id="indicatorForm" class="dialog-form">
     <div class="dialog-head">
@@ -783,7 +858,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 </dialog>
 
 <script>
-const APP_VERSION = '0.4.0-ota';
+const APP_VERSION = '0.4.1-ota';
 const DEFAULT_OTA_URL = 'https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html';
 const STORAGE_KEY = 'wealthos_trial_v1';
 const LUONG_PER_OZ = 37.5 / 31.1035;
@@ -867,6 +942,22 @@ function getCommonBucket(a) {
   if (a.category === 'bitcoin') return 'bitcoin';
   if (a.category === 'stock') return 'stock';
   return null;
+}
+
+function getTxBucketKey(t, asset) {
+  const src = asset || state.assets.find(x => x.id === t.assetId) || {};
+  const cat = String(t.category || src.category || '').toLowerCase();
+  const kind = String(t.kind || src.kind || '').toLowerCase();
+  const name = `${t.assetName || ''} ${src.name || ''} ${src.ticker || ''}`.toLowerCase();
+  if (cat === 'gold' || name.includes('vàng') || name.includes('doji')) return 'gold';
+  if (cat === 'bitcoin' || name.includes('btc') || name.includes('link') || name.includes('crypto')) return 'bitcoin';
+  if (cat === 'stock' || name.includes('fpt') || name.includes('hpg') || name.includes('vesaf') || name.includes('chứng khoán')) return 'stock';
+  if (cat === 'cash' || kind === 'em' || kind === 'op' || kind === 'deposit') {
+    if (kind === 'em' || name.includes('khẩn cấp')) return 'emergency';
+    if (kind === 'op' || name.includes('cơ hội')) return 'opportunity';
+    return 'deposit';
+  }
+  return 'deposit';
 }
 
 let state = loadState();
@@ -1151,7 +1242,7 @@ function renderAssets() {
   $('#assetCards').innerHTML = list.map(a => {
     const pnl = Number(a.cost) > 0 ? Number(a.value) - Number(a.cost) : null;
     const pct = pnl !== null ? (pnl / Number(a.cost) * 100).toFixed(2) + '%' : '';
-    const canDca = ['gold', 'bitcoin', 'stock'].includes(a.category);
+    const isInvest = ['gold', 'bitcoin', 'stock'].includes(a.category);
     return `<article class="asset-card">
       <div class="asset-card-top">
         <span class="asset-tag">${esc(kindNames[a.kind] || LABELS[a.category] || a.category)}</span>
@@ -1163,9 +1254,10 @@ function renderAssets() {
       ${pnl !== null ? `<div class="asset-detail ${pnl >= 0 ? 'pos' : 'neg'}">Lãi/Lỗ: ${pnl >= 0 ? '+' : ''}${money(pnl)} (${pnl >= 0 ? '+' : ''}${pct})</div>` : ''}
       ${a.note ? `<div class="asset-detail" style="margin-top:4px">${esc(a.note)}</div>` : ''}
       <div class="asset-actions">
-        ${canDca ? `<button type="button" class="small-btn dca" data-dca-asset="${esc(a.id)}">＋ Mua thêm</button>` : ''}
+        ${isInvest ? `<button type="button" class="small-btn dca" data-dca-asset="${esc(a.id)}">＋ Mua thêm</button>` : ''}
+        <button type="button" class="small-btn sell" data-sell-asset="${esc(a.id)}">${isInvest ? '− Bán ra' : '− Rút tiền'}</button>
         <button type="button" class="small-btn" data-edit-asset="${esc(a.id)}">Sửa</button>
-        <button type="button" class="small-btn" data-delete-asset="${esc(a.id)}">Xoá</button>
+        <button type="button" class="small-btn del" data-delete-asset="${esc(a.id)}">Xoá</button>
       </div>
     </article>`;
   }).join('') || '<div class="empty">Không tìm thấy tài sản phù hợp.</div>';
@@ -1191,8 +1283,9 @@ function buildDepositCardHtml(a) {
     <div class="asset-detail">${Number(a.cost) > 0 ? 'Gốc: ' + money(a.cost) : 'Chưa ghi vốn gốc'}${m.estInterest > 0 ? ` · Lãi kỳ hạn: <span class="pos">+${money(m.estInterest)}</span>` : ''}</div>
     ${a.note ? `<div class="asset-detail" style="margin-top:4px">${esc(a.note)}</div>` : ''}
     <div class="asset-actions">
+      <button type="button" class="small-btn sell" data-sell-asset="${esc(a.id)}">− Rút tiền</button>
       <button type="button" class="small-btn" data-edit-asset="${esc(a.id)}">Sửa</button>
-      <button type="button" class="small-btn" data-delete-asset="${esc(a.id)}">Xoá</button>
+      <button type="button" class="small-btn del" data-delete-asset="${esc(a.id)}">Xoá</button>
     </div>
   </article>`;
 }
@@ -1235,33 +1328,67 @@ function renderDepositsSections() {
 
 function renderTransactions() {
   if (!$('#transactionRows')) return;
-  const typeMap = { buy: 'Mua / đầu tư', sell: 'Bán', deposit: 'Gửi thêm', withdraw: 'Rút ra', transfer: 'Luân chuyển' };
+  const typeMap = { buy: 'Mua / đầu tư', sell: 'Bán ra', deposit: 'Gửi thêm', withdraw: 'Rút tiền', transfer: 'Luân chuyển' };
+  const bucketNames = { deposit: 'Tiền gửi', opportunity: 'Quỹ cơ hội', gold: 'Vàng', bitcoin: 'Bitcoin', stock: 'Chứng khoán VN', emergency: 'Quỹ khẩn cấp' };
   $('#transactionRows').innerHTML = state.transactions.slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || ''))).map(t => {
-    const assetName = state.assets.find(a => a.id === t.assetId)?.name || t.assetName || '—';
+    const asset = state.assets.find(a => a.id === t.assetId);
+    const assetName = asset?.name || t.assetName || '—';
+    const bKey = getTxBucketKey(t, asset);
     const pnl = t.realizedPnl != null ? Number(t.realizedPnl) : null;
     return `<tr>
       <td>${esc(t.date || '—')}</td>
       <td>${esc(typeMap[t.type] || t.type)}</td>
+      <td>${esc(bucketNames[bKey] || '—')}</td>
       <td>${esc(assetName)}</td>
       <td>${t.quantity ? num(t.quantity) : '—'}</td>
       <td>${money(t.amount)}</td>
       <td class="${pnl > 0 ? 'pos' : pnl < 0 ? 'neg' : ''}">${pnl !== null ? (pnl > 0 ? '+' : '') + money(pnl) : '—'}</td>
       <td>${esc(t.note || '')}</td>
-      <td><button type="button" class="small-btn" data-delete-tx="${esc(t.id)}">Xoá</button></td>
+      <td><button type="button" class="small-btn del" data-delete-tx="${esc(t.id)}">Xoá</button></td>
     </tr>`;
-  }).join('') || '<tr><td colspan="8" class="empty">Chưa có giao dịch nào.</td></tr>';
+  }).join('') || '<tr><td colspan="9" class="empty">Chưa có giao dịch nào.</td></tr>';
 }
 
 function renderCashflows() {
-  if (!$('#cashflowRows')) return;
   const inc = state.cashflows.filter(x => x.type === 'income').reduce((s, x) => s + Number(x.amount || 0), 0);
   const out = state.cashflows.filter(x => x.type === 'expense').reduce((s, x) => s + Number(x.amount || 0), 0);
+  const sellTxs = state.transactions.filter(t => t.type === 'sell' || t.type === 'withdraw');
+  const sellTotal = sellTxs.reduce((s, t) => s + (Number(t.amount) || 0), 0);
+
   setText('#incomeTotal', money(inc));
   setText('#expenseTotal', money(out));
-  setText('#cashflowNet', money(inc - out));
-  $('#cashflowRows').innerHTML = state.cashflows.slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || ''))).map(x =>
-    `<tr><td>${esc(x.date)}</td><td>${x.type === 'income' ? 'Thu nhập' : 'Chi tiêu'}</td><td>${esc(x.note)}</td><td>${money(x.amount)}</td><td><button type="button" class="small-btn" data-delete-cf="${esc(x.id)}">Xoá</button></td></tr>`
-  ).join('') || '<tr><td colspan="5" class="empty">Chưa có dữ liệu.</td></tr>';
+  setText('#cashflowSellTotal', money(sellTotal));
+
+  if ($('#monthlySellRows')) {
+    const monthMap = new Map();
+    const cols = ['deposit', 'opportunity', 'gold', 'bitcoin', 'stock', 'emergency'];
+    sellTxs.forEach(t => {
+      const mKey = String(t.date || today()).slice(0, 7);
+      if (!monthMap.has(mKey)) {
+        monthMap.set(mKey, { deposit: 0, opportunity: 0, gold: 0, bitcoin: 0, stock: 0, emergency: 0, total: 0 });
+      }
+      const row = monthMap.get(mKey);
+      const bk = getTxBucketKey(t);
+      const amt = Number(t.amount) || 0;
+      row[bk] = (row[bk] || 0) + amt;
+      row.total += amt;
+    });
+
+    const sortedMonths = [...monthMap.entries()].sort((a, b) => b[0].localeCompare(a[0]));
+    $('#monthlySellRows').innerHTML = sortedMonths.map(([mKey, r]) =>
+      `<tr>
+        <td><b>${esc(mKey)}</b></td>
+        ${cols.map(c => `<td>${r[c] > 0 ? money(r[c]) : '—'}</td>`).join('')}
+        <td><b>${money(r.total)}</b></td>
+      </tr>`
+    ).join('') || '<tr><td colspan="8" class="empty">Chưa có giao dịch bán ra hoặc rút tiền.</td></tr>';
+  }
+
+  if ($('#cashflowRows')) {
+    $('#cashflowRows').innerHTML = state.cashflows.slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || ''))).map(x =>
+      `<tr><td>${esc(x.date)}</td><td>${x.type === 'income' ? 'Thu nhập' : 'Chi tiêu'}</td><td>${esc(x.note)}</td><td>${money(x.amount)}</td><td><button type="button" class="small-btn del" data-delete-cf="${esc(x.id)}">Xoá</button></td></tr>`
+    ).join('') || '<tr><td colspan="5" class="empty">Chưa có dữ liệu.</td></tr>';
+  }
 }
 
 function renderModules() {
@@ -1326,7 +1453,10 @@ function renderModules() {
         <td>${q > 0 && c > 0 ? money(c / q) : '—'}</td>
         <td>${money(v)}</td>
         <td class="${pnl >= 0 ? 'pos' : 'neg'}">${pnl !== null ? `${pnl >= 0 ? '+' : ''}${money(pnl)} (${(pnl / c * 100).toFixed(2)}%)` : '—'}</td>
-        <td><button type="button" class="small-btn dca" data-dca-asset="${esc(a.id)}">＋ Mua thêm</button></td>
+        <td style="display:flex;gap:4px;justify-content:flex-end">
+          <button type="button" class="small-btn dca" data-dca-asset="${esc(a.id)}">＋ Mua</button>
+          <button type="button" class="small-btn sell" data-sell-asset="${esc(a.id)}">− Bán</button>
+        </td>
       </tr>`;
     }).join('') || '<tr><td colspan="7" class="empty">Chưa có vàng nào.</td></tr>';
   }
@@ -1374,7 +1504,10 @@ function renderModules() {
         <td>${avgCostUsd > 0 ? usd(avgCostUsd) : '—'}</td>
         <td>${money(vVnd)}<br><small class="muted">${usd(curUsdTotal)}</small></td>
         <td class="${pnlVnd >= 0 ? 'pos' : 'neg'}">${pnlVnd !== null ? `${pnlUsd >= 0 ? '+' : ''}${usd(pnlUsd)} · ${pnlVnd >= 0 ? '+' : ''}${money(pnlVnd)}<br><small class="muted">Giá: ${priceDiffVnd >= 0 ? '+' : ''}${money(priceDiffVnd)} | Tỷ giá: ${fxDiffVnd >= 0 ? '+' : ''}${money(fxDiffVnd)}</small>` : '—'}</td>
-        <td><button type="button" class="small-btn dca" data-dca-asset="${esc(a.id)}">＋ Mua thêm</button></td>
+        <td style="display:flex;gap:4px;justify-content:flex-end">
+          <button type="button" class="small-btn dca" data-dca-asset="${esc(a.id)}">＋ Mua</button>
+          <button type="button" class="small-btn sell" data-sell-asset="${esc(a.id)}">− Bán</button>
+        </td>
       </tr>`;
     }).join('') || '<tr><td colspan="8" class="empty">Chưa có coin nào.</td></tr>';
   }
@@ -1388,13 +1521,16 @@ function renderModules() {
 
   ['VNINDEX', 'VN30', 'HNX', 'UPCOM'].forEach(k => {
     const ix = m.indices?.[k];
+    const el = $(`#chg${k}`);
     if (ix && ix.p > 0) {
       setText(`#idx${k}`, num(ix.p, 2));
-      const el = $(`#chg${k}`);
       if (el) {
         el.textContent = `${ix.c >= 0 ? '+' : ''}${num(ix.c, 2)} (${Number(ix.pc || 0) >= 0 ? '+' : ''}${Number(ix.pc || 0).toFixed(2)}%)`;
         el.className = ix.c >= 0 ? 'pos' : 'neg';
       }
+    } else if (el) {
+      el.textContent = 'Chưa có dữ liệu';
+      el.className = 'muted';
     }
   });
 
@@ -1414,7 +1550,10 @@ function renderModules() {
         <td>${q > 0 && c > 0 ? money(c / q) : '—'}</td>
         <td>${money(v)}</td>
         <td class="${pnl >= 0 ? 'pos' : 'neg'}">${pnl !== null ? `${pnl >= 0 ? '+' : ''}${money(pnl)} (${(pnl / c * 100).toFixed(2)}%)` : '—'}</td>
-        <td><button type="button" class="small-btn dca" data-dca-asset="${esc(a.id)}">＋ Mua thêm</button></td>
+        <td style="display:flex;gap:4px;justify-content:flex-end">
+          <button type="button" class="small-btn dca" data-dca-asset="${esc(a.id)}">＋ Mua</button>
+          <button type="button" class="small-btn sell" data-sell-asset="${esc(a.id)}">− Bán</button>
+        </td>
       </tr>`;
     }).join('') || '<tr><td colspan="9" class="empty">Chưa có cổ phiếu hoặc quỹ mở.</td></tr>';
   }
@@ -1426,7 +1565,7 @@ function renderIndicators() {
     `<article class="indicator-card">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <h3>${esc(x.name)}</h3>
-        <button type="button" class="small-btn" data-del-ind="${esc(x.id)}">Xoá</button>
+        <button type="button" class="small-btn del" data-del-ind="${esc(x.id)}">Xoá</button>
       </div>
       <p>Nhóm: <b>${esc(x.group)}</b></p>
       <p>Ngưỡng cảnh báo: ${esc(x.threshold || 'Chưa thiết lập')}</p>
@@ -1464,6 +1603,55 @@ function renderReports() {
   $('#reportRows').innerHTML = rowsHtml.join('');
 }
 
+/* ====== BÁN RA / RÚT TIỀN ====== */
+function openSellModal(filterFn, preselectedAssetId) {
+  const list = state.assets.filter(filterFn || (a => Number(a.value) > 0));
+  if (!list.length) {
+    alert('Không có khoản nào phù hợp để bán ra / rút tiền.');
+    return;
+  }
+  $('#sellAssetSelect').innerHTML = list.map(a => {
+    const isCash = a.category === 'cash';
+    return `<option value="${esc(a.id)}">${esc(a.name)} · ${isCash ? `Số dư: ${money(a.value)}` : `SL: ${num(a.quantity || 0)} · Giá trị: ${money(a.value)}`}</option>`;
+  }).join('');
+  if (preselectedAssetId && list.some(a => a.id === preselectedAssetId)) {
+    $('#sellAssetSelect').value = preselectedAssetId;
+  }
+  $('#sellQty').value = '';
+  $('#sellAmount').value = '';
+  $('#sellDate').value = today();
+  $('#sellNote').value = '';
+  updateSellPreview();
+  $('#sellDialog').showModal();
+}
+
+function updateSellPreview() {
+  const asset = state.assets.find(a => a.id === $('#sellAssetSelect')?.value);
+  if (!asset || !$('#sellPreview')) return;
+  const isCash = asset.category === 'cash';
+  if ($('#sellQtyRow')) $('#sellQtyRow').style.gridTemplateColumns = isCash ? '0fr 1fr' : '1fr 1fr';
+  const qtyInp = $('#sellQty');
+  if (qtyInp && qtyInp.parentElement) qtyInp.parentElement.style.display = isCash ? 'none' : 'grid';
+
+  const amt = Number($('#sellAmount')?.value) || 0;
+  const q0 = Number(asset.quantity) || 0;
+  const c0 = Number(asset.cost) || 0;
+  const v0 = Number(asset.value) || 0;
+  const qSell = isCash ? 0 : (Number($('#sellQty')?.value) || 0);
+
+  if (isCash) {
+    $('#sellDialogTitle').textContent = 'Rút tiền gửi / Quỹ';
+    $('#sellPreview').innerHTML = `Số dư sau rút ước tính: <b>${money(Math.max(0, v0 - amt))}</b>`;
+  } else {
+    $('#sellDialogTitle').textContent = 'Bán ra tài sản đầu tư';
+    const ratio = qSell > 0 && q0 > 0 ? Math.min(1, qSell / q0) : (v0 > 0 ? Math.min(1, amt / v0) : 0);
+    const costSold = Math.round(c0 * ratio);
+    const pnl = amt > 0 ? amt - costSold : 0;
+    $('#sellPreview').innerHTML = `SL còn lại: <b>${num(Math.max(0, q0 - qSell))}</b> · Giá vốn phần bán: <b>${money(costSold)}</b> · Lãi/Lỗ chốt: <b class="${pnl >= 0 ? 'pos' : 'neg'}">${pnl >= 0 ? '+' : ''}${money(pnl)}</b>`;
+  }
+}
+
+/* ====== MUA THÊM / TRUNG BÌNH GIÁ (DCA) ====== */
 function openDcaModal(categoryFilter, preselectedAssetId) {
   const candidates = state.assets.filter(a => categoryFilter ? a.category === categoryFilter : ['gold', 'bitcoin', 'stock'].includes(a.category));
   if (!candidates.length) {
@@ -1614,10 +1802,10 @@ async function fetchVnIndices() {
   if (statusEl) { statusEl.textContent = 'Đang tải VN-Index, VN30, HNX, UPCoM…'; statusEl.className = 'status-badge'; }
 
   const list = [
-    ['VNINDEX', ['VNINDEX']],
-    ['VN30', ['VN30']],
-    ['HNX', ['HNX', 'HNXINDEX']],
-    ['UPCOM', ['UPCOM', 'UPCOMINDEX']]
+    ['VNINDEX', ['VNINDEX', '10']],
+    ['VN30', ['VN30', '11']],
+    ['HNX', ['HNX', 'HNXINDEX', '02']],
+    ['UPCOM', ['UPCOM', 'UPCOMINDEX', '03']]
   ];
   const t = Math.floor(Date.now() / 1000);
   let okCount = 0;
@@ -1653,6 +1841,16 @@ async function fetchVnIndices() {
         okCount++;
         return;
       }
+      const j4 = await fetchJsonWithFallback(`https://fiin-market.ssi.com.vn/MarketInfor/GetIndexInfo?indexId=${sym}`);
+      const d4 = j4?.data || j4;
+      const p4 = Number(d4?.indexValue || d4?.value || d4?.close || 0);
+      if (p4 >= 30) {
+        const c4 = Number(d4?.change || d4?.diff || 0);
+        const pc4 = Number(d4?.changePercent || d4?.ratioChange || 0);
+        state.market.indices[key] = { p: p4, c: c4, pc: pc4 };
+        okCount++;
+        return;
+      }
     }
   }));
 
@@ -1662,7 +1860,7 @@ async function fetchVnIndices() {
       statusEl.textContent = `Chỉ số VN: Đã cập nhật ${okCount}/4 chỉ số lúc ${nowTime}`;
       statusEl.className = 'status-badge live';
     } else {
-      statusEl.textContent = 'Chỉ số VN: Đang dùng số liệu gần nhất';
+      statusEl.textContent = 'Chỉ số VN: Nguồn mạng đang chặn, bạn có thể nhập chỉ số nhanh bên dưới';
       statusEl.className = 'status-badge stale';
     }
   }
@@ -1925,9 +2123,90 @@ function bindEvents() {
   if ($('#refreshStocksBtn')) $('#refreshStocksBtn').onclick = async () => { await fetchVnIndices(); await refreshAllMarketData(); };
   if ($('#refreshDojiBtn')) $('#refreshDojiBtn').onclick = async () => { await fetchDojiGoldPrices(); saveState(); renderAll(); };
 
+  if ($('#saveManualIdxBtn')) {
+    $('#saveManualIdxBtn').onclick = () => {
+      const k = $('#manualIdxKey')?.value || 'VNINDEX';
+      const p = Number($('#manualIdxVal')?.value) || 0;
+      const c = Number($('#manualIdxChg')?.value) || 0;
+      if (p > 0) {
+        const prev = p - c;
+        state.market.indices = state.market.indices || {};
+        state.market.indices[k] = { p, c, pc: prev > 0 ? (c / prev) * 100 : 0 };
+        saveState();
+        renderAll();
+      }
+    };
+  }
+
   $$('[data-add-deposit-kind]').forEach(btn => {
     btn.onclick = () => openAssetModal(null, 'cash', btn.dataset.addDepositKind);
   });
+
+  $$('[data-withdraw-kind]').forEach(btn => {
+    const kind = btn.dataset.withdrawKind;
+    btn.onclick = () => openSellModal(a => a.category === 'cash' && ((kind === 'deposit' && (!a.kind || a.kind === 'deposit')) || a.kind === kind));
+  });
+
+  if ($('#sellGoldBtn')) $('#sellGoldBtn').onclick = () => openSellModal(a => a.category === 'gold');
+  if ($('#sellBtcBtn')) $('#sellBtcBtn').onclick = () => openSellModal(a => a.category === 'bitcoin');
+  if ($('#sellStockBtn')) $('#sellStockBtn').onclick = () => openSellModal(a => a.category === 'stock');
+  if ($('#quickSellTxBtn')) $('#quickSellTxBtn').onclick = () => openSellModal(a => Number(a.value) > 0);
+  if ($('#sellAssetSelect')) $('#sellAssetSelect').onchange = updateSellPreview;
+  if ($('#sellQty')) $('#sellQty').oninput = updateSellPreview;
+  if ($('#sellAmount')) $('#sellAmount').oninput = updateSellPreview;
+
+  if ($('#sellForm')) {
+    $('#sellForm').onsubmit = e => {
+      e.preventDefault();
+      const asset = state.assets.find(a => a.id === $('#sellAssetSelect').value);
+      const amt = Number($('#sellAmount').value) || 0;
+      const txDate = $('#sellDate').value || today();
+      const note = ($('#sellNote').value || '').trim();
+      if (!asset || amt <= 0) return;
+
+      const isCash = asset.category === 'cash';
+      const q0 = Number(asset.quantity) || 0;
+      const c0 = Number(asset.cost) || 0;
+      const v0 = Number(asset.value) || 0;
+      let realizedPnl = null;
+      let qSold = null;
+
+      if (isCash) {
+        asset.value = Math.max(0, v0 - amt);
+        if (c0 > 0) asset.cost = Math.max(0, c0 - amt);
+        asset.updatedAt = new Date().toISOString();
+        state.transactions.push({
+          id: uid(), type: 'withdraw', assetId: asset.id, assetName: asset.name,
+          category: asset.category, kind: asset.kind,
+          date: txDate, quantity: null, amount: amt, realizedPnl: null,
+          note: note || 'Rút tiền gửi / quỹ'
+        });
+      } else {
+        const qInput = Number($('#sellQty')?.value) || 0;
+        const ratio = qInput > 0 && q0 > 0 ? Math.min(1, qInput / q0) : (v0 > 0 ? Math.min(1, amt / v0) : 0);
+        qSold = qInput > 0 ? Math.min(q0, qInput) : (q0 > 0 ? Number((q0 * ratio).toFixed(8)) : null);
+        const costSold = Math.round(c0 * ratio);
+        realizedPnl = amt - costSold;
+        asset.quantity = Math.max(0, q0 - (qSold || 0));
+        asset.cost = Math.max(0, c0 - costSold);
+        asset.value = Math.max(0, Math.round(v0 * (1 - ratio)));
+        if (asset.category === 'bitcoin' && asset.meta?.usdCost != null) {
+          asset.meta.usdCost = Math.max(0, Number(asset.meta.usdCost) * (1 - ratio));
+        }
+        asset.updatedAt = new Date().toISOString();
+        state.transactions.push({
+          id: uid(), type: 'sell', assetId: asset.id, assetName: asset.name,
+          category: asset.category, kind: asset.kind,
+          date: txDate, quantity: qSold, amount: amt, realizedPnl,
+          note: note || 'Bán ra tài sản'
+        });
+      }
+
+      saveState();
+      closeDlg($('#sellDialog'));
+      renderAll();
+    };
+  }
 
   if ($('#dcaGoldBtn')) $('#dcaGoldBtn').onclick = () => openDcaModal('gold');
   if ($('#dcaBtcBtn')) $('#dcaBtcBtn').onclick = () => openDcaModal('bitcoin');
@@ -1939,6 +2218,8 @@ function bindEvents() {
   document.addEventListener('click', e => {
     const dcaBtn = e.target.closest('[data-dca-asset]');
     if (dcaBtn) openDcaModal(null, dcaBtn.dataset.dcaAsset);
+    const sellBtn = e.target.closest('[data-sell-asset]');
+    if (sellBtn) openSellModal(null, sellBtn.dataset.sellAsset);
   });
 
   if ($('#dcaForm')) {
@@ -1968,6 +2249,7 @@ function bindEvents() {
 
       state.transactions.push({
         id: uid(), type: 'buy', assetId: asset.id, assetName: asset.name,
+        category: asset.category, kind: asset.kind,
         date: $('#dcaDate').value || today(), quantity: addQ,
         amount: addAmt, realizedPnl: null,
         note: ($('#dcaNote').value || 'Mua thêm trung bình giá').trim()
@@ -2087,7 +2369,7 @@ function bindEvents() {
     const editBtn = e.target.closest('[data-edit-asset]');
     const delBtn = e.target.closest('[data-delete-asset]');
     if (editBtn) openAssetModal(state.assets.find(a => a.id === editBtn.dataset.editAsset));
-    if (delBtn && confirm('Xoá khoản tài sản này?')) {
+    if (delBtn && confirm('Xoá khoản này khỏi danh sách?')) {
       state.assets = state.assets.filter(a => a.id !== delBtn.dataset.deleteAsset);
       saveState();
       renderAll();
@@ -2153,6 +2435,7 @@ function bindEvents() {
 
       state.transactions.push({
         id: uid(), type, assetId: asset?.id, assetName: asset?.name,
+        category: asset?.category, kind: asset?.kind,
         date: $('#txDate').value || today(), quantity: qtyDelta || null,
         amount, realizedPnl, note: $('#txNote').value.trim()
       });
