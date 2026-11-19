@@ -38,7 +38,9 @@ input,textarea,select,td,th,.asset-amount,.metric-value,code{-webkit-user-select
 .nav-label{font-size:9px;letter-spacing:1.6px;color:#70839b;padding:13px 13px 4px;font-weight:700}
 .sidebar-foot{margin-top:auto;padding:12px 10px 0;color:#8fa0b5;font-size:11px;border-top:1px solid #29394a}
 .status-dot,.local-pill i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#39b889;margin-right:7px}
-.main{margin-left:252px;padding:26px 34px 28px;max-width:1600px}
+.main{margin-left:252px;padding:26px 34px 28px;max-width:1600px;transition:margin-left .2s,padding .2s}
+.app-shell.expanded-mode .sidebar{transform:translateX(-100%)}
+.app-shell.expanded-mode .main{margin-left:0;max-width:none;padding:20px 24px 32px}
 .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:12px;flex-wrap:wrap}
 .eyebrow{font-size:9px;letter-spacing:1.7px;color:#9aa7b7;font-weight:700}
 .topbar h1{font-size:25px;margin:3px 0 0;letter-spacing:-.5px}
@@ -70,8 +72,11 @@ input,textarea,select,td,th,.asset-amount,.metric-value,code{-webkit-user-select
 .total-card .metric-foot{color:#b1c0d0}
 .content-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:16px}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:19px;box-shadow:0 3px 12px #26384a08;margin-bottom:15px;min-width:0}
+.panel.table-zoomed{position:relative;z-index:15;box-shadow:0 14px 36px rgba(16,29,43,.14);border-color:#b8c7d9}
+.panel.table-zoomed .table-scroll{max-height:70vh;overflow:auto}
 .panel h3{font-size:14px;margin:0 0 4px}
 .panel-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px;gap:10px;flex-wrap:wrap}
+.panel-head-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .text-btn{border:0;background:none;color:#526b83;font-size:11px;cursor:pointer;font-weight:600}
 .allocation-wrap{display:flex;align-items:center;gap:28px;min-height:170px;flex-wrap:wrap}
 .donut{width:158px;height:158px;border-radius:50%;background:conic-gradient(#dce3eb 0 100%);display:grid;place-items:center;flex:none;position:relative}
@@ -91,8 +96,8 @@ input,textarea,select,td,th,.asset-amount,.metric-value,code{-webkit-user-select
 .recent-value{font-size:12.5px;font-weight:700;text-align:right}
 .table-panel{padding-bottom:10px}
 .table-scroll{width:100%;overflow-x:auto}
-table{border-collapse:collapse;width:100%;min-width:560px}
-th,td{text-align:right;padding:11px 10px;border-bottom:1px solid #edf0f4;white-space:nowrap;font-size:11.5px}
+table{border-collapse:collapse;width:100%;min-width:620px}
+th,td{text-align:right;padding:11px 10px;border-bottom:1px solid #edf0f4;white-space:nowrap;font-size:12px}
 th:first-child,td:first-child{text-align:left}
 th{font-size:9.5px;color:#8794a4;letter-spacing:.6px;font-weight:700;text-transform:uppercase}
 .empty{text-align:center;color:#99a5b3;padding:26px 12px;font-size:11.5px}
@@ -121,7 +126,6 @@ th{font-size:9.5px;color:#8794a4;letter-spacing:.6px;font-weight:700;text-transf
 .alert-pill.due{background:#fdf0f0;color:#c85a5a}
 .alert-pill.ok{background:#e6f5f0;color:#1d7258}
 
-/* Banner màu tích hợp số liệu cốt lõi */
 .module-hero{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 22px;border-radius:16px;color:#fff;margin-bottom:15px;flex-wrap:wrap}
 .hero-left{display:flex;align-items:center;gap:15px;min-width:220px}
 .module-hero h2{font-size:19px;margin:2px 0 0}
@@ -159,6 +163,7 @@ th{font-size:9.5px;color:#8794a4;letter-spacing:.6px;font-weight:700;text-transf
 .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .settings-grid .panel.full-span{grid-column:1/-1}
 .ota-box{background:linear-gradient(120deg,#f6f9fc,#eef3f9);border:1px solid #d5e0ec}
+.ota-body.collapsed{display:none}
 .ota-row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
 .ota-row input{flex:1;min-width:240px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px}
 .file-drop{margin-top:12px;min-height:110px;border:1.5px dashed #b8c5d2;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;color:#40556d;padding:14px;text-align:center;transition:background .15s}
@@ -205,7 +210,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 </style>
 </head>
 <body>
-<div class="app-shell">
+<div class="app-shell" id="appShell">
   <aside class="sidebar" id="sidebarPanel">
     <div class="brand">
       <div class="brand-mark">W</div>
@@ -229,7 +234,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <button type="button" class="nav-item" data-page="reports">▦ <span>Báo cáo</span></button>
       <button type="button" class="nav-item" data-page="settings">⚙ <span>Cài đặt & dữ liệu</span></button>
     </nav>
-    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.6 · Banner gọn trực diện</div>
+    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.7 · Phóng thu bảng & Thu gọn OTA</div>
   </aside>
 
   <main class="main">
@@ -310,7 +315,10 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <article class="panel table-panel">
         <div class="panel-head">
           <div><h3>Danh mục tài sản chung</h3><p>Giá trị, tỷ trọng và lãi/lỗ tạm tính theo từng khoản mục</p></div>
-          <button type="button" class="text-btn" data-goto="assets">Quản lý danh mục →</button>
+          <div class="panel-head-actions">
+            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
+            <button type="button" class="text-btn" data-goto="assets">Quản lý danh mục →</button>
+          </div>
         </div>
         <div class="table-scroll">
           <table>
@@ -349,6 +357,12 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         </div>
       </div>
       <article class="panel table-panel">
+        <div class="panel-head">
+          <div><h3>Lịch sử giao dịch</h3></div>
+          <div class="panel-head-actions">
+            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
+          </div>
+        </div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Ngày</th><th>Loại</th><th>Danh mục</th><th>Tài sản</th><th>Số lượng</th><th>Giá trị (₫)</th><th>Lãi/lỗ chốt</th><th>Ghi chú</th><th></th></tr></thead>
@@ -369,7 +383,12 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <article class="metric-card"><div class="metric-label">TỔNG BÁN RA / RÚT TIỀN</div><div class="metric-value" id="cashflowSellTotal">0 ₫</div></article>
       </div>
       <article class="panel table-panel">
-        <div class="panel-head"><div><h3>Tổng kết bán ra theo từng tháng & từng danh mục</h3></div></div>
+        <div class="panel-head">
+          <div><h3>Tổng kết bán ra theo từng tháng & từng danh mục</h3></div>
+          <div class="panel-head-actions">
+            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
+          </div>
+        </div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Tháng</th><th>Tiền gửi</th><th>Quỹ cơ hội</th><th>Vàng</th><th>Bitcoin</th><th>Chứng khoán VN</th><th>Quỹ khẩn cấp</th><th>Tổng bán ra</th></tr></thead>
@@ -378,7 +397,12 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         </div>
       </article>
       <article class="panel table-panel">
-        <div class="panel-head"><div><h3>Sổ thu chi</h3></div></div>
+        <div class="panel-head">
+          <div><h3>Sổ thu chi</h3></div>
+          <div class="panel-head-actions">
+            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
+          </div>
+        </div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Ngày</th><th>Loại</th><th>Nội dung</th><th>Số tiền</th><th></th></tr></thead>
@@ -420,7 +444,10 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <article class="panel table-panel">
         <div class="panel-head">
           <div><h3>Bảng giá vàng DOJI (đ/lượng)</h3></div>
-          <button type="button" class="secondary" id="saveManualDojiBtn">Lưu giá đã sửa</button>
+          <div class="panel-head-actions">
+            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
+            <button type="button" class="secondary" id="saveManualDojiBtn">Lưu giá đã sửa</button>
+          </div>
         </div>
         <div class="table-scroll">
           <table>
@@ -431,7 +458,12 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </article>
 
       <article class="panel table-panel">
-        <div class="panel-head"><div><h3>Danh mục vàng đang giữ</h3></div></div>
+        <div class="panel-head">
+          <div><h3>Danh mục vàng đang giữ</h3></div>
+          <div class="panel-head-actions">
+            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
+          </div>
+        </div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Loại vàng</th><th>Giá mua vào (/chỉ)</th><th>Số lượng (chỉ)</th><th>Giá vốn TB (/chỉ)</th><th>Giá trị hiện tại</th><th>Lãi / Lỗ</th><th>Thao tác</th></tr></thead>
@@ -480,7 +512,12 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
 
       <article class="panel table-panel">
-        <div class="panel-head"><div><h3>Coin đang theo dõi</h3></div></div>
+        <div class="panel-head">
+          <div><h3>Coin đang theo dõi</h3></div>
+          <div class="panel-head-actions">
+            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
+          </div>
+        </div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Coin</th><th>Giá (USD)</th><th>24 giờ</th><th>Số lượng</th><th>Giá vốn TB (USD)</th><th>Giá trị (VND)</th><th>Lãi / Lỗ</th><th>Thao tác</th></tr></thead>
@@ -504,7 +541,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         </div>
         <div class="hero-stats">
           <div class="hero-stat"><small>Giá trị chứng khoán</small><b id="stockValue">0 ₫</b></div>
-          <div class="hero-stat"><small>Số mã / quỹ</small><b id="stockCount">0</b></div>
+          <div class="hero-stat"><small>Lãi / Lỗ danh mục</small><b id="stockPnlHero">—</b></div>
           <div class="hero-stat"><small>Tỷ trọng quỹ mở</small><b id="fundShare">—</b></div>
         </div>
       </div>
@@ -541,7 +578,12 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
 
       <article class="panel table-panel">
-        <div class="panel-head"><div><h3>Danh mục cổ phiếu và quỹ mở</h3></div></div>
+        <div class="panel-head">
+          <div><h3>Danh mục cổ phiếu và quỹ mở</h3></div>
+          <div class="panel-head-actions">
+            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
+          </div>
+        </div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Mã</th><th>Loại</th><th>Giá hiện tại</th><th>Hôm nay</th><th>Số lượng</th><th>Giá vốn TB</th><th>Giá trị</th><th>Lãi / Lỗ</th><th>Thao tác</th></tr></thead>
@@ -640,6 +682,12 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <button type="button" class="secondary" id="exportCsv">Xuất CSV (mở bằng Excel)</button>
       </div>
       <article class="panel table-panel">
+        <div class="panel-head">
+          <div><h3>Bảng báo cáo theo khoản mục</h3></div>
+          <div class="panel-head-actions">
+            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
+          </div>
+        </div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Khoản mục</th><th>Số khoản</th><th>Giá vốn (₫)</th><th>Giá trị hiện tại (₫)</th><th>Tỷ trọng</th><th>Lãi / Lỗ (₫)</th></tr></thead>
@@ -656,27 +704,32 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
       <div class="settings-grid">
         <article class="panel full-span ota-box">
-          <div class="panel-head" style="margin-bottom:8px">
+          <div class="panel-head" style="margin-bottom:0">
             <div>
               <h3>☁ Cập nhật ứng dụng trực tiếp từ đám mây</h3>
               <p>Tải bản giao diện & công thức mới từ GitHub về thẳng ứng dụng, giữ nguyên dữ liệu tài sản.</p>
             </div>
-            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.6-ota</span>
+            <div class="panel-head-actions">
+              <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.7-ota</span>
+              <button type="button" class="small-btn" id="toggleOtaCollapseBtn">▾ Thu gọn</button>
+            </div>
           </div>
 
-          <label style="font-size:11px;color:#45566a;font-weight:600;display:block;margin-top:8px">
-            Đường dẫn đám mây (Kho public <code>wealthos-ota</code> trên GitHub của bạn):
-          </label>
-          <div class="ota-row">
-            <input id="otaUrlInput" type="url" placeholder="https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html">
-            <button type="button" class="primary" id="otaUpdateBtn">⬇ Tải & Cập nhật ngay</button>
-            <label class="secondary file-button" style="margin:0">
-              Nạp từ file .html
-              <input type="file" id="otaLocalFile" accept=".html,text/html">
+          <div class="ota-body" id="otaCollapseBody">
+            <label style="font-size:11px;color:#45566a;font-weight:600;display:block;margin-top:10px">
+              Đường dẫn đám mây (Kho public <code>wealthos-ota</code> trên GitHub của bạn):
             </label>
-            <button type="button" class="secondary" id="otaRollbackBtn">↩ Quay lại bản trước</button>
+            <div class="ota-row">
+              <input id="otaUrlInput" type="url" placeholder="https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html">
+              <button type="button" class="primary" id="otaUpdateBtn">⬇ Tải & Cập nhật ngay</button>
+              <label class="secondary file-button" style="margin:0">
+                Nạp từ file .html
+                <input type="file" id="otaLocalFile" accept=".html,text/html">
+              </label>
+              <button type="button" class="secondary" id="otaRollbackBtn">↩ Quay lại bản trước</button>
+            </div>
+            <div id="otaStatus" class="notice">Sẵn sàng kiểm tra bản cập nhật mới từ đám mây.</div>
           </div>
-          <div id="otaStatus" class="notice">Sẵn sàng kiểm tra bản cập nhật mới từ đám mây.</div>
         </article>
 
         <article class="panel">
@@ -716,7 +769,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
     </section>
 
-    <footer>WealthOS 0.4.6 · Banner gọn trực diện · Tự động đáo hạn gốc + lãi</footer>
+    <footer>WealthOS 0.4.7 · Phóng thu bảng theo thao tác · Thu gọn phần Cập nhật</footer>
   </main>
 </div>
 
@@ -886,7 +939,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 </dialog>
 
 <script>
-const APP_VERSION = '0.4.6-ota';
+const APP_VERSION = '0.4.7-ota';
 const DEFAULT_OTA_URL = 'https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html';
 const STORAGE_KEY = 'wealthos_trial_v1';
 const LUONG_PER_OZ = 37.5 / 31.1035;
@@ -1005,6 +1058,7 @@ let autoSyncTimer = null;
 function defaultState() {
   return {
     otaUrl: DEFAULT_OTA_URL,
+    otaCollapsed: false,
     autoSync: true,
     fx: 25704,
     fxAuto: true,
@@ -1088,6 +1142,7 @@ function loadState() {
     const merged = {
       ...defaultState(),
       ...parsed,
+      otaCollapsed: !!parsed.otaCollapsed,
       autoSync: parsed.autoSync !== false,
       assets: Array.isArray(parsed.assets) ? parsed.assets.map(normalizeAsset) : [],
       transactions: Array.isArray(parsed.transactions) ? parsed.transactions : [],
@@ -1112,6 +1167,13 @@ function saveState() {
   } catch (e) {
     console.error('Lỗi lưu localStorage:', e);
   }
+}
+
+function syncOtaCollapseUI() {
+  const bodyEl = $('#otaCollapseBody');
+  const btnEl = $('#toggleOtaCollapseBtn');
+  if (bodyEl) bodyEl.classList.toggle('collapsed', !!state.otaCollapsed);
+  if (btnEl) btnEl.textContent = state.otaCollapsed ? '▸ Mở rộng' : '▾ Thu gọn';
 }
 
 function rolloverDeposits() {
@@ -1252,6 +1314,7 @@ function renderAll() {
   if ($('#otaUrlInput') && !$('#otaUrlInput').value) {
     $('#otaUrlInput').value = state.otaUrl || DEFAULT_OTA_URL;
   }
+  syncOtaCollapseUI();
 
   const alertItems = assets.filter(a => a.category === 'cash').map(a => ({ a, m: parseDepositMeta(a) }))
     .filter(x => x.m.alertLevel === 'warn')
@@ -1631,9 +1694,11 @@ function renderModules() {
 
   const stocks = state.assets.filter(a => a.category === 'stock');
   const sVal = stocks.reduce((s, a) => s + Number(a.value || 0), 0);
+  const sCost = stocks.filter(a => Number(a.cost) > 0).reduce((s, a) => s + Number(a.cost || 0), 0);
+  const sValWithCost = stocks.filter(a => Number(a.cost) > 0).reduce((s, a) => s + Number(a.value || 0), 0);
   const fVal = stocks.filter(a => a.kind === 'fund').reduce((s, a) => s + Number(a.value || 0), 0);
   setText('#stockValue', money(sVal));
-  setText('#stockCount', stocks.length);
+  setText('#stockPnlHero', sCost > 0 ? `${sValWithCost - sCost >= 0 ? '+' : ''}${money(sValWithCost - sCost)}` : '—');
   setText('#fundShare', sVal > 0 ? (fVal / sVal * 100).toFixed(1) + '%' : '—');
 
   ['VNINDEX', 'VN30', 'HNX', 'UPCOM'].forEach(k => {
@@ -2254,6 +2319,38 @@ function bindEvents() {
   $$('.nav-item').forEach(b => b.onclick = () => showPage(b.dataset.page));
   $$('[data-goto]').forEach(b => b.onclick = () => showPage(b.dataset.goto));
   if ($('#menuBtn')) $('#menuBtn').onclick = () => $('#sidebarPanel').classList.toggle('open');
+
+  document.addEventListener('click', e => {
+    const zoomBtn = e.target.closest('[data-toggle-zoom]');
+    if (zoomBtn) {
+      e.preventDefault();
+      const panel = zoomBtn.closest('.panel');
+      const shell = $('#appShell');
+      if (!panel) return;
+      const willZoom = !panel.classList.contains('table-zoomed');
+      $$('.panel.table-zoomed').forEach(p => {
+        p.classList.remove('table-zoomed');
+        const b = p.querySelector('[data-toggle-zoom]');
+        if (b) b.textContent = '⛶ Phóng to';
+      });
+      if (willZoom) {
+        panel.classList.add('table-zoomed');
+        zoomBtn.textContent = '⤢ Thu nhỏ';
+        shell?.classList.add('expanded-mode');
+      } else {
+        shell?.classList.remove('expanded-mode');
+      }
+    }
+  });
+
+  if ($('#toggleOtaCollapseBtn')) {
+    $('#toggleOtaCollapseBtn').onclick = () => {
+      state.otaCollapsed = !state.otaCollapsed;
+      saveState();
+      syncOtaCollapseUI();
+    };
+  }
+
   if ($('#syncMarketBtn')) $('#syncMarketBtn').onclick = refreshAllMarketData;
   if ($('#autoSyncToggleBtn')) {
     $('#autoSyncToggleBtn').onclick = () => {
@@ -2415,7 +2512,10 @@ function bindEvents() {
 
   if ($('#quickOtaBtn')) {
     $('#quickOtaBtn').onclick = () => {
+      state.otaCollapsed = false;
+      saveState();
       showPage('settings');
+      syncOtaCollapseUI();
       $('#otaUpdateBtn')?.click();
     };
   }
