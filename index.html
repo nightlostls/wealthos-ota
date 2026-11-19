@@ -2860,6 +2860,8 @@ refreshAllMarketData();
 <script>
 </script>
 <script>
+</script>
+<script>
 // === WEALTHOS_FB_FORCE_UI ===
 (function(){
   const FB_URL = "https://theo-doi-dau-default-rtdb.asia-southeast1.firebasedatabase.app/wealthos_ma_bi_mat_cua_ban/state.json";
@@ -2913,13 +2915,19 @@ refreshAllMarketData();
       }
     }catch(e){ console.warn("FB pull err:",e); }
   }
-  function findSettingsHost(){
-    const headings = Array.from(document.querySelectorAll("h1,h2,h3,h4,div,span"));
-    for(const el of headings){
+  function findBackupCard(){
+    const nodes = Array.from(document.querySelectorAll("h1,h2,h3,h4,div,span,p"));
+    for(const el of nodes){
+      if(el.closest("#__fb_force_btn")) continue;
       const t = (el.textContent || "").trim();
-      if(t === "Sao lưu & Khôi phục WealthOS" || t === "Cài đặt & dữ liệu"){
-        let box = el.closest(".card,section,article") || el.parentElement;
-        if(box && box.offsetParent !== null) return box;
+      if(t === "Sao lưu & Khôi phục WealthOS"){
+        let card = el.parentElement;
+        while(card && card !== document.body){
+          if((card.textContent || "").includes("Tải bản sao lưu JSON") && card.offsetParent !== null){
+            return card;
+          }
+          card = card.parentElement;
+        }
       }
     }
     return null;
@@ -2934,15 +2942,14 @@ refreshAllMarketData();
       btn.textContent = "Đẩy Firebase lên mây";
       btn.addEventListener("click", ()=>pushNow(true));
     }
-    const host = findSettingsHost();
+    const host = findBackupCard();
     if(host){
       if(btn.parentElement !== host){
-        btn.style.cssText = "margin-top:12px;padding:8px 14px;border-radius:8px;border:1px solid rgba(15,23,42,0.15);background:#0f172a;color:#ffffff;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;";
+        btn.style.cssText = "margin-top:14px;padding:8px 14px;border-radius:8px;border:none;background:#0f172a;color:#ffffff;font-size:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;";
         host.appendChild(btn);
       }
-    } else if(btn.parentElement !== document.body){
-      btn.style.cssText = "position:fixed;right:16px;bottom:16px;z-index:2147483647;padding:9px 15px;border-radius:999px;border:1px solid rgba(255,255,255,0.3);background:#0f172a;color:#ffffff;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,0.4);";
-      document.body.appendChild(btn);
+    } else if(btn.parentElement){
+      btn.remove();
     }
   }
   function scheduleAuto(){ if(applying) return; clearTimeout(timer); timer=setTimeout(()=>pushNow(false),800); }
