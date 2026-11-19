@@ -32,9 +32,6 @@ input,textarea,select,td,th,.asset-amount,.metric-value,code{-webkit-user-select
 .nav-item[data-page="bitcoin"] span{color:#ffc078;font-weight:600}
 .nav-item[data-page="stocks"] .nav-badge{background:rgba(139,124,246,.2);color:#a79bff;box-shadow:0 0 0 1px rgba(167,155,255,.3)}
 .nav-item[data-page="stocks"] span{color:#cbc3ff;font-weight:600}
-.nav-item[data-page="gold"].active{box-shadow:inset 3px 0 #f0c34e;background:#263646}
-.nav-item[data-page="bitcoin"].active{box-shadow:inset 3px 0 #ff9d2e;background:#2b323d}
-.nav-item[data-page="stocks"].active{box-shadow:inset 3px 0 #a79bff;background:#242e47}
 .nav-label{font-size:9px;letter-spacing:1.6px;color:#70839b;padding:13px 13px 4px;font-weight:700}
 .sidebar-foot{margin-top:auto;padding:12px 10px 0;color:#8fa0b5;font-size:11px;border-top:1px solid #29394a}
 .status-dot,.local-pill i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#39b889;margin-right:7px}
@@ -42,7 +39,11 @@ input,textarea,select,td,th,.asset-amount,.metric-value,code{-webkit-user-select
 .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:12px;flex-wrap:wrap}
 .eyebrow{font-size:9px;letter-spacing:1.7px;color:#9aa7b7;font-weight:700}
 .topbar h1{font-size:25px;margin:3px 0 0;letter-spacing:-.5px}
-.top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.zoom-group{display:inline-flex;align-items:center;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.zoom-btn{border:0;background:transparent;color:#45566a;padding:8px 10px;font:600 11.5px inherit;cursor:pointer}
+.zoom-btn:hover{background:#edf1f5}
+.zoom-val{padding:0 6px;font-size:11px;font-weight:700;color:#536479}
 .local-pill,.date-chip{border:1px solid var(--line);background:#fff;border-radius:30px;padding:8px 13px;color:#536479;font-size:11px;display:inline-flex;align-items:center;gap:6px}
 .primary,.secondary,.danger-btn{border:0;border-radius:9px;padding:10px 15px;font:600 12px inherit;cursor:pointer;transition:background .15s}
 .primary{background:var(--navy2);color:#fff}
@@ -70,9 +71,6 @@ input,textarea,select,td,th,.asset-amount,.metric-value,code{-webkit-user-select
 .total-card .metric-foot{color:#b1c0d0}
 .content-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:16px}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:19px;box-shadow:0 3px 12px #26384a08;margin-bottom:15px;min-width:0}
-.panel.table-zoomed{padding:24px;border-color:#a6bbd4;box-shadow:0 10px 28px rgba(16,29,43,.1)}
-.panel.table-zoomed th,.panel.table-zoomed td{padding:14px 14px;font-size:13px}
-.panel.table-zoomed .table-scroll{max-height:none;height:auto;overflow-x:auto}
 .panel h3{font-size:14px;margin:0 0 4px}
 .panel-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px;gap:10px;flex-wrap:wrap}
 .panel-head-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -231,7 +229,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <button type="button" class="nav-item" data-page="reports">▦ <span>Báo cáo & Dòng tiền</span></button>
       <button type="button" class="nav-item" data-page="settings">⚙ <span>Cài đặt & dữ liệu</span></button>
     </nav>
-    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.10 · Bảng linh hoạt</div>
+    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.11 · Thu/Phóng giao diện</div>
   </aside>
 
   <main class="main">
@@ -242,6 +240,12 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
       <div class="top-actions">
         <span class="local-pill" id="livePill"><i></i> <span id="livePillText">macOS App · USD/VND: 25.704</span></span>
+        <div class="zoom-group" title="Phóng to / thu nhỏ giao diện">
+          <button type="button" class="zoom-btn" id="zoomOutBtn">−</button>
+          <span class="zoom-val" id="zoomLabel">100%</span>
+          <button type="button" class="zoom-btn" id="zoomInBtn">＋</button>
+          <button type="button" class="zoom-btn" id="zoomResetBtn">100%</button>
+        </div>
         <button type="button" class="secondary active-auto" id="autoSyncToggleBtn" title="Tự động cập nhật giá mỗi 60 giây">⚡ Auto 60s: Bật</button>
         <button type="button" class="secondary" id="quickOtaBtn" title="Cập nhật ứng dụng từ đám mây">☁ Cập nhật App</button>
         <button type="button" class="secondary" id="syncMarketBtn">↻ Cập nhật giá</button>
@@ -311,9 +315,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <article class="panel table-panel">
         <div class="panel-head">
           <div><h3>Danh mục tài sản chung</h3><p>Giá trị, tỷ trọng và lãi/lỗ tạm tính theo từng khoản mục</p></div>
-          <div class="panel-head-actions">
-            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
-          </div>
         </div>
         <div class="table-scroll">
           <table>
@@ -352,12 +353,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         </div>
       </div>
       <article class="panel table-panel">
-        <div class="panel-head">
-          <div><h3>Lịch sử giao dịch</h3></div>
-          <div class="panel-head-actions">
-            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
-          </div>
-        </div>
+        <div class="panel-head"><div><h3>Lịch sử giao dịch</h3></div></div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Ngày</th><th>Loại</th><th>Danh mục</th><th>Tài sản</th><th>Số lượng</th><th>Giá trị (₫)</th><th>Lãi/lỗ chốt</th><th>Ghi chú</th><th></th></tr></thead>
@@ -399,10 +395,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <article class="panel table-panel">
         <div class="panel-head">
           <div><h3>Bảng giá vàng DOJI (đ/lượng)</h3></div>
-          <div class="panel-head-actions">
-            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
-            <button type="button" class="secondary" id="saveManualDojiBtn">Lưu giá đã sửa</button>
-          </div>
+          <button type="button" class="secondary" id="saveManualDojiBtn">Lưu giá đã sửa</button>
         </div>
         <div class="table-scroll">
           <table>
@@ -413,12 +406,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </article>
 
       <article class="panel table-panel">
-        <div class="panel-head">
-          <div><h3>Danh mục vàng đang giữ</h3></div>
-          <div class="panel-head-actions">
-            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
-          </div>
-        </div>
+        <div class="panel-head"><div><h3>Danh mục vàng đang giữ</h3></div></div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Loại vàng</th><th>Giá mua vào (/chỉ)</th><th>Số lượng (chỉ)</th><th>Giá vốn TB (/chỉ)</th><th>Giá trị hiện tại</th><th>Lãi / Lỗ</th><th>Thao tác</th></tr></thead>
@@ -467,12 +455,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
 
       <article class="panel table-panel">
-        <div class="panel-head">
-          <div><h3>Coin đang theo dõi</h3></div>
-          <div class="panel-head-actions">
-            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
-          </div>
-        </div>
+        <div class="panel-head"><div><h3>Coin đang theo dõi</h3></div></div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Coin</th><th>Giá (USD)</th><th>24 giờ</th><th>Số lượng</th><th>Giá vốn TB (USD)</th><th>Giá trị (VND)</th><th>Lãi / Lỗ</th><th>Thao tác</th></tr></thead>
@@ -533,12 +516,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
 
       <article class="panel table-panel">
-        <div class="panel-head">
-          <div><h3>Danh mục cổ phiếu và quỹ mở</h3></div>
-          <div class="panel-head-actions">
-            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
-          </div>
-        </div>
+        <div class="panel-head"><div><h3>Danh mục cổ phiếu và quỹ mở</h3></div></div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Mã</th><th>Loại</th><th>Giá hiện tại</th><th>Hôm nay</th><th>Số lượng</th><th>Giá vốn TB</th><th>Giá trị</th><th>Lãi / Lỗ</th><th>Thao tác</th></tr></thead>
@@ -647,12 +625,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
 
       <article class="panel table-panel">
-        <div class="panel-head">
-          <div><h3>Báo cáo tài sản theo khoản mục</h3></div>
-          <div class="panel-head-actions">
-            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
-          </div>
-        </div>
+        <div class="panel-head"><div><h3>Báo cáo tài sản theo khoản mục</h3></div></div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Khoản mục</th><th>Số khoản</th><th>Giá vốn (₫)</th><th>Giá trị hiện tại (₫)</th><th>Tỷ trọng</th><th>Lãi / Lỗ (₫)</th></tr></thead>
@@ -662,12 +635,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </article>
 
       <article class="panel table-panel">
-        <div class="panel-head">
-          <div><h3>Tổng kết bán ra theo từng tháng & từng danh mục</h3></div>
-          <div class="panel-head-actions">
-            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
-          </div>
-        </div>
+        <div class="panel-head"><div><h3>Tổng kết bán ra theo từng tháng & từng danh mục</h3></div></div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Tháng</th><th>Tiền gửi</th><th>Quỹ cơ hội</th><th>Vàng</th><th>Bitcoin</th><th>Chứng khoán VN</th><th>Quỹ khẩn cấp</th><th>Tổng bán ra</th></tr></thead>
@@ -677,12 +645,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </article>
 
       <article class="panel table-panel">
-        <div class="panel-head">
-          <div><h3>Sổ thu chi</h3></div>
-          <div class="panel-head-actions">
-            <button type="button" class="small-btn" data-toggle-zoom>⛶ Phóng to</button>
-          </div>
-        </div>
+        <div class="panel-head"><div><h3>Sổ thu chi</h3></div></div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Ngày</th><th>Loại</th><th>Nội dung</th><th>Số tiền</th><th></th></tr></thead>
@@ -705,7 +668,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
               <p>Bấm cập nhật trực tiếp một nút, không cần nhập link.</p>
             </div>
             <div class="panel-head-actions">
-              <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.10-ota</span>
+              <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.11-ota</span>
               <button type="button" class="primary" id="otaUpdateBtn">⬇ Cập nhật ngay</button>
               <button type="button" class="small-btn" id="toggleOtaCollapseBtn">▸ Mở rộng</button>
             </div>
@@ -761,7 +724,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
     </section>
 
-    <footer>WealthOS 0.4.10 · Bảng co giãn linh hoạt · Không tạo khoảng trống thừa</footer>
+    <footer>WealthOS 0.4.11 · Thu/Phóng giao diện linh hoạt</footer>
   </main>
 </div>
 
@@ -931,7 +894,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 </dialog>
 
 <script>
-const APP_VERSION = '0.4.10-ota';
+const APP_VERSION = '0.4.11-ota';
 const DEFAULT_OTA_URL = 'https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html';
 const STORAGE_KEY = 'wealthos_trial_v1';
 const LUONG_PER_OZ = 37.5 / 31.1035;
@@ -1051,6 +1014,7 @@ function defaultState() {
   return {
     otaUrl: DEFAULT_OTA_URL,
     otaCollapsed: true,
+    uiZoom: 100,
     autoSync: true,
     fx: 25704,
     fxAuto: true,
@@ -1135,6 +1099,7 @@ function loadState() {
       ...defaultState(),
       ...parsed,
       otaCollapsed: parsed.otaCollapsed !== false,
+      uiZoom: Math.min(140, Math.max(75, Number(parsed.uiZoom) || 100)),
       autoSync: parsed.autoSync !== false,
       assets: Array.isArray(parsed.assets) ? parsed.assets.map(normalizeAsset) : [],
       transactions: Array.isArray(parsed.transactions) ? parsed.transactions : [],
@@ -1157,6 +1122,13 @@ function saveState() {
   } catch (e) {
     console.error('Lỗi lưu localStorage:', e);
   }
+}
+
+function applyUiZoom() {
+  const z = Math.min(140, Math.max(75, Number(state.uiZoom) || 100));
+  state.uiZoom = z;
+  document.body.style.zoom = `${z}%`;
+  setText('#zoomLabel', `${z}%`);
 }
 
 function syncOtaCollapseUI() {
@@ -1270,6 +1242,7 @@ function renderAll() {
   const fx = Number(state.fx) || 25704;
   rolloverDeposits();
   pruneDepletedAssets();
+  applyUiZoom();
   const assets = (state.assets || []).map(normalizeAsset);
   state.assets = assets;
 
@@ -2324,24 +2297,27 @@ function bindEvents() {
   $$('[data-goto]').forEach(b => b.onclick = () => showPage(b.dataset.goto));
   if ($('#menuBtn')) $('#menuBtn').onclick = () => $('#sidebarPanel').classList.toggle('open');
 
-  document.addEventListener('click', e => {
-    const zoomBtn = e.target.closest('[data-toggle-zoom]');
-    if (zoomBtn) {
-      e.preventDefault();
-      const panel = zoomBtn.closest('.panel');
-      if (!panel) return;
-      const willZoom = !panel.classList.contains('table-zoomed');
-      $$('.panel.table-zoomed').forEach(p => {
-        p.classList.remove('table-zoomed');
-        const b = p.querySelector('[data-toggle-zoom]');
-        if (b) b.textContent = '⛶ Phóng to';
-      });
-      if (willZoom) {
-        panel.classList.add('table-zoomed');
-        zoomBtn.textContent = '⤢ Thu nhỏ';
-      }
-    }
-  });
+  if ($('#zoomOutBtn')) {
+    $('#zoomOutBtn').onclick = () => {
+      state.uiZoom = Math.max(75, (Number(state.uiZoom) || 100) - 10);
+      applyUiZoom();
+      saveState();
+    };
+  }
+  if ($('#zoomInBtn')) {
+    $('#zoomInBtn').onclick = () => {
+      state.uiZoom = Math.min(140, (Number(state.uiZoom) || 100) + 10);
+      applyUiZoom();
+      saveState();
+    };
+  }
+  if ($('#zoomResetBtn')) {
+    $('#zoomResetBtn').onclick = () => {
+      state.uiZoom = 100;
+      applyUiZoom();
+      saveState();
+    };
+  }
 
   if ($('#toggleOtaCollapseBtn')) {
     $('#toggleOtaCollapseBtn').onclick = () => {
