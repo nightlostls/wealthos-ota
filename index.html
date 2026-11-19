@@ -106,6 +106,1872 @@ th{font-size:9.5px;color:#8794a4;letter-spacing:.6px;font-weight:700;text-transf
 .module-symbol{font-size:28px;width:52px;height:52px;display:grid;place-items:center;border:1px solid #ffffff55;border-radius:14px;flex:none}
 .market-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:14px;flex-wrap:wrap}
 .status-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:10.5px;font-weight:600;background:#eef2f6;color:#45566a}
+.status-badge.live{background:#e6f5f0;color:#1d7258}
+.status-badge.stale{background:#fcf3e3;color:#9c6818}
+.mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:11px;margin-bottom:15px}
+.mini-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.mini-card small{display:block;font-size:9px;color:#8794a4;letter-spacing:.7px;font-weight:700;text-transform:uppercase}
+.mini-card b{display:block;font-size:15px;margin-top:4px}
+.mini-card span{font-size:10.5px;color:var(--muted)}
+.pos{color:var(--green)!important;font-weight:600}
+.neg{color:var(--red)!important;font-weight:600}
+.muted{color:var(--muted);font-size:11px}
+.small{font-size:10px}
+.panel textarea{margin-top:10px;resize:vertical}
+.mt{margin-top:10px}
+.indicator-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.indicator-card{background:#fff;border:1px solid var(--line);padding:16px;border-radius:13px}
+.indicator-card h3{margin:0 0 6px;font-size:13.5px}
+.indicator-card p{margin:3px 0;color:var(--muted);font-size:11px}
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.settings-grid .panel.full-span{grid-column:1/-1}
+.ota-box{background:linear-gradient(120deg,#f6f9fc,#eef3f9);border:1px solid #d5e0ec}
+.ota-row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.ota-row input{flex:1;min-width:240px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px}
+.file-drop{margin-top:12px;min-height:110px;border:1.5px dashed #b8c5d2;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;color:#40556d;padding:14px;text-align:center;transition:background .15s}
+.file-drop:hover{background:#f8fafc}
+.file-drop span{font-size:22px}
+.file-drop small{color:#8794a4;font-size:10.5px}
+.file-drop input,.file-button input{display:none}
+.notice{font-size:11.5px;margin-top:10px;color:#526b83;line-height:1.5}
+.divider{height:1px;background:var(--line);margin:18px 0}
+.system-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #edf0f4;font-size:11.5px}
+.system-row b{font-weight:600}
+.pending{color:#bd8732}
+footer{padding:16px 0;color:#9aa7b7;font-size:10.5px}
+.dialog-form{padding:22px;width:min(540px,calc(100vw - 28px));display:grid;gap:12px}
+.dialog-form label{font-size:11px;color:#536276;display:grid;gap:5px;font-weight:500}
+.dialog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+.dialog-head h2{font-size:18px;margin:2px 0}
+.icon-btn{border:0;background:#f0f3f6;border-radius:50%;width:30px;height:30px;font-size:18px;cursor:pointer;display:grid;place-items:center}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:6px}
+dialog{border:0;border-radius:17px;padding:0;box-shadow:0 25px 80px #101d2b44;background:#fff;color:var(--ink)}
+dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
+.file-button{display:inline-block;padding:9px 13px;background:#eef2f6;border:1px solid var(--line);border-radius:8px;font-size:11.5px;cursor:pointer;color:#42566c;font-weight:600}
+.check-line{display:flex!important;align-items:center;gap:8px;font-size:12px;color:#26364a;cursor:pointer}
+.check-line input{width:auto!important;margin:0}
+.gold-edit-input{width:115px;padding:5px 8px;border:1px solid var(--line);border-radius:6px;text-align:right;font:inherit;font-size:11.5px}
+@media(max-width:1100px){
+  .sidebar{width:220px}.main{margin-left:220px;padding:22px}
+  .metric-grid{grid-template-columns:repeat(2,1fr)}.asset-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  .sidebar{transform:translateX(-100%);width:265px;box-shadow:10px 0 30px #0003}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin:0;padding:16px 14px 28px}
+  .mobile-menu{display:block;border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 11px;cursor:pointer}
+  .metric-grid,.metric-grid.three{grid-template-columns:1fr 1fr;gap:9px}
+  .content-grid,.settings-grid,.indicator-grid{grid-template-columns:1fr}
+  .asset-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebarPanel">
+    <div class="brand">
+      <div class="brand-mark">W</div>
+      <div><b>WealthOS</b><small>PERSONAL FINANCE</small></div>
+    </div>
+    <nav id="sideNav">
+      <button type="button" class="nav-item active" data-page="overview">◫ <span>Tổng quan</span></button>
+      <button type="button" class="nav-item" data-page="assets">▤ <span>Tài sản</span></button>
+      <button type="button" class="nav-item" data-page="transactions">⇄ <span>Giao dịch</span></button>
+      <button type="button" class="nav-item" data-page="cashflow">↗ <span>Dòng tiền</span></button>
+      <div class="nav-label">ĐẦU TƯ</div>
+      <button type="button" class="nav-item" data-page="gold">◈ <span>Vàng</span></button>
+      <button type="button" class="nav-item" data-page="bitcoin">₿ <span>Bitcoin</span></button>
+      <button type="button" class="nav-item" data-page="stocks">▥ <span>Chứng khoán VN</span></button>
+      <button type="button" class="nav-item" data-page="indicators">⌁ <span>Chỉ báo & cảnh báo</span></button>
+      <div class="nav-label">HỆ THỐNG</div>
+      <button type="button" class="nav-item" data-page="reports">▦ <span>Báo cáo</span></button>
+      <button type="button" class="nav-item" data-page="settings">⚙ <span>Cài đặt & dữ liệu</span></button>
+    </nav>
+    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.3.3 · DOJI & VN-Index</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">PERSONAL WEALTH MANAGEMENT</div>
+        <h1 id="pageTitle">Tổng quan tài sản</h1>
+      </div>
+      <div class="top-actions">
+        <span class="local-pill" id="livePill"><i></i> <span id="livePillText">macOS App · USD/VND: 25.500</span></span>
+        <button type="button" class="secondary" id="quickOtaBtn" title="Kiểm tra cập nhật ứng dụng từ đám mây">☁ Cập nhật App</button>
+        <button type="button" class="secondary" id="syncMarketBtn">↻ Cập nhật giá</button>
+        <button type="button" class="primary" id="quickAdd">＋ Thêm tài sản</button>
+        <button type="button" class="mobile-menu" id="menuBtn">☰</button>
+      </div>
+    </header>
+
+    <!-- TỔNG QUAN -->
+    <section id="overviewPage" class="page active">
+      <div class="welcome-row">
+        <div>
+          <h2>Bức tranh tài chính của bạn</h2>
+          <p>Giá trị tài sản được tổng hợp từ dữ liệu bạn nhập hoặc chuyển từ trang theo dõi đầu tư cũ.</p>
+        </div>
+        <div class="date-chip" id="todayLabel"></div>
+      </div>
+
+      <div class="metric-grid">
+        <article class="metric-card total-card">
+          <div class="metric-label">TỔNG TÀI SẢN RÒNG</div>
+          <div class="metric-value" id="netWorth">0 ₫</div>
+          <div class="metric-foot" id="netWorthSub">Tổng giá trị các tài sản đã ghi nhận</div>
+        </article>
+        <article class="metric-card">
+          <div class="metric-label">TIỀN MẶT & TIỀN GỬI</div>
+          <div class="metric-value" id="cashValue">0 ₫</div>
+          <div class="metric-foot" id="cashSub">Tiền gửi · Quỹ cơ hội · Quỹ khẩn cấp</div>
+        </article>
+        <article class="metric-card">
+          <div class="metric-label">TÀI SẢN ĐẦU TƯ</div>
+          <div class="metric-value" id="investValue">0 ₫</div>
+          <div class="metric-foot" id="investSub">Vàng · Crypto · Chứng khoán</div>
+        </article>
+        <article class="metric-card">
+          <div class="metric-label">SỐ KHOẢN ĐANG THEO DÕI</div>
+          <div class="metric-value" id="assetCount">0</div>
+          <div class="metric-foot">Tài sản và khoản tiền</div>
+        </article>
+      </div>
+
+      <div class="content-grid">
+        <article class="panel">
+          <div class="panel-head">
+            <div><h3>Phân bổ tài sản</h3><p>Tỷ trọng danh mục đầu tư & tiền gửi (không gồm quỹ khẩn cấp)</p></div>
+          </div>
+          <div class="allocation-wrap">
+            <div class="donut" id="donut"><div><b id="donutTotal">0 ₫</b><small>DANH MỤC</small></div></div>
+            <div class="legend" id="allocationLegend"><div class="empty">Chưa có dữ liệu tài sản.</div></div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div><h3>Tài sản gần đây</h3><p>Các khoản mới cập nhật</p></div>
+            <button type="button" class="text-btn" data-goto="assets">Xem tất cả →</button>
+          </div>
+          <div id="recentAssets" class="recent-list"><div class="empty">Chưa có tài sản nào.</div></div>
+        </article>
+      </div>
+
+      <article class="panel table-panel">
+        <div class="panel-head">
+          <div><h3>Danh mục tài sản</h3><p>Giá trị, tỷ trọng và lãi/lỗ tạm tính theo từng nhóm</p></div>
+          <button type="button" class="text-btn" data-goto="assets">Quản lý danh mục →</button>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Danh mục</th><th>Giá trị hiện tại</th><th>Tỷ trọng</th><th>Lãi / Lỗ</th><th>Lãi / Lỗ %</th></tr></thead>
+            <tbody id="overviewTable"><tr><td colspan="5" class="empty">Chưa có dữ liệu.</td></tr></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <!-- TÀI SẢN -->
+    <section id="assetsPage" class="page">
+      <div class="section-toolbar">
+        <div><h2>Tất cả tài sản</h2><p>Ghi nhận số lượng, giá vốn, giá trị hiện tại và thông tin từng khoản.</p></div>
+        <button type="button" class="primary" id="addAsset">＋ Thêm tài sản</button>
+      </div>
+      <div class="filter-row">
+        <input id="assetSearch" placeholder="Tìm theo tên hoặc mã…">
+        <select id="assetFilter">
+          <option value="all">Tất cả danh mục</option>
+          <option value="cash">Tiền mặt / tiền gửi</option>
+          <option value="gold">Vàng</option>
+          <option value="bitcoin">Bitcoin / Crypto</option>
+          <option value="stock">Chứng khoán / Quỹ</option>
+          <option value="other">Khác</option>
+        </select>
+      </div>
+      <div id="assetCards" class="asset-grid"><div class="empty">Chưa có tài sản. Hãy thêm khoản đầu tiên hoặc nhập từ file cũ.</div></div>
+    </section>
+
+    <!-- GIAO DỊCH -->
+    <section id="transactionsPage" class="page">
+      <div class="section-toolbar">
+        <div><h2>Sổ giao dịch</h2><p>Ghi nhận mua, bán, gửi thêm, rút và điều chuyển vốn.</p></div>
+        <button type="button" class="primary" id="addTransaction">＋ Ghi giao dịch</button>
+      </div>
+      <article class="panel table-panel">
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Ngày</th><th>Loại</th><th>Tài sản</th><th>Số lượng</th><th>Giá trị (₫)</th><th>Lãi/lỗ chốt</th><th>Ghi chú</th><th></th></tr></thead>
+            <tbody id="transactionRows"><tr><td colspan="8" class="empty">Chưa có giao dịch.</td></tr></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <!-- DÒNG TIỀN -->
+    <section id="cashflowPage" class="page">
+      <div class="section-toolbar">
+        <div><h2>Dòng tiền</h2><p>Theo dõi thu nhập, chi tiêu và tiền chuyển vào đầu tư.</p></div>
+        <button type="button" class="primary" id="addCashflow">＋ Thêm dòng tiền</button>
+      </div>
+      <div class="metric-grid three">
+        <article class="metric-card"><div class="metric-label">TỔNG THU</div><div class="metric-value" id="incomeTotal">0 ₫</div></article>
+        <article class="metric-card"><div class="metric-label">TỔNG CHI</div><div class="metric-value" id="expenseTotal">0 ₫</div></article>
+        <article class="metric-card"><div class="metric-label">DÒNG TIỀN RÒNG</div><div class="metric-value" id="cashflowNet">0 ₫</div></article>
+      </div>
+      <article class="panel table-panel">
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Ngày</th><th>Loại</th><th>Nội dung</th><th>Số tiền</th><th></th></tr></thead>
+            <tbody id="cashflowRows"><tr><td colspan="5" class="empty">Chưa có dữ liệu.</td></tr></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <!-- VÀNG DOJI -->
+    <section id="goldPage" class="page">
+      <div class="module-hero gold-hero">
+        <div class="module-symbol">◈</div>
+        <div><div class="eyebrow">INVESTMENT MODULE</div><h2>Vàng DOJI & Vàng Thế Giới</h2><p>Tự động cập nhật vàng thế giới (Binance PAXG) và 3 dòng vàng DOJI (Nhẫn tròn 9999 Hưng Thịnh Vượng, Vàng miếng SJC, Nữ trang 9999).</p></div>
+      </div>
+
+      <div class="market-bar">
+        <span id="goldStatus" class="status-badge">Nguồn: giavang.doji.vn · Binance PAXG</span>
+        <button type="button" class="secondary" id="refreshDojiBtn">↻ Cập nhật giá DOJI</button>
+      </div>
+
+      <div class="mini-grid">
+        <div class="mini-card"><small>Vàng thế giới (USD/oz)</small><b id="mktGoldUsd">—</b><span id="mktGoldChg">24h: —</span></div>
+        <div class="mini-card"><small>Quy đổi TG (VND/lượng)</small><b id="mktGoldVnd">—</b><span>1 lượng = 37,5 / 31,1035 oz</span></div>
+        <div class="mini-card"><small>DOJI Nhẫn 9999 (Mua/Bán)</small><b id="mktDojiNhan">—</b><span id="mktDojiNhanChi">Theo chỉ: —</span></div>
+        <div class="mini-card"><small>Chênh Nhẫn 9999 vs TG</small><b id="mktGoldPrem">—</b><span id="mktGoldSpread">Chênh mua-bán: —</span></div>
+      </div>
+
+      <article class="panel table-panel">
+        <div class="panel-head">
+          <div><h3>Bảng giá vàng DOJI (đ/lượng)</h3><p>Tự động lấy từ DOJI; bạn cũng có thể sửa trực tiếp số liệu và bấm Lưu nếu nguồn tạm gián đoạn</p></div>
+          <button type="button" class="secondary" id="saveManualDojiBtn">Lưu giá đã sửa</button>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Loại vàng DOJI</th><th>Mua vào (đ/lượng)</th><th>Bán ra (đ/lượng)</th><th>Chênh mua-bán</th><th>Bán ra so với TG</th><th>Mua / Bán (đ/chỉ)</th><th>Trạng thái</th></tr></thead>
+            <tbody id="dojiTableRows"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <div class="metric-grid three">
+        <article class="metric-card"><div class="metric-label">GIÁ TRỊ VÀNG NẮM GIỮ</div><div class="metric-value" id="goldValue">0 ₫</div></article>
+        <article class="metric-card"><div class="metric-label">TỔNG SỐ LƯỢNG</div><div class="metric-value" id="goldQty">0 chỉ</div></article>
+        <article class="metric-card"><div class="metric-label">TỔNG GIÁ VỐN</div><div class="metric-value" id="goldCost">—</div></article>
+      </div>
+
+      <article class="panel table-panel">
+        <div class="panel-head"><div><h3>Danh mục vàng đang giữ</h3><p>Định giá theo giá mua vào (đ/chỉ) của đúng loại vàng DOJI tương ứng</p></div></div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Loại vàng</th><th>Giá mua vào (/chỉ)</th><th>Số lượng (chỉ)</th><th>Giá vốn (/chỉ)</th><th>Giá trị hiện tại</th><th>Lãi / Lỗ</th></tr></thead>
+            <tbody id="goldHoldingsRows"><tr><td colspan="6" class="empty">Chưa có vàng nào.</td></tr></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h3>Khung luận điểm vàng</h3>
+        <textarea id="goldThesis" rows="3" placeholder="Ghi luận điểm, giả định và điều kiện làm luận điểm mất hiệu lực…"></textarea>
+        <button type="button" class="primary mt" data-save-note="goldThesis">Lưu luận điểm</button>
+      </article>
+    </section>
+
+    <!-- BITCOIN -->
+    <section id="bitcoinPage" class="page">
+      <div class="module-hero btc-hero">
+        <div class="module-symbol">₿</div>
+        <div><div class="eyebrow">INVESTMENT MODULE</div><h2>Đầu tư Bitcoin & Crypto</h2><p>Giá trực tiếp từ Binance, dữ liệu thị trường từ CoinGecko & Alternative.me, tách riêng tác động giá và tỷ giá USD/VND.</p></div>
+      </div>
+      <div class="market-bar">
+        <span id="btcStatus" class="status-badge">Nguồn: Binance · CoinGecko · Alternative.me</span>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <input id="inFxRate" class="inline-input" style="width:150px" type="number" step="10" placeholder="Tỷ giá USD/VND">
+          <button type="button" class="secondary" id="applyFxBtn">Lưu tỷ giá tay</button>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini-card"><small>Giá BTC (USD)</small><b id="mktBtcUsd">—</b><span id="mktBtcChg">24h: —</span></div>
+        <div class="mini-card"><small>Tổng vốn hóa Crypto</small><b id="mktCapUsd">—</b><span id="mktCapChg">24h: —</span></div>
+        <div class="mini-card"><small>BTC / ETH Dominance</small><b id="mktDom">—</b><span>Thị phần vốn hóa</span></div>
+        <div class="mini-card"><small>Khối lượng 24h</small><b id="mktVolUsd">—</b><span>Toàn thị trường</span></div>
+        <div class="mini-card"><small>Sợ hãi & Tham lam</small><b id="mktFng">—</b><span id="mktFngLabel">Alternative.me</span></div>
+        <div class="mini-card"><small>Tỷ giá USD/VND</small><b id="mktFx">—</b><span id="mktFxMode">Tự động</span></div>
+      </div>
+      <div class="metric-grid three">
+        <article class="metric-card"><div class="metric-label">GIÁ TRỊ CRYPTO</div><div class="metric-value" id="btcValue">0 ₫</div></article>
+        <article class="metric-card"><div class="metric-label">SỐ LƯỢNG BTC</div><div class="metric-value" id="btcQty">0 BTC</div></article>
+        <article class="metric-card"><div class="metric-label">GIÁ VỐN QUY ĐỔI</div><div class="metric-value" id="btcCost">—</div></article>
+      </div>
+      <article class="panel table-panel">
+        <div class="panel-head"><div><h3>Coin đang theo dõi</h3><p>Giá vốn USD, giá thị trường và phân rã lãi/lỗ theo giá coin vs tỷ giá</p></div></div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Coin</th><th>Giá (USD)</th><th>24 giờ</th><th>Số lượng</th><th>Giá vốn TB (USD)</th><th>Giá trị (VND)</th><th>Lãi / Lỗ</th></tr></thead>
+            <tbody id="btcHoldingsRows"><tr><td colspan="7" class="empty">Chưa có coin nào.</td></tr></tbody>
+          </table>
+        </div>
+      </article>
+      <article class="panel">
+        <h3>Khung luận điểm Bitcoin</h3>
+        <textarea id="bitcoinThesis" rows="3" placeholder="Ghi luận điểm, giả định và điều kiện làm luận điểm mất hiệu lực…"></textarea>
+        <button type="button" class="primary mt" data-save-note="bitcoinThesis">Lưu luận điểm</button>
+      </article>
+    </section>
+
+    <!-- CHỨNG KHOÁN VN -->
+    <section id="stocksPage" class="page">
+      <div class="module-hero stock-hero">
+        <div class="module-symbol">▥</div>
+        <div><div class="eyebrow">INVESTMENT MODULE</div><h2>Chứng khoán & Quỹ mở Việt Nam</h2><p>Chỉ số VN-Index, VN30, HNX, UPCoM và danh mục cổ phiếu / chứng chỉ quỹ (NAV Fmarket).</p></div>
+      </div>
+      <div class="market-bar">
+        <span id="stockStatus" class="status-badge">Nguồn: TCBS · DNSE · VPS · VNDirect · Fmarket</span>
+        <button type="button" class="secondary" id="refreshStocksBtn">↻ Làm mới chỉ số & giá CK</button>
+      </div>
+      <div class="mini-grid">
+        <div class="mini-card"><small>VN-INDEX</small><b id="idxVNINDEX">—</b><span id="chgVNINDEX">Đang tải…</span></div>
+        <div class="mini-card"><small>VN30</small><b id="idxVN30">—</b><span id="chgVN30">Đang tải…</span></div>
+        <div class="mini-card"><small>HNX-INDEX</small><b id="idxHNX">—</b><span id="chgHNX">Đang tải…</span></div>
+        <div class="mini-card"><small>UPCoM-INDEX</small><b id="idxUPCOM">—</b><span id="chgUPCOM">Đang tải…</span></div>
+      </div>
+      <div class="metric-grid three">
+        <article class="metric-card"><div class="metric-label">GIÁ TRỊ CHỨNG KHOÁN</div><div class="metric-value" id="stockValue">0 ₫</div></article>
+        <article class="metric-card"><div class="metric-label">SỐ MÃ / QUỸ</div><div class="metric-value" id="stockCount">0</div></article>
+        <article class="metric-card"><div class="metric-label">TỶ TRỌNG QUỸ MỞ</div><div class="metric-value" id="fundShare">—</div></article>
+      </div>
+      <article class="panel table-panel">
+        <div class="panel-head"><div><h3>Danh mục cổ phiếu và quỹ mở</h3><p>Hiệu suất từng mã cổ phiếu vệ tinh và quỹ mở lõi</p></div></div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Mã</th><th>Loại</th><th>Giá hiện tại</th><th>Hôm nay</th><th>Số lượng</th><th>Giá vốn TB</th><th>Giá trị</th><th>Lãi / Lỗ</th></tr></thead>
+            <tbody id="stockHoldingsRows"><tr><td colspan="8" class="empty">Chưa có cổ phiếu hoặc quỹ mở.</td></tr></tbody>
+          </table>
+        </div>
+      </article>
+      <article class="panel">
+        <h3>Khung đánh giá quỹ và cổ phiếu</h3>
+        <textarea id="stocksThesis" rows="3" placeholder="Ghi luận điểm thị trường và tiêu chí lựa chọn…"></textarea>
+        <button type="button" class="primary mt" data-save-note="stocksThesis">Lưu luận điểm</button>
+      </article>
+    </section>
+
+    <!-- CHỈ BÁO & CẢNH BÁO -->
+    <section id="indicatorsPage" class="page">
+      <div class="section-toolbar">
+        <div><h2>Chỉ báo & cảnh báo</h2><p>Danh mục chỉ báo vĩ mô và điều kiện theo dõi luận điểm.</p></div>
+        <button type="button" class="primary" id="addIndicator">＋ Thêm chỉ báo</button>
+      </div>
+      <div id="indicatorList" class="indicator-grid"><article class="panel empty">Chưa có chỉ báo nào.</article></div>
+    </section>
+
+    <!-- BÁO CÁO -->
+    <section id="reportsPage" class="page">
+      <div class="section-toolbar">
+        <div><h2>Báo cáo tài sản</h2><p>Tổng hợp giá trị, giá vốn và lãi/lỗ hiện tại theo nhóm tài sản.</p></div>
+        <button type="button" class="secondary" id="exportCsv">Xuất CSV (mở bằng Excel)</button>
+      </div>
+      <article class="panel table-panel">
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Danh mục</th><th>Số khoản</th><th>Giá vốn (₫)</th><th>Giá trị hiện tại (₫)</th><th>Tỷ trọng</th><th>Lãi / Lỗ (₫)</th></tr></thead>
+            <tbody id="reportRows"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <!-- CÀI ĐẶT & DỮ LIỆU -->
+    <section id="settingsPage" class="page">
+      <div class="section-toolbar">
+        <div><h2>Cài đặt & dữ liệu</h2><p>Cập nhật phần mềm trực tiếp từ đám mây, sao lưu dữ liệu và nhập từ bản cũ.</p></div>
+      </div>
+
+      <div class="settings-grid">
+        <article class="panel full-span ota-box">
+          <div class="panel-head" style="margin-bottom:8px">
+            <div>
+              <h3>☁ Cập nhật ứng dụng trực tiếp từ đám mây (Không cần cài lại .app)</h3>
+              <p>Tải phiên bản giao diện & công thức mới từ GitHub về thẳng ứng dụng. Toàn bộ dữ liệu tài sản của bạn được giữ nguyên 100%.</p>
+            </div>
+            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.3.3-ota</span>
+          </div>
+
+          <label style="font-size:11px;color:#45566a;font-weight:600;display:block;margin-top:8px">
+            Đường dẫn đám mây (Kho public <code>wealthos-ota</code> trên GitHub của bạn):
+          </label>
+          <div class="ota-row">
+            <input id="otaUrlInput" type="url" placeholder="https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html">
+            <button type="button" class="primary" id="otaUpdateBtn">⬇ Tải & Cập nhật ngay</button>
+            <label class="secondary file-button" style="margin:0">
+              Nạp từ file .html
+              <input type="file" id="otaLocalFile" accept=".html,text/html">
+            </label>
+            <button type="button" class="secondary" id="otaRollbackBtn">↩ Quay lại bản trước</button>
+          </div>
+          <div id="otaStatus" class="notice">Sẵn sàng kiểm tra bản cập nhật mới từ đám mây.</div>
+        </article>
+
+        <article class="panel">
+          <h3>Chuyển dữ liệu từ ứng dụng cũ</h3>
+          <p class="muted">Hỗ trợ cả file sao lưu <code>.json</code> hoặc file <code>.html</code> kèm dữ liệu từ <b>theo-doi-dau-tu-canh-bao.html</b>.</p>
+          <label class="file-drop">
+            <span>＋</span>
+            <b>Chọn file JSON hoặc HTML kèm dữ liệu</b>
+            <small>Nhận diện tự động định dạng theo-doi-dau-tu</small>
+            <input type="file" id="legacyImport" accept=".json,.html,application/json,text/html">
+          </label>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+            <button type="button" class="secondary" id="loadSampleBtn">Nạp dữ liệu mẫu</button>
+            <button type="button" class="danger-btn" id="clearAllBtn">Xoá dữ liệu thử nghiệm</button>
+          </div>
+          <div id="importStatus" class="notice"></div>
+        </article>
+
+        <article class="panel">
+          <h3>Sao lưu & Khôi phục WealthOS</h3>
+          <p class="muted">Xuất toàn bộ dữ liệu hiện tại thành file JSON để lưu trữ hoặc chuyển sang thiết bị khác.</p>
+          <button type="button" class="primary" id="backupBtn">Tải bản sao lưu JSON</button>
+          <div class="divider"></div>
+          <h3>Khôi phục từ sao lưu WealthOS</h3>
+          <p class="muted">Nạp lại file <code>wealthos-backup-….json</code> đã xuất trước đó.</p>
+          <label class="file-button">Chọn file sao lưu WealthOS<input type="file" id="restoreFile" accept=".json,application/json"></label>
+          <div id="restoreStatus" class="notice"></div>
+        </article>
+
+        <article class="panel full-span">
+          <h3>Tình trạng hệ thống</h3>
+          <div class="system-row"><span>Ứng dụng macOS</span><b>WealthOS.app (Native Cocoa + OTA Engine)</b></div>
+          <div class="system-row"><span>Thư mục chứa bản cập nhật OTA</span><b id="otaPathDisplay" style="font-family:monospace;font-size:11px">~/Library/Application Support/WealthOS/ota</b></div>
+          <div class="system-row"><span>Đồng bộ Google Drive</span><b class="pending">Chưa kết nối</b></div>
+          <div class="system-row"><span>Mã hóa dữ liệu</span><b class="pending">Chưa kích hoạt</b></div>
+        </article>
+      </div>
+    </section>
+
+    <footer>WealthOS 0.3.3 · DOJI Gold & VN-Index Live · Dữ liệu lưu cục bộ trên máy Mac</footer>
+  </main>
+</div>
+
+<!-- MODAL THÊM / SỬA TÀI SẢN -->
+<dialog id="assetDialog">
+  <form method="dialog" id="assetForm" class="dialog-form">
+    <div class="dialog-head">
+      <div><div class="eyebrow">ASSET RECORD</div><h2 id="assetDialogTitle">Thêm tài sản</h2></div>
+      <button type="button" class="icon-btn" data-close-dialog aria-label="Đóng">×</button>
+    </div>
+    <input type="hidden" id="assetId">
+    <label>Tên tài sản<input id="assetName" required maxlength="80" placeholder="Ví dụ: DOJI Nhẫn tròn 9999, Quỹ mở VESAF, FPT…"></label>
+    <div class="form-grid">
+      <label>Danh mục
+        <select id="assetCategory">
+          <option value="cash">Tiền mặt / tiền gửi</option>
+          <option value="gold">Vàng</option>
+          <option value="bitcoin">Bitcoin / Crypto</option>
+          <option value="stock">Chứng khoán / Quỹ</option>
+          <option value="other">Khác</option>
+        </select>
+      </label>
+      <label>Phân loại chi tiết
+        <select id="assetKind">
+          <option value="">Tự động theo danh mục</option>
+          <option value="gold">Vàng (đơn vị chỉ)</option>
+          <option value="stock">Cổ phiếu</option>
+          <option value="fund">Quỹ mở</option>
+          <option value="crypto">Crypto (giá vốn USD)</option>
+          <option value="deposit">Tiền gửi ngân hàng</option>
+          <option value="op">Quỹ cơ hội</option>
+          <option value="em">Quỹ khẩn cấp</option>
+        </select>
+      </label>
+      <label>Mã / loại tài sản<input id="assetTicker" maxlength="30" placeholder="DOJI nhẫn, DOJI miếng, VESAF, FPT…"></label>
+      <label>Số lượng<input id="assetQuantity" type="number" min="0" step="any" placeholder="0"></label>
+      <label>Giá trị hiện tại (VND)<input id="assetValue" type="number" min="0" step="1" required placeholder="0"></label>
+      <label>Giá vốn (VND)<input id="assetCost" type="number" min="0" step="1" placeholder="Không bắt buộc"></label>
+      <label>Ngày cập nhật<input id="assetDate" type="date"></label>
+    </div>
+    <label>Ghi chú<textarea id="assetNote" rows="2" placeholder="Ngân hàng, kỳ hạn, loại vàng, thông tin thêm…"></textarea></label>
+    <div class="dialog-actions">
+      <button type="button" class="secondary" data-close-dialog>Huỷ</button>
+      <button type="submit" class="primary" id="saveAssetBtn">Lưu tài sản</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- MODAL GIAO DỊCH -->
+<dialog id="transactionDialog">
+  <form method="dialog" id="transactionForm" class="dialog-form">
+    <div class="dialog-head">
+      <div><div class="eyebrow">TRANSACTION</div><h2>Ghi giao dịch</h2></div>
+      <button type="button" class="icon-btn" data-close-dialog aria-label="Đóng">×</button>
+    </div>
+    <div class="form-grid">
+      <label>Loại giao dịch
+        <select id="txType">
+          <option value="buy">Mua / đầu tư thêm</option>
+          <option value="sell">Bán tài sản</option>
+          <option value="deposit">Gửi thêm</option>
+          <option value="withdraw">Rút tiền</option>
+          <option value="transfer">Luân chuyển nội bộ</option>
+        </select>
+      </label>
+      <label>Tài sản liên quan<select id="txAsset"></select></label>
+    </div>
+    <div class="form-grid">
+      <label>Ngày<input id="txDate" type="date" required></label>
+      <label>Số tiền (VND)<input id="txAmount" type="number" min="1" step="1" required></label>
+    </div>
+    <div class="form-grid">
+      <label>Số lượng biến động (nếu có)<input id="txQtyDelta" type="number" min="0" step="any" placeholder="Ví dụ: 5"></label>
+      <label>Tài sản nhận (nếu luân chuyển)<select id="txTargetAsset"><option value="">— Không chọn —</option></select></label>
+    </div>
+    <label class="check-line"><input type="checkbox" id="txApplyAsset" checked> Cập nhật trực tiếp số lượng, giá vốn bình quân và giá trị tài sản</label>
+    <label>Ghi chú<input id="txNote" maxlength="120" placeholder="Ghi chú giao dịch…"></label>
+    <div class="dialog-actions">
+      <button type="button" class="secondary" data-close-dialog>Huỷ</button>
+      <button type="submit" class="primary" id="saveTxBtn">Lưu giao dịch</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- MODAL DÒNG TIỀN -->
+<dialog id="cashDialog">
+  <form method="dialog" id="cashForm" class="dialog-form">
+    <div class="dialog-head">
+      <div><div class="eyebrow">CASH FLOW</div><h2>Thêm dòng tiền</h2></div>
+      <button type="button" class="icon-btn" data-close-dialog aria-label="Đóng">×</button>
+    </div>
+    <label>Loại<select id="cfType"><option value="income">Thu nhập</option><option value="expense">Chi tiêu</option></select></label>
+    <div class="form-grid">
+      <label>Ngày<input id="cfDate" type="date" required></label>
+      <label>Số tiền (VND)<input id="cfAmount" type="number" min="1" required></label>
+    </div>
+    <label>Nội dung<input id="cfNote" required maxlength="100" placeholder="Lương, tiền thuê nhà, cổ tức…"></label>
+    <div class="dialog-actions">
+      <button type="button" class="secondary" data-close-dialog>Huỷ</button>
+      <button type="submit" class="primary">Lưu dòng tiền</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- MODAL CHỈ BÁO -->
+<dialog id="indicatorDialog">
+  <form method="dialog" id="indicatorForm" class="dialog-form">
+    <div class="dialog-head">
+      <div><div class="eyebrow">INDICATOR REGISTRY</div><h2>Thêm chỉ báo</h2></div>
+      <button type="button" class="icon-btn" data-close-dialog aria-label="Đóng">×</button>
+    </div>
+    <label>Tên chỉ báo<input id="indicatorName" required placeholder="Ví dụ: Lãi suất thực Mỹ, DXY, P/B VN-Index…"></label>
+    <div class="form-grid">
+      <label>Nhóm<select id="indicatorGroup"><option>Vàng</option><option>Bitcoin</option><option>Chứng khoán Việt Nam</option><option>Vĩ mô</option><option>Danh mục tổng</option></select></label>
+      <label>Ngưỡng cảnh báo<input id="indicatorThreshold" placeholder="Ví dụ: dưới 1%"></label>
+    </div>
+    <label>Nguồn dữ liệu / ghi chú<input id="indicatorSource" placeholder="Nguồn theo dõi"></label>
+    <div class="dialog-actions">
+      <button type="button" class="secondary" data-close-dialog>Huỷ</button>
+      <button type="submit" class="primary">Lưu chỉ báo</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+const APP_VERSION = '0.3.3-ota';
+const DEFAULT_OTA_URL = 'https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html';
+const STORAGE_KEY = 'wealthos_trial_v1';
+const LUONG_PER_OZ = 37.5 / 31.1035;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const money = n => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(Number(n) || 0);
+const usd = n => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(Number(n) || 0);
+const num = (n, d = 6) => new Intl.NumberFormat('vi-VN', { maximumFractionDigits: d }).format(Number(n) || 0);
+const today = () => { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10); };
+const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(16).slice(2));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+const DOJI_TYPES = ['DOJI nhẫn', 'DOJI miếng', 'DOJI nữ trang 9999'];
+
+function triggerDownload(content, mime, filename) {
+  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.saveFile) {
+    window.webkit.messageHandlers.saveFile.postMessage({ filename, content });
+    return;
+  }
+  const blob = new Blob([content], { type: mime });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+function sendNativeOTA(payload) {
+  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.otaAction) {
+    window.webkit.messageHandlers.otaAction.postMessage(payload);
+    return true;
+  }
+  return false;
+}
+
+window.__onNativeOTA = function(res) {
+  const statusEl = $('#otaStatus');
+  const btn = $('#otaUpdateBtn');
+  if (btn) { btn.disabled = false; btn.textContent = '⬇ Tải & Cập nhật ngay'; }
+
+  if (res.type === 'status') {
+    if ($('#otaPathDisplay') && res.otaPath) $('#otaPathDisplay').textContent = res.otaPath;
+    if ($('#otaVersionBadge')) {
+      $('#otaVersionBadge').textContent = res.hasOTA ? `Bản OTA: ${res.version || APP_VERSION}` : `Bản gốc: ${APP_VERSION}`;
+    }
+    if ($('#otaRollbackBtn')) $('#otaRollbackBtn').disabled = !res.hasRollback;
+    return;
+  }
+
+  if (statusEl) {
+    statusEl.style.color = res.ok ? '#238568' : '#c85a5a';
+    statusEl.textContent = res.message || '';
+  }
+};
+
+const COLORS = { cash: '#238568', gold: '#c49a38', bitcoin: '#e58a38', stock: '#7567bd', other: '#8291a3' };
+const LABELS = { cash: 'Tiền mặt / tiền gửi', gold: 'Vàng', bitcoin: 'Bitcoin / Crypto', stock: 'Chứng khoán / Quỹ', other: 'Khác' };
+
+let state = loadState();
+
+function defaultState() {
+  return {
+    otaUrl: DEFAULT_OTA_URL,
+    fx: 25500,
+    fxAuto: true,
+    assets: [],
+    transactions: [],
+    cashflows: [],
+    indicators: [],
+    notes: { goldThesis: '', bitcoinThesis: '', stocksThesis: '' },
+    goldPrices: {
+      'DOJI nhẫn': { b: 140300000, s: 143300000, src: 'Nhập sẵn' },
+      'DOJI miếng': { b: 141800000, s: 144800000, src: 'Nhập sẵn' },
+      'DOJI nữ trang 9999': { b: 138800000, s: 141800000, src: 'Nhập sẵn' }
+    },
+    market: {
+      goldUsd: 0, goldChg: 0,
+      btcUsd: 0, btcChg: 0, capUsd: 0, capChg: 0, btcDom: 0, ethDom: 0, volUsd: 0, fngVal: 0, fngText: '',
+      cryptoPrices: {},
+      stockQuotes: {},
+      indices: {}
+    }
+  };
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return defaultState();
+    const parsed = JSON.parse(raw);
+    const merged = {
+      ...defaultState(),
+      ...parsed,
+      goldPrices: { ...defaultState().goldPrices, ...(parsed.goldPrices || {}) },
+      market: { ...defaultState().market, ...(parsed.market || {}) }
+    };
+    if (!merged.otaUrl || merged.otaUrl.includes('/nightlostls/wealthos/')) {
+      merged.otaUrl = DEFAULT_OTA_URL;
+    }
+    return merged;
+  } catch {
+    return defaultState();
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.error('Lỗi lưu localStorage:', e);
+  }
+}
+
+/* ====== ĐỊNH GIÁ VÀNG THEO BẢNG GIÁ DOJI ====== */
+function getGoldBidPerChi(asset) {
+  const gp = state.goldPrices || {};
+  const key = `${asset?.ticker || ''} ${asset?.name || ''}`.toLowerCase();
+  let row = null;
+  if (key.includes('nữ trang') || key.includes('9999')) row = gp['DOJI nữ trang 9999'];
+  if (key.includes('nhẫn') || key.includes('hưng thịnh')) row = gp['DOJI nhẫn'];
+  else if (key.includes('miếng') || key.includes('sjc') || key.includes('avpl')) row = gp['DOJI miếng'];
+  if (!row) row = gp[asset?.ticker] || gp[asset?.name] || gp['DOJI nhẫn'];
+  return row && Number(row.b) > 0 ? Number(row.b) / 10 : 0;
+}
+
+function revalueGoldAssets() {
+  state.assets.forEach(a => {
+    if (a.category === 'gold' && Number(a.quantity) > 0) {
+      const bidChi = getGoldBidPerChi(a);
+      if (bidChi > 0) a.value = Math.round(Number(a.quantity) * bidChi);
+    }
+  });
+}
+
+/* ====== HIỂN THỊ GIAO DIỆN ====== */
+function renderAll() {
+  const fx = Number(state.fx) || 25500;
+  const assets = state.assets || [];
+  const emergencyAssets = assets.filter(a => a.category === 'cash' && a.kind === 'em');
+  const portfolioAssets = assets.filter(a => !(a.category === 'cash' && a.kind === 'em'));
+
+  const sumVal = list => list.reduce((s, a) => s + (Number(a.value) || 0), 0);
+  const sumCost = list => list.reduce((s, a) => s + (Number(a.cost) || 0), 0);
+
+  const totalNetWorth = sumVal(assets);
+  const totalPortfolio = sumVal(portfolioAssets);
+  const cashTotal = sumVal(assets.filter(a => a.category === 'cash'));
+  const emTotal = sumVal(emergencyAssets);
+  const investTotal = sumVal(assets.filter(a => ['gold', 'bitcoin', 'stock'].includes(a.category)));
+
+  $('#netWorth').textContent = money(totalNetWorth);
+  $('#netWorthSub').textContent = `≈ ${usd(totalNetWorth / fx)}${emTotal > 0 ? ` · Danh mục đầu tư: ${money(totalPortfolio)}` : ''}`;
+  $('#cashValue').textContent = money(cashTotal);
+  $('#cashSub').textContent = emTotal > 0 ? `Gồm Quỹ khẩn cấp: ${money(emTotal)}` : 'Tiền gửi · Quỹ cơ hội · Quỹ khẩn cấp';
+  $('#investValue').textContent = money(investTotal);
+  $('#assetCount').textContent = assets.length;
+  $('#donutTotal').textContent = money(totalPortfolio);
+  $('#livePillText').textContent = `${navigator.onLine ? 'Online' : 'Offline'} · USD/VND: ${num(fx, 0)}`;
+  if ($('#otaUrlInput') && !$('#otaUrlInput').value) {
+    $('#otaUrlInput').value = state.otaUrl || DEFAULT_OTA_URL;
+  }
+
+  const order = ['cash', 'gold', 'bitcoin', 'stock', 'other'];
+  const catVals = Object.fromEntries(order.map(k => [k, sumVal(portfolioAssets.filter(a => a.category === k))]));
+  let acc = 0, parts = [];
+  order.forEach(k => {
+    const pct = totalPortfolio > 0 ? (catVals[k] / totalPortfolio) * 100 : 0;
+    if (pct > 0) {
+      parts.push(`${COLORS[k]} ${acc}% ${acc + pct}%`);
+      acc += pct;
+    }
+  });
+  $('#donut').style.background = parts.length ? `conic-gradient(${parts.join(',')})` : 'conic-gradient(#dce3eb 0 100%)';
+  $('#allocationLegend').innerHTML = order.filter(k => catVals[k] > 0).map(k =>
+    `<div class="legend-item"><i style="background:${COLORS[k]}"></i><span>${LABELS[k]}</span><b>${(catVals[k] / totalPortfolio * 100).toFixed(1)}%</b></div>`
+  ).join('') || '<div class="empty">Chưa có dữ liệu tài sản.</div>';
+
+  $('#recentAssets').innerHTML = assets.slice().sort((a, b) => String(b.updatedAt || '').localeCompare(String(a.updatedAt || ''))).slice(0, 5).map(a =>
+    `<div class="recent-item"><div><div class="recent-name">${esc(a.name)}</div><div class="recent-meta">${esc(LABELS[a.category] || a.category)}${a.ticker ? ' · ' + esc(a.ticker) : ''}</div></div><div class="recent-value">${money(a.value)}</div></div>`
+  ).join('') || '<div class="empty">Chưa có tài sản nào.</div>';
+
+  $('#overviewTable').innerHTML = order.filter(k => catVals[k] > 0).map(k => {
+    const list = portfolioAssets.filter(a => a.category === k);
+    const v = sumVal(list);
+    const withCost = list.filter(a => Number(a.cost) > 0);
+    const c = sumCost(withCost);
+    const vWithCost = sumVal(withCost);
+    const pnl = c > 0 ? vWithCost - c : null;
+    const pct = c > 0 ? (pnl / c * 100).toFixed(2) + '%' : '—';
+    return `<tr><td><b>${LABELS[k]}</b></td><td>${money(v)}</td><td>${(v / (totalPortfolio || 1) * 100).toFixed(1)}%</td><td class="${pnl > 0 ? 'pos' : pnl < 0 ? 'neg' : ''}">${pnl !== null ? (pnl > 0 ? '+' : '') + money(pnl) : '—'}</td><td class="${pnl > 0 ? 'pos' : pnl < 0 ? 'neg' : ''}">${pnl !== null ? (pnl > 0 ? '+' : '') + pct : '—'}</td></tr>`;
+  }).join('') || '<tr><td colspan="5" class="empty">Chưa có dữ liệu.</td></tr>';
+
+  renderAssets();
+  renderTransactions();
+  renderCashflows();
+  renderModules();
+  renderIndicators();
+  renderReports();
+
+  $('#goldThesis').value = state.notes.goldThesis || '';
+  $('#bitcoinThesis').value = state.notes.bitcoinThesis || '';
+  $('#stocksThesis').value = state.notes.stocksThesis || '';
+}
+
+function renderAssets() {
+  const q = ($('#assetSearch')?.value || '').toLowerCase();
+  const f = $('#assetFilter')?.value || 'all';
+  const kindNames = { fund: 'Quỹ mở', stock: 'Cổ phiếu', gold: 'Vàng', crypto: 'Crypto', deposit: 'Tiền gửi', op: 'Quỹ cơ hội', em: 'Quỹ khẩn cấp' };
+  const list = state.assets.filter(a => (f === 'all' || a.category === f) && (`${a.name} ${a.ticker || ''}`).toLowerCase().includes(q));
+
+  $('#assetCards').innerHTML = list.map(a => {
+    const pnl = Number(a.cost) > 0 ? Number(a.value) - Number(a.cost) : null;
+    const pct = pnl !== null ? (pnl / Number(a.cost) * 100).toFixed(2) + '%' : '';
+    const lotsCount = Array.isArray(a.acquisitionLots) ? a.acquisitionLots.length : 0;
+    return `<article class="asset-card">
+      <div class="asset-card-top">
+        <span class="asset-tag">${esc(kindNames[a.kind] || LABELS[a.category] || a.category)}</span>
+        <span class="asset-ticker">${esc(a.ticker || '')}</span>
+      </div>
+      <h3>${esc(a.name)}</h3>
+      <div class="asset-amount">${money(a.value)}</div>
+      <div class="asset-detail">${a.quantity != null && a.quantity !== '' ? 'Số lượng: ' + num(a.quantity) + ' · ' : ''}${Number(a.cost) > 0 ? 'Giá vốn: ' + money(a.cost) : 'Chưa nhập giá vốn'}${lotsCount > 1 ? ` (${lotsCount} lần mua)` : ''}</div>
+      ${pnl !== null ? `<div class="asset-detail ${pnl >= 0 ? 'pos' : 'neg'}">Lãi/Lỗ: ${pnl >= 0 ? '+' : ''}${money(pnl)} (${pnl >= 0 ? '+' : ''}${pct})</div>` : ''}
+      ${a.note ? `<div class="asset-detail" style="margin-top:4px">${esc(a.note)}</div>` : ''}
+      <div class="asset-actions">
+        <button type="button" class="small-btn" data-edit-asset="${esc(a.id)}">Sửa</button>
+        <button type="button" class="small-btn" data-delete-asset="${esc(a.id)}">Xoá</button>
+      </div>
+    </article>`;
+  }).join('') || '<div class="empty">Không tìm thấy tài sản phù hợp.</div>';
+}
+
+function renderTransactions() {
+  const typeMap = { buy: 'Mua / đầu tư', sell: 'Bán', deposit: 'Gửi thêm', withdraw: 'Rút ra', transfer: 'Luân chuyển' };
+  $('#transactionRows').innerHTML = state.transactions.slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || ''))).map(t => {
+    const assetName = state.assets.find(a => a.id === t.assetId)?.name || t.assetName || '—';
+    const pnl = t.realizedPnl != null ? Number(t.realizedPnl) : null;
+    return `<tr>
+      <td>${esc(t.date || '—')}</td>
+      <td>${esc(typeMap[t.type] || t.type)}</td>
+      <td>${esc(assetName)}</td>
+      <td>${t.quantity ? num(t.quantity) : '—'}</td>
+      <td>${money(t.amount)}</td>
+      <td class="${pnl > 0 ? 'pos' : pnl < 0 ? 'neg' : ''}">${pnl !== null ? (pnl > 0 ? '+' : '') + money(pnl) : '—'}</td>
+      <td>${esc(t.note || '')}</td>
+      <td><button type="button" class="small-btn" data-delete-tx="${esc(t.id)}">Xoá</button></td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="8" class="empty">Chưa có giao dịch nào.</td></tr>';
+}
+
+function renderCashflows() {
+  const inc = state.cashflows.filter(x => x.type === 'income').reduce((s, x) => s + Number(x.amount || 0), 0);
+  const out = state.cashflows.filter(x => x.type === 'expense').reduce((s, x) => s + Number(x.amount || 0), 0);
+  $('#incomeTotal').textContent = money(inc);
+  $('#expenseTotal').textContent = money(out);
+  $('#cashflowNet').textContent = money(inc - out);
+  $('#cashflowRows').innerHTML = state.cashflows.slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || ''))).map(x =>
+    `<tr><td>${esc(x.date)}</td><td>${x.type === 'income' ? 'Thu nhập' : 'Chi tiêu'}</td><td>${esc(x.note)}</td><td>${money(x.amount)}</td><td><button type="button" class="small-btn" data-delete-cf="${esc(x.id)}">Xoá</button></td></tr>`
+  ).join('') || '<tr><td colspan="5" class="empty">Chưa có dòng tiền nào.</td></tr>';
+}
+
+function renderModules() {
+  const fx = Number(state.fx) || 25500;
+  const m = state.market;
+
+  // --- VÀNG DOJI ---
+  const golds = state.assets.filter(a => a.category === 'gold');
+  const gVal = golds.reduce((s, a) => s + Number(a.value || 0), 0);
+  const gQty = golds.reduce((s, a) => s + Number(a.quantity || 0), 0);
+  const gCost = golds.reduce((s, a) => s + Number(a.cost || 0), 0);
+  $('#goldValue').textContent = money(gVal);
+  $('#goldQty').textContent = num(gQty) + ' chỉ';
+  $('#goldCost').textContent = gCost > 0 ? money(gCost) : '—';
+
+  const worldVnd = m.goldUsd > 0 ? m.goldUsd * LUONG_PER_OZ * fx : 0;
+  const nhan = state.goldPrices['DOJI nhẫn'] || { b: 0, s: 0 };
+  $('#mktGoldUsd').textContent = m.goldUsd > 0 ? usd(m.goldUsd) : '—';
+  $('#mktGoldChg').textContent = m.goldUsd > 0 ? `24h: ${m.goldChg >= 0 ? '+' : ''}${m.goldChg.toFixed(2)}%` : '24h: —';
+  $('#mktGoldVnd').textContent = worldVnd > 0 ? money(worldVnd) : '—';
+  $('#mktDojiNhan').textContent = nhan.b && nhan.s ? `${num(nhan.b / 1e6, 2)} / ${num(nhan.s / 1e6, 2)} tr` : '—';
+  $('#mktDojiNhanChi').textContent = nhan.b ? `Mua 1 chỉ: ${money(nhan.b / 10)}` : 'Theo chỉ: —';
+  if (worldVnd > 0 && nhan.s > 0) {
+    const prem = nhan.s - worldVnd;
+    $('#mktGoldPrem').textContent = `${prem >= 0 ? '+' : ''}${money(prem)} (${(prem / worldVnd * 100).toFixed(2)}%)`;
+  } else {
+    $('#mktGoldPrem').textContent = '—';
+  }
+  $('#mktGoldSpread').textContent = nhan.b && nhan.s ? `Chênh mua-bán: ${money(nhan.s - nhan.b)}` : 'Chênh mua-bán: —';
+
+  const labelMap = {
+    'DOJI nhẫn': 'DOJI Nhẫn tròn 9999 (Hưng Thịnh Vượng)',
+    'DOJI miếng': 'DOJI Vàng miếng SJC',
+    'DOJI nữ trang 9999': 'DOJI Vàng nữ trang 9999'
+  };
+  $('#dojiTableRows').innerHTML = DOJI_TYPES.map((k, idx) => {
+    const row = state.goldPrices[k] || { b: 0, s: 0, src: 'Chưa có' };
+    const spread = row.b > 0 && row.s > 0 ? row.s - row.b : null;
+    const prem = worldVnd > 0 && row.s > 0 ? row.s - worldVnd : null;
+    const premPct = worldVnd > 0 && row.s > 0 ? ((row.s - worldVnd) / worldVnd * 100).toFixed(2) + '%' : '';
+    return `<tr>
+      <td><b>${labelMap[k]}</b></td>
+      <td><input class="gold-edit-input" data-doji-k="${esc(k)}" data-doji-f="b" type="number" step="10000" value="${row.b || ''}"></td>
+      <td><input class="gold-edit-input" data-doji-k="${esc(k)}" data-doji-f="s" type="number" step="10000" value="${row.s || ''}"></td>
+      <td>${spread !== null ? money(spread) : '—'}</td>
+      <td class="${prem > 0 ? 'pos' : prem < 0 ? 'neg' : ''}">${prem !== null ? `${prem >= 0 ? '+' : ''}${money(prem)} (${premPct})` : '—'}</td>
+      <td>${row.b ? money(row.b / 10) : '—'} / ${row.s ? money(row.s / 10) : '—'}</td>
+      <td><span class="muted">${esc(row.src || 'Nhập sẵn')}</span></td>
+    </tr>`;
+  }).join('');
+
+  $('#goldHoldingsRows').innerHTML = golds.map(a => {
+    const q = Number(a.quantity) || 0, c = Number(a.cost) || 0, v = Number(a.value) || 0;
+    const bidChi = getGoldBidPerChi(a) || (q > 0 ? v / q : 0);
+    const pnl = c > 0 ? v - c : null;
+    return `<tr>
+      <td><b>${esc(a.name)}</b></td>
+      <td>${bidChi ? money(bidChi) : '—'}</td>
+      <td>${num(q)} <small class="muted">(${num(q / 10, 2)} lượng)</small></td>
+      <td>${q > 0 && c > 0 ? money(c / q) : '—'}</td>
+      <td>${money(v)}</td>
+      <td class="${pnl >= 0 ? 'pos' : 'neg'}">${pnl !== null ? `${pnl >= 0 ? '+' : ''}${money(pnl)} (${(pnl / c * 100).toFixed(2)}%)` : '—'}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="6" class="empty">Chưa có vàng nào.</td></tr>';
+
+  // --- BITCOIN & CRYPTO ---
+  const cryptos = state.assets.filter(a => a.category === 'bitcoin');
+  const cVal = cryptos.reduce((s, a) => s + Number(a.value || 0), 0);
+  const btcOnly = cryptos.filter(a => (a.ticker || '').toUpperCase() === 'BTC');
+  const btcQty = btcOnly.reduce((s, a) => s + Number(a.quantity || 0), 0);
+  const cCost = cryptos.reduce((s, a) => s + Number(a.cost || 0), 0);
+  $('#btcValue').textContent = money(cVal);
+  $('#btcQty').textContent = num(btcQty, 8) + ' BTC';
+  $('#btcCost').textContent = cCost > 0 ? money(cCost) : '—';
+
+  $('#mktBtcUsd').textContent = m.btcUsd > 0 ? usd(m.btcUsd) : '—';
+  $('#mktBtcChg').textContent = m.btcUsd > 0 ? `24h: ${m.btcChg >= 0 ? '+' : ''}${m.btcChg.toFixed(2)}%` : '24h: —';
+  $('#mktCapUsd').textContent = m.capUsd > 0 ? `$${(m.capUsd / 1e9).toFixed(0)} tỷ` : '—';
+  $('#mktCapChg').textContent = m.capUsd > 0 ? `24h: ${m.capChg >= 0 ? '+' : ''}${m.capChg.toFixed(2)}%` : '24h: —';
+  $('#mktDom').textContent = m.btcDom > 0 ? `BTC ${m.btcDom.toFixed(1)}% · ETH ${m.ethDom.toFixed(1)}%` : '—';
+  $('#mktVolUsd').textContent = m.volUsd > 0 ? `$${(m.volUsd / 1e9).toFixed(1)} tỷ` : '—';
+  $('#mktFng').textContent = m.fngVal > 0 ? `${m.fngVal}/100` : '—';
+  $('#mktFngLabel').textContent = m.fngText || 'Alternative.me';
+  $('#mktFx').textContent = money(fx);
+  $('#mktFxMode').textContent = state.fxAuto ? 'Tự động (ExchangeRate)' : 'Nhập tay';
+
+  $('#btcHoldingsRows').innerHTML = cryptos.map(a => {
+    const sym = (a.ticker || a.name || '').toUpperCase();
+    const q = Number(a.quantity) || 0, cVnd = Number(a.cost) || 0, vVnd = Number(a.value) || 0;
+    const live = m.cryptoPrices?.[sym];
+    const unitUsd = live?.p || (q > 0 ? (vVnd / fx) / q : 0);
+    const usdCostTotal = a.meta?.usdCost != null ? Number(a.meta.usdCost) : (cVnd / fx);
+    const avgCostUsd = q > 0 && usdCostTotal > 0 ? usdCostTotal / q : 0;
+    const curUsdTotal = unitUsd * q;
+    const pnlUsd = usdCostTotal > 0 ? curUsdTotal - usdCostTotal : null;
+    const pnlVnd = cVnd > 0 ? vVnd - cVnd : null;
+    const fx0 = usdCostTotal > 0 ? cVnd / usdCostTotal : fx;
+    const priceDiffVnd = usdCostTotal > 0 ? Math.round((curUsdTotal - usdCostTotal) * fx0) : 0;
+    const fxDiffVnd = usdCostTotal > 0 ? Math.round(curUsdTotal * (fx - fx0)) : 0;
+
+    return `<tr>
+      <td><b>${esc(sym)}</b></td>
+      <td>${unitUsd > 0 ? usd(unitUsd) : '—'}</td>
+      <td class="${live?.ch >= 0 ? 'pos' : 'neg'}">${live?.ch != null ? `${live.ch >= 0 ? '+' : ''}${live.ch.toFixed(2)}%` : '—'}</td>
+      <td>${num(q, 8)}</td>
+      <td>${avgCostUsd > 0 ? usd(avgCostUsd) : '—'}</td>
+      <td>${money(vVnd)}<br><small class="muted">${usd(curUsdTotal)}</small></td>
+      <td class="${pnlVnd >= 0 ? 'pos' : 'neg'}">${pnlVnd !== null ? `${pnlUsd >= 0 ? '+' : ''}${usd(pnlUsd)} · ${pnlVnd >= 0 ? '+' : ''}${money(pnlVnd)}<br><small class="muted">Giá: ${priceDiffVnd >= 0 ? '+' : ''}${money(priceDiffVnd)} | Tỷ giá: ${fxDiffVnd >= 0 ? '+' : ''}${money(fxDiffVnd)}</small>` : '—'}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="7" class="empty">Chưa có coin nào.</td></tr>';
+
+  // --- CHỨNG KHOÁN VN ---
+  const stocks = state.assets.filter(a => a.category === 'stock');
+  const sVal = stocks.reduce((s, a) => s + Number(a.value || 0), 0);
+  const fVal = stocks.filter(a => a.kind === 'fund').reduce((s, a) => s + Number(a.value || 0), 0);
+  $('#stockValue').textContent = money(sVal);
+  $('#stockCount').textContent = stocks.length;
+  $('#fundShare').textContent = sVal > 0 ? (fVal / sVal * 100).toFixed(1) + '%' : '—';
+
+  ['VNINDEX', 'VN30', 'HNX', 'UPCOM'].forEach(k => {
+    const ix = m.indices?.[k];
+    if (ix && ix.p > 0) {
+      $(`#idx${k}`).textContent = num(ix.p, 2);
+      const el = $(`#chg${k}`);
+      el.textContent = `${ix.c >= 0 ? '+' : ''}${num(ix.c, 2)} (${ix.pc >= 0 ? '+' : ''}${ix.pc.toFixed(2)}%)`;
+      el.className = ix.c >= 0 ? 'pos' : 'neg';
+    }
+  });
+
+  $('#stockHoldingsRows').innerHTML = stocks.map(a => {
+    const sym = (a.ticker || a.name || '').toUpperCase();
+    const q = Number(a.quantity) || 0, c = Number(a.cost) || 0, v = Number(a.value) || 0;
+    const sq = m.stockQuotes?.[sym];
+    const curPrice = sq?.p || (q > 0 ? v / q : 0);
+    const pnl = c > 0 ? v - c : null;
+    return `<tr>
+      <td><b>${esc(sym)}</b></td>
+      <td>${a.kind === 'fund' ? 'Quỹ mở' : 'Cổ phiếu'}</td>
+      <td>${curPrice > 0 ? money(curPrice) : '—'}</td>
+      <td class="${sq?.pc >= 0 ? 'pos' : 'neg'}">${sq?.pc != null ? `${sq.pc >= 0 ? '+' : ''}${sq.pc.toFixed(2)}%` : '—'}</td>
+      <td>${num(q, a.kind === 'fund' ? 2 : 0)}</td>
+      <td>${q > 0 && c > 0 ? money(c / q) : '—'}</td>
+      <td>${money(v)}</td>
+      <td class="${pnl >= 0 ? 'pos' : 'neg'}">${pnl !== null ? `${pnl >= 0 ? '+' : ''}${money(pnl)} (${(pnl / c * 100).toFixed(2)}%)` : '—'}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="8" class="empty">Chưa có cổ phiếu hoặc quỹ mở.</td></tr>';
+}
+
+function renderIndicators() {
+  $('#indicatorList').innerHTML = state.indicators.map(x =>
+    `<article class="indicator-card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3>${esc(x.name)}</h3>
+        <button type="button" class="small-btn" data-del-ind="${esc(x.id)}">Xoá</button>
+      </div>
+      <p>Nhóm: <b>${esc(x.group)}</b></p>
+      <p>Ngưỡng cảnh báo: ${esc(x.threshold || 'Chưa thiết lập')}</p>
+      <p>Nguồn: ${esc(x.source || 'Theo dõi thủ công')}</p>
+    </article>`
+  ).join('') || '<article class="panel empty">Chưa có chỉ báo nào.</article>';
+}
+
+function renderReports() {
+  const order = ['cash', 'gold', 'bitcoin', 'stock', 'other'];
+  const totalAll = state.assets.reduce((s, a) => s + Number(a.value || 0), 0);
+  $('#reportRows').innerHTML = order.map(k => {
+    const list = state.assets.filter(a => a.category === k);
+    const v = list.reduce((s, a) => s + Number(a.value || 0), 0);
+    const c = list.reduce((s, a) => s + Number(a.cost || 0), 0);
+    const pnl = c > 0 ? v - c : null;
+    return `<tr>
+      <td><b>${LABELS[k]}</b></td>
+      <td>${list.length}</td>
+      <td>${c > 0 ? money(c) : '—'}</td>
+      <td>${money(v)}</td>
+      <td>${totalAll > 0 ? (v / totalAll * 100).toFixed(1) : '0.0'}%</td>
+      <td class="${pnl >= 0 ? 'pos' : 'neg'}">${pnl !== null ? (pnl >= 0 ? '+' : '') + money(pnl) : '—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+/* ====== LẤY GIÁ VÀNG DOJI (3 LOẠI) & CHỈ SỐ CHỨNG KHOÁN VN ====== */
+async function fetchTextWithFallback(targetUrl) {
+  const attempts = [
+    targetUrl,
+    'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl),
+    'https://corsproxy.io/?url=' + encodeURIComponent(targetUrl)
+  ];
+  for (const url of attempts) {
+    const ac = new AbortController();
+    const timer = setTimeout(() => ac.abort(), 9000);
+    try {
+      const res = await fetch(url, { signal: ac.signal });
+      clearTimeout(timer);
+      if (res.ok) {
+        const txt = await res.text();
+        if (txt && txt.length > 20) return txt;
+      }
+    } catch {
+      clearTimeout(timer);
+    }
+  }
+  return null;
+}
+
+async function fetchJsonWithFallback(targetUrl, opts) {
+  const attempts = opts ? [targetUrl] : [
+    targetUrl,
+    'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl),
+    'https://corsproxy.io/?url=' + encodeURIComponent(targetUrl)
+  ];
+  for (const url of attempts) {
+    const ac = new AbortController();
+    const timer = setTimeout(() => ac.abort(), 9000);
+    try {
+      const res = await fetch(url, { ...(opts || {}), signal: ac.signal });
+      clearTimeout(timer);
+      if (res.ok) return await res.json();
+    } catch {
+      clearTimeout(timer);
+    }
+  }
+  return null;
+}
+
+async function fetchDojiGoldPrices() {
+  const statusEl = $('#goldStatus');
+  if (statusEl) { statusEl.textContent = 'Đang tải bảng giá DOJI…'; statusEl.className = 'status-badge'; }
+
+  const xmlText = await fetchTextWithFallback('http://giavang.doji.vn/api/giavang/?api_key=258fbd2a72ce8481089d88c678e9fe4f');
+  if (!xmlText) {
+    if (statusEl) { statusEl.textContent = 'DOJI: Không kết nối được (đang dùng giá đã lưu)'; statusEl.className = 'status-badge stale'; }
+    return false;
+  }
+
+  const doc = new DOMParser().parseFromString(xmlText, 'text/xml');
+  const rows = [];
+  const w = state.market.goldUsd > 0 ? state.market.goldUsd * LUONG_PER_OZ * (Number(state.fx) || 25500) : 140000000;
+  const scaleLuong = raw => {
+    const v = Number(String(raw || '').replace(/\D/g, ''));
+    if (!v) return 0;
+    const cands = [v, v * 10, v * 1e3, v * 1e4].filter(x => x > w * 0.55 && x < w * 2.2);
+    return cands.length ? cands[0] : (v < 1e6 ? v * 1e4 : v);
+  };
+
+  doc.querySelectorAll('*').forEach(node => {
+    const nm = (node.getAttribute('Name') || node.getAttribute('Key') || '').normalize('NFC');
+    const b = scaleLuong(node.getAttribute('Buy'));
+    const s = scaleLuong(node.getAttribute('Sell'));
+    if (nm && b > 0 && s >= b) rows.push({ nm, b, s });
+  });
+
+  if (!rows.length) {
+    if (statusEl) { statusEl.textContent = 'DOJI: Không đọc được bảng giá XML'; statusEl.className = 'status-badge stale'; }
+    return false;
+  }
+
+  const rules = [
+    ['DOJI nhẫn', /nhẫn\s*tròn|hưng\s*thịnh/i],
+    ['DOJI miếng', /sjc|avpl/i],
+    ['DOJI nữ trang 9999', /nữ\s*trang.*9999/i]
+  ];
+
+  let updatedCount = 0;
+  const nowTime = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+  rules.forEach(([key, regex]) => {
+    const matches = rows.filter(r => regex.test(r.nm));
+    const pick = matches.find(r => /lẻ/i.test(r.nm)) || matches[0];
+    if (pick) {
+      state.goldPrices[key] = { b: pick.b, s: pick.s, src: `DOJI tự động (${nowTime})` };
+      updatedCount++;
+    }
+  });
+
+  if (updatedCount > 0) {
+    revalueGoldAssets();
+    if (statusEl) { statusEl.textContent = `DOJI: Đã cập nhật ${updatedCount}/3 loại lúc ${nowTime}`; statusEl.className = 'status-badge live'; }
+    return true;
+  }
+  return false;
+}
+
+async function fetchVnIndices() {
+  const statusEl = $('#stockStatus');
+  if (statusEl) { statusEl.textContent = 'Đang tải VN-Index, VN30, HNX, UPCoM…'; statusEl.className = 'status-badge'; }
+
+  const list = [
+    ['VNINDEX', ['VNINDEX']],
+    ['VN30', ['VN30']],
+    ['HNX', ['HNX', 'HNXINDEX']],
+    ['UPCOM', ['UPCOM', 'UPCOMINDEX']]
+  ];
+  const t = Math.floor(Date.now() / 1000);
+  let okCount = 0;
+
+  await Promise.allSettled(list.map(async ([key, tickers]) => {
+    for (const sym of tickers) {
+      // Nguồn 1: TCBS
+      const j1 = await fetchJsonWithFallback(`https://apipubaws.tcbs.com.vn/stock-insight/v1/stock/bars-long-term?ticker=${sym}&type=index&resolution=D&to=${t}&countBack=3`);
+      const arr = j1?.data || [];
+      if (arr.length >= 1) {
+        const last = Number(arr[arr.length - 1].close);
+        const prev = arr.length > 1 ? Number(arr[arr.length - 2].close) : last;
+        if (last >= 30) {
+          state.market.indices[key] = { p: last, c: last - prev, pc: prev > 0 ? (last - prev) / prev * 100 : 0 };
+          okCount++;
+          return;
+        }
+      }
+      // Nguồn 2: DNSE Entrade
+      const j2 = await fetchJsonWithFallback(`https://services.entrade.com.vn/chart-api/v2/ohlcs/index?from=${t - 864000}&to=${t + 86400}&symbol=${sym}&resolution=1D`);
+      const c2 = j2?.c || [];
+      if (c2.length >= 1) {
+        const last = Number(c2[c2.length - 1]);
+        const prev = c2.length > 1 ? Number(c2[c2.length - 2]) : last;
+        if (last >= 30) {
+          state.market.indices[key] = { p: last, c: last - prev, pc: prev > 0 ? (last - prev) / prev * 100 : 0 };
+          okCount++;
+          return;
+        }
+      }
+      // Nguồn 3: VNDirect
+      const j3 = await fetchJsonWithFallback(`https://finfo-api.vndirect.com.vn/v4/stock_prices?sort=date&size=1&q=code:${sym}`);
+      const d3 = j3?.data?.[0];
+      if (d3 && Number(d3.close) >= 30) {
+        state.market.indices[key] = { p: Number(d3.close), c: Number(d3.change) || 0, pc: Number(d3.pctChange) || 0 };
+        okCount++;
+        return;
+      }
+    }
+  }));
+
+  const nowTime = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+  if (statusEl) {
+    if (okCount > 0) {
+      statusEl.textContent = `Chỉ số VN: Đã cập nhật ${okCount}/4 chỉ số lúc ${nowTime}`;
+      statusEl.className = 'status-badge live';
+    } else {
+      statusEl.textContent = 'Chỉ số VN: Không kết nối được nguồn dữ liệu';
+      statusEl.className = 'status-badge stale';
+    }
+  }
+}
+
+async function fetchVnStock(symbol) {
+  const d1 = await fetchJsonWithFallback(`https://bgapidatafeed.vps.com.vn/getliststockdata/${encodeURIComponent(symbol)}`);
+  if (Array.isArray(d1) && d1[0]) {
+    const p = (+d1[0].lastPrice || +d1[0].r) * 1000, r = (+d1[0].r) * 1000;
+    if (p > 0) return { p, pc: r > 0 ? (p - r) / r * 100 : 0 };
+  }
+  const j2 = await fetchJsonWithFallback(`https://finfo-api.vndirect.com.vn/v4/stock_prices?sort=date&size=1&q=code:${encodeURIComponent(symbol)}`);
+  const d2 = j2?.data?.[0];
+  if (d2 && Number(d2.close) > 0) {
+    const p = Number(d2.close) < 1000 ? Number(d2.close) * 1000 : Number(d2.close);
+    return { p, pc: Number(d2.pctChange) || 0 };
+  }
+  return null;
+}
+
+async function fetchVnFund(code) {
+  const j = await fetchJsonWithFallback('https://api.fmarket.vn/res/products/filter', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ types: ['NEW_FUND', 'TRADING_FUND'], page: 1, pageSize: 10, searchField: code })
+  });
+  const row = (j?.data?.rows || []).find(x => x.code === code);
+  if (row && row.nav > 0) return { p: Number(row.nav), pc: Number(row.productNavChange?.navToPrevious) || 0 };
+  return null;
+}
+
+async function refreshAllMarketData() {
+  const btn = $('#syncMarketBtn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Đang tải giá…'; }
+
+  if (state.fxAuto) {
+    const fxData = await fetchJsonWithFallback('https://open.er-api.com/v6/latest/USD');
+    if (fxData?.rates?.VND > 1000) state.fx = Math.round(fxData.rates.VND);
+  }
+
+  const coinSyms = [...new Set(['BTC', 'PAXG', ...state.assets.filter(a => a.category === 'bitcoin').map(a => (a.ticker || '').toUpperCase()).filter(Boolean)])];
+  await Promise.allSettled([
+    ...coinSyms.map(async sym => {
+      const d = await fetchJsonWithFallback(`https://api.binance.com/api/v3/ticker/24hr?symbol=${sym}USDT`);
+      if (d?.lastPrice) {
+        const p = Number(d.lastPrice), ch = Number(d.priceChangePercent);
+        if (sym === 'PAXG') { state.market.goldUsd = p; state.market.goldChg = ch; }
+        if (sym === 'BTC') { state.market.btcUsd = p; state.market.btcChg = ch; }
+        state.market.cryptoPrices[sym] = { p, ch };
+      }
+    }),
+    (async () => {
+      const g = await fetchJsonWithFallback('https://api.coingecko.com/api/v3/global');
+      if (g?.data) {
+        state.market.capUsd = Number(g.data.total_market_cap?.usd) || 0;
+        state.market.capChg = Number(g.data.market_cap_change_percentage_24h_usd) || 0;
+        state.market.btcDom = Number(g.data.market_cap_percentage?.btc) || 0;
+        state.market.ethDom = Number(g.data.market_cap_percentage?.eth) || 0;
+        state.market.volUsd = Number(g.data.total_volume?.usd) || 0;
+      }
+    })(),
+    (async () => {
+      const fg = await fetchJsonWithFallback('https://api.alternative.me/fng/?limit=1');
+      if (fg?.data?.[0]) {
+        state.market.fngVal = Number(fg.data[0].value) || 0;
+        state.market.fngText = fg.data[0].value_classification || '';
+      }
+    })(),
+    fetchDojiGoldPrices(),
+    fetchVnIndices(),
+    ...state.assets.filter(a => a.category === 'stock' && a.ticker).map(async a => {
+      const sym = a.ticker.toUpperCase();
+      const res = a.kind === 'fund' ? await fetchVnFund(sym) : await fetchVnStock(sym);
+      if (res && res.p > 0) state.market.stockQuotes[sym] = res;
+    })
+  ]);
+
+  const fx = Number(state.fx) || 25500;
+  state.assets.forEach(a => {
+    const q = Number(a.quantity) || 0;
+    if (!(q > 0)) return;
+    if (a.category === 'bitcoin') {
+      const sym = (a.ticker || '').toUpperCase();
+      const live = state.market.cryptoPrices?.[sym];
+      if (live?.p > 0) a.value = Math.round(q * live.p * fx);
+    } else if (a.category === 'stock') {
+      const sym = (a.ticker || '').toUpperCase();
+      const sq = state.market.stockQuotes?.[sym];
+      if (sq?.p > 0) a.value = Math.round(q * sq.p);
+    }
+  });
+  revalueGoldAssets();
+
+  saveState();
+  renderAll();
+  if (btn) { btn.disabled = false; btn.textContent = '↻ Cập nhật giá'; }
+}
+
+/* ====== NHẬP DỮ LIỆU TỪ FILE THEO DÕI ĐẦU TƯ CŨ ====== */
+async function handleLegacyImport(file) {
+  const statusEl = $('#importStatus');
+  try {
+    const rawText = await file.text();
+    let payload = null;
+
+    if (file.name.toLowerCase().endsWith('.html') || rawText.trim().startsWith('<')) {
+      const match = /<script[^>]*id=["']seed["'][^>]*>([\s\S]*?)<\/script>/i.exec(rawText);
+      if (!match) throw new Error('File HTML này chưa nhúng dữ liệu. Hãy dùng nút “Tải bản HTML kèm dữ liệu” hoặc “Sao lưu (JSON)” trên trang cũ.');
+      payload = JSON.parse(match[1]);
+    } else {
+      payload = JSON.parse(rawText);
+    }
+
+    if (!payload || payload.app !== 'theo-doi-dau-tu' || !payload.data) {
+      throw new Error('File không đúng định dạng sao lưu của ứng dụng Theo dõi đầu tư.');
+    }
+
+    const d = payload.data;
+    const fx = Number(d.fx) || 25500;
+    const importedAssets = [];
+    const importedTx = [];
+    const lotsOf = (h, qk, ck) => Array.isArray(h.lots) && h.lots.length ? h.lots : (Number(h[qk]) > 0 ? [{ q: Number(h[qk]), p: Number(h[ck]) || 0, d: h.d || '' }] : []);
+
+    (d.cr || []).forEach(c => {
+      const lots = lotsOf(c, 'a', 'c').map(l => ({ quantity: Number(l.q) || 0, unitCost: Number(l.p) || 0, currency: 'USD', date: l.d || '', fx: Number(l.x) || fx }));
+      const qty = lots.reduce((s, l) => s + l.quantity, 0);
+      const usdCost = lots.reduce((s, l) => s + l.quantity * l.unitCost, 0);
+      const vndCost = lots.reduce((s, l) => s + l.quantity * l.unitCost * l.fx, 0);
+      if (qty > 0 || vndCost > 0) {
+        importedAssets.push({
+          id: uid(), name: `${c.s} (Crypto)`, ticker: String(c.s || '').toUpperCase(),
+          category: 'bitcoin', kind: 'crypto', quantity: qty, cost: Math.round(vndCost), value: Math.round(usdCost * fx),
+          date: c.d || today(), updatedAt: new Date().toISOString(),
+          note: `Vốn gốc: ${usd(usdCost)} · Quy đổi theo tỷ giá hiện tại`,
+          acquisitionLots: lots, meta: { usdCost }
+        });
+      }
+    });
+
+    (d.hold || []).forEach(h => {
+      const lots = lotsOf(h, 'u', 'cost').map(l => ({ quantity: Number(l.q) || 0, unitCost: Number(l.p) || 0, currency: 'VND', date: l.d || '' }));
+      const qty = lots.reduce((s, l) => s + l.quantity, 0);
+      const cost = lots.reduce((s, l) => s + l.quantity * l.unitCost, 0);
+      const unitLive = Number(h.m) || (qty > 0 ? cost / qty : 0);
+      if (qty > 0 || cost > 0) {
+        importedAssets.push({
+          id: uid(), name: `${h.c} (${h.t === 'f' ? 'Quỹ mở' : 'Cổ phiếu'})`, ticker: String(h.c || '').toUpperCase(),
+          category: 'stock', kind: h.t === 'f' ? 'fund' : 'stock', quantity: qty, cost: Math.round(cost), value: Math.round(qty * unitLive),
+          manualPrice: Number(h.m) || 0, date: h.d || today(), updatedAt: new Date().toISOString(),
+          note: h.t === 'f' ? 'Chứng chỉ quỹ mở' : 'Cổ phiếu niêm yết', acquisitionLots: lots
+        });
+      }
+    });
+
+    const gp = d.gp || {};
+    (d.gh || []).forEach(h => {
+      const lots = lotsOf(h, 'u', 'cost').map(l => ({ quantity: Number(l.q) || 0, unitCost: Number(l.p) || 0, currency: 'VND/chỉ', date: l.d || '' }));
+      const qty = lots.reduce((s, l) => s + l.quantity, 0);
+      const cost = lots.reduce((s, l) => s + l.quantity * l.unitCost, 0);
+      const bidChi = Number(gp[h.t]?.b) ? Number(gp[h.t].b) / 10 : (qty > 0 ? cost / qty : 0);
+      if (qty > 0 || cost > 0) {
+        importedAssets.push({
+          id: uid(), name: h.t || 'DOJI nhẫn', ticker: h.t || 'DOJI nhẫn',
+          category: 'gold', kind: 'gold', quantity: qty, cost: Math.round(cost), value: Math.round(qty * bidChi),
+          date: h.d || today(), updatedAt: new Date().toISOString(),
+          note: `Đơn vị chỉ · Định giá theo giá mua vào DOJI`, acquisitionLots: lots
+        });
+      }
+    });
+
+    const depGroups = [['deps', 'deposit', 'Tiền gửi ngân hàng'], ['deps_op', 'op', 'Quỹ cơ hội'], ['deps_em', 'em', 'Quỹ khẩn cấp']];
+    depGroups.forEach(([key, kind, label]) => {
+      (d[key] || []).forEach(x => {
+        const pr = Number(x.pr) || 0, rt = Number(x.rt) || 0, tm = Number(x.tm) || 0;
+        const start = Date.parse(x.sd), end = new Date(x.sd);
+        if (Number.isFinite(end.getTime())) end.setUTCMonth(end.getUTCMonth() + tm);
+        const ratio = Number.isFinite(start) && end > start ? Math.max(0, Math.min(1, (Date.now() - start) / (end - start))) : 0;
+        const accrued = Math.round(pr * (rt / 100) * (tm / 12) * ratio);
+        if (pr > 0) {
+          importedAssets.push({
+            id: uid(), name: `${x.bk || 'Ngân hàng'} · ${label}`, ticker: label,
+            category: 'cash', kind, quantity: 1, cost: pr, value: pr + accrued,
+            date: x.sd || today(), updatedAt: new Date().toISOString(),
+            note: `Lãi suất ${rt}%/năm · Kỳ hạn ${tm} tháng · Lãi tích luỹ: ${money(accrued)}`
+          });
+        }
+      });
+    });
+
+    const catNames = { crypto: 'Tiền điện tử', stock: 'Chứng khoán', gold: 'Vàng', dep: 'Tiền gửi', op: 'Quỹ cơ hội', em: 'Quỹ khẩn cấp' };
+    (d.wd || []).forEach(w => {
+      const txType = w.t === 'ban' ? 'sell' : w.t === 'chuyen' ? 'transfer' : 'withdraw';
+      const amt = Number(w.a) || 0, cost = Number(w.c) || 0;
+      importedTx.push({
+        id: uid(), type: txType, assetName: catNames[w.f] || w.f || 'Danh mục',
+        date: w.d || today(), amount: amt,
+        realizedPnl: w.t === 'ban' && cost > 0 ? amt - cost : null,
+        note: `${w.t === 'chuyen' ? `Chuyển sang ${catNames[w.to] || w.to}. ` : ''}${w.n || ''}`.trim()
+      });
+    });
+
+    if (state.assets.length > 0 && !confirm(`Hiện đang có ${state.assets.length} tài sản. Bạn muốn THAY THẾ bằng ${importedAssets.length} tài sản từ file cũ? (Bấm Huỷ để gộp thêm)`)) {
+      state.assets.push(...importedAssets);
+      state.transactions.push(...importedTx);
+    } else {
+      state.assets = importedAssets;
+      state.transactions = importedTx;
+    }
+
+    state.fx = fx;
+    saveState();
+    renderAll();
+
+    statusEl.style.color = '#238568';
+    statusEl.textContent = `Đã nhập thành công ${importedAssets.length} khoản tài sản và ${importedTx.length} giao dịch từ file cũ. Đang đồng bộ giá thị trường…`;
+    refreshAllMarketData();
+  } catch (err) {
+    statusEl.style.color = '#c85a5a';
+    statusEl.textContent = 'Lỗi nhập dữ liệu: ' + err.message;
+  }
+}
+
+function showPage(name) {
+  $$('.page').forEach(p => p.classList.toggle('active', p.id === name + 'Page'));
+  $$('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.page === name));
+  const titles = {
+    overview: 'Tổng quan tài sản', assets: 'Quản lý tài sản', transactions: 'Sổ giao dịch',
+    cashflow: 'Dòng tiền', gold: 'Vàng DOJI & Thị trường', bitcoin: 'Đầu tư Bitcoin',
+    stocks: 'Chứng khoán Việt Nam', indicators: 'Chỉ báo & cảnh báo',
+    reports: 'Báo cáo', settings: 'Cài đặt & dữ liệu'
+  };
+  $('#pageTitle').textContent = titles[name] || 'WealthOS';
+  $('#sidebarPanel')?.classList.remove('open');
+}
+
+function closeDlg(dlg) {
+  if (!dlg) return;
+  try { dlg.close(); } catch { dlg.removeAttribute('open'); }
+}
+
+function openAssetModal(asset) {
+  $('#assetForm').reset();
+  $('#assetId').value = asset?.id || '';
+  $('#assetDialogTitle').textContent = asset ? 'Sửa tài sản' : 'Thêm tài sản';
+  $('#assetName').value = asset?.name || '';
+  $('#assetCategory').value = asset?.category || 'cash';
+  $('#assetKind').value = asset?.kind || '';
+  $('#assetTicker').value = asset?.ticker || '';
+  $('#assetQuantity').value = asset?.quantity ?? '';
+  $('#assetValue').value = asset?.value ?? '';
+  $('#assetCost').value = asset?.cost ?? '';
+  $('#assetDate').value = asset?.date || today();
+  $('#assetNote').value = asset?.note || '';
+  $('#assetDialog').showModal();
+}
+
+function bindEvents() {
+  $$('[data-close-dialog]').forEach(btn => btn.addEventListener('click', e => {
+    e.preventDefault();
+    closeDlg(btn.closest('dialog'));
+  }));
+  $$('.nav-item').forEach(b => b.onclick = () => showPage(b.dataset.page));
+  $$('[data-goto]').forEach(b => b.onclick = () => showPage(b.dataset.goto));
+  $('#menuBtn').onclick = () => $('#sidebarPanel').classList.toggle('open');
+  $('#syncMarketBtn').onclick = refreshAllMarketData;
+  $('#refreshStocksBtn').onclick = async () => { await fetchVnIndices(); await refreshAllMarketData(); };
+  $('#refreshDojiBtn').onclick = async () => { await fetchDojiGoldPrices(); saveState(); renderAll(); };
+
+  $('#saveManualDojiBtn').onclick = () => {
+    $$('[data-doji-k]').forEach(inp => {
+      const k = inp.dataset.dojiK, f = inp.dataset.dojiF, v = Number(inp.value);
+      if (v > 0) {
+        state.goldPrices[k] = state.goldPrices[k] || {};
+        state.goldPrices[k][f] = v;
+        state.goldPrices[k].src = 'Nhập tay';
+      }
+    });
+    revalueGoldAssets();
+    saveState();
+    renderAll();
+  };
+
+  $('#quickOtaBtn').onclick = () => {
+    showPage('settings');
+    $('#otaUpdateBtn')?.click();
+  };
+
+  $('#otaUpdateBtn').onclick = () => {
+    const url = ($('#otaUrlInput')?.value || '').trim();
+    if (!url) {
+      $('#otaStatus').style.color = '#c85a5a';
+      $('#otaStatus').textContent = 'Vui lòng nhập đường dẫn URL trên đám mây (https://...).';
+      return;
+    }
+    state.otaUrl = url;
+    saveState();
+    $('#otaStatus').style.color = '#526b83';
+    $('#otaStatus').textContent = 'Đang kết nối đám mây và tải gói cập nhật…';
+    const btn = $('#otaUpdateBtn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Đang tải…'; }
+    if (!sendNativeOTA({ action: 'updateFromUrl', url, currentVersion: APP_VERSION })) {
+      $('#otaStatus').style.color = '#c85a5a';
+      $('#otaStatus').textContent = 'Chức năng cập nhật OTA chỉ hoạt động bên trong ứng dụng macOS WealthOS.app.';
+      if (btn) { btn.disabled = false; btn.textContent = '⬇ Tải & Cập nhật ngay'; }
+    }
+  };
+
+  $('#otaLocalFile').onchange = async e => {
+    const f = e.target.files[0];
+    if (!f) return;
+    try {
+      const html = await f.text();
+      if (!sendNativeOTA({ action: 'updateFromHtmlString', html, version: f.name })) {
+        throw new Error('Chỉ hỗ trợ trong ứng dụng macOS WealthOS.app.');
+      }
+    } catch (err) {
+      $('#otaStatus').style.color = '#c85a5a';
+      $('#otaStatus').textContent = err.message;
+    } finally {
+      e.target.value = '';
+    }
+  };
+
+  $('#otaRollbackBtn').onclick = () => {
+    if (confirm('Khôi phục giao diện ứng dụng về phiên bản ngay trước lần cập nhật gần nhất? (Dữ liệu tài chính vẫn giữ nguyên)')) {
+      sendNativeOTA({ action: 'rollback' });
+    }
+  };
+
+  $('#quickAdd').onclick = $('#addAsset').onclick = () => openAssetModal();
+  $('#assetForm').onsubmit = e => {
+    e.preventDefault();
+    const existingId = $('#assetId').value;
+    const prev = existingId ? state.assets.find(x => x.id === existingId) : null;
+    const cat = $('#assetCategory').value;
+    const kind = $('#assetKind').value || prev?.kind || ({ cash: 'deposit', gold: 'gold', bitcoin: 'crypto', stock: 'stock' }[cat] || '');
+    const record = {
+      ...(prev || {}),
+      id: existingId || uid(),
+      name: $('#assetName').value.trim(),
+      category: cat,
+      kind,
+      ticker: $('#assetTicker').value.trim(),
+      quantity: $('#assetQuantity').value === '' ? null : Number($('#assetQuantity').value),
+      value: Number($('#assetValue').value) || 0,
+      cost: $('#assetCost').value === '' ? null : Number($('#assetCost').value),
+      date: $('#assetDate').value || today(),
+      note: $('#assetNote').value.trim(),
+      updatedAt: new Date().toISOString()
+    };
+    if (prev) {
+      state.assets = state.assets.map(x => x.id === existingId ? record : x);
+    } else {
+      state.assets.push(record);
+    }
+    saveState();
+    closeDlg($('#assetDialog'));
+    renderAll();
+  };
+
+  $('#assetSearch').oninput = renderAssets;
+  $('#assetFilter').onchange = renderAssets;
+  $('#assetCards').onclick = e => {
+    const editBtn = e.target.closest('[data-edit-asset]');
+    const delBtn = e.target.closest('[data-delete-asset]');
+    if (editBtn) openAssetModal(state.assets.find(a => a.id === editBtn.dataset.editAsset));
+    if (delBtn && confirm('Xoá khoản tài sản này?')) {
+      state.assets = state.assets.filter(a => a.id !== delBtn.dataset.deleteAsset);
+      saveState();
+      renderAll();
+    }
+  };
+
+  $('#addTransaction').onclick = () => {
+    if (!state.assets.length) { alert('Hãy thêm ít nhất một tài sản trước khi ghi giao dịch.'); return; }
+    const opts = state.assets.map(a => `<option value="${esc(a.id)}">${esc(a.name)} (${money(a.value)})</option>`).join('');
+    $('#txAsset').innerHTML = opts;
+    $('#txTargetAsset').innerHTML = '<option value="">— Không chọn —</option>' + opts;
+    $('#txDate').value = today();
+    $('#txQtyDelta').value = '';
+    $('#txAmount').value = '';
+    $('#txNote').value = '';
+    $('#transactionDialog').showModal();
+  };
+
+  $('#transactionForm').onsubmit = e => {
+    e.preventDefault();
+    const asset = state.assets.find(a => a.id === $('#txAsset').value);
+    const type = $('#txType').value;
+    const amount = Number($('#txAmount').value) || 0;
+    const qtyDelta = $('#txQtyDelta').value !== '' ? Number($('#txQtyDelta').value) : 0;
+    const apply = $('#txApplyAsset').checked;
+    const target = state.assets.find(a => a.id === $('#txTargetAsset').value);
+    let realizedPnl = null;
+
+    if (apply && asset) {
+      const q0 = Number(asset.quantity) || 0;
+      const c0 = Number(asset.cost) || 0;
+      const v0 = Number(asset.value) || 0;
+
+      if (type === 'buy' || type === 'deposit') {
+        asset.quantity = q0 + qtyDelta;
+        asset.cost = c0 + amount;
+        asset.value = v0 + amount;
+      } else if (type === 'sell' || type === 'withdraw') {
+        if (type === 'sell' && qtyDelta > 0 && q0 > 0) {
+          const ratio = Math.min(1, qtyDelta / q0);
+          const costSold = Math.round(c0 * ratio);
+          realizedPnl = amount - costSold;
+          asset.quantity = Math.max(0, q0 - qtyDelta);
+          asset.cost = Math.max(0, c0 - costSold);
+          asset.value = Math.max(0, Math.round(v0 * (1 - ratio)));
+        } else {
+          asset.value = Math.max(0, v0 - amount);
+          if (c0 > 0) asset.cost = Math.max(0, c0 - amount);
+        }
+      } else if (type === 'transfer') {
+        asset.value = Math.max(0, v0 - amount);
+        if (c0 > 0) asset.cost = Math.max(0, c0 - amount);
+        if (target && target.id !== asset.id) {
+          target.value = (Number(target.value) || 0) + amount;
+          target.cost = (Number(target.cost) || 0) + amount;
+        }
+      }
+      asset.updatedAt = new Date().toISOString();
+    }
+
+    state.transactions.push({
+      id: uid(), type, assetId: asset?.id, assetName: asset?.name,
+      date: $('#txDate').value || today(), quantity: qtyDelta || null,
+      amount, realizedPnl, note: $('#txNote').value.trim()
+    });
+    saveState();
+    closeDlg($('#transactionDialog'));
+    renderAll();
+  };
+
+  $('#transactionRows').onclick = e => {
+    const b = e.target.closest('[data-delete-tx]');
+    if (b && confirm('Xoá dòng lịch sử giao dịch này?')) {
+      state.transactions = state.transactions.filter(t => t.id !== b.dataset.deleteTx);
+      saveState();
+      renderAll();
+    }
+  };
+
+  $('#addCashflow').onclick = () => { $('#cfDate').value = today(); $('#cashDialog').showModal(); };
+  $('#cashForm').onsubmit = e => {
+    e.preventDefault();
+    state.cashflows.push({
+      id: uid(), type: $('#cfType').value, date: $('#cfDate').value || today(),
+      amount: Number($('#cfAmount').value) || 0, note: $('#cfNote').value.trim()
+    });
+    saveState();
+    closeDlg($('#cashDialog'));
+    renderAll();
+  };
+  $('#cashflowRows').onclick = e => {
+    const b = e.target.closest('[data-delete-cf]');
+    if (b && confirm('Xoá dòng tiền này?')) {
+      state.cashflows = state.cashflows.filter(x => x.id !== b.dataset.deleteCf);
+      saveState();
+      renderAll();
+    }
+  };
+
+  $('#addIndicator').onclick = () => $('#indicatorDialog').showModal();
+  $('#indicatorForm').onsubmit = e => {
+    e.preventDefault();
+    state.indicators.push({
+      id: uid(), name: $('#indicatorName').value.trim(), group: $('#indicatorGroup').value,
+      threshold: $('#indicatorThreshold').value.trim(), source: $('#indicatorSource').value.trim()
+    });
+    saveState();
+    closeDlg($('#indicatorDialog'));
+    $('#indicatorForm').reset();
+    renderAll();
+  };
+  $('#indicatorList').onclick = e => {
+    const b = e.target.closest('[data-del-ind]');
+    if (b) { state.indicators = state.indicators.filter(x => x.id !== b.dataset.delInd); saveState(); renderAll(); }
+  };
+
+  $$('[data-save-note]').forEach(b => b.onclick = () => {
+    const k = b.dataset.saveNote;
+    state.notes[k] = $('#' + k).value;
+    saveState();
+    b.textContent = 'Đã lưu';
+    setTimeout(() => b.textContent = 'Lưu luận điểm', 1200);
+  });
+
+  $('#applyFxBtn').onclick = () => {
+    const val = Number($('#inFxRate').value);
+    if (val > 1000) {
+      state.fx = val;
+      state.fxAuto = false;
+      state.assets.filter(a => a.category === 'bitcoin' && a.meta?.usdCost).forEach(a => {
+        const sym = (a.ticker || '').toUpperCase();
+        const p = state.market.cryptoPrices?.[sym]?.p;
+        if (p && a.quantity) a.value = Math.round(a.quantity * p * val);
+      });
+      saveState();
+      renderAll();
+    }
+  };
+
+  $('#legacyImport').onchange = e => {
+    if (e.target.files[0]) handleLegacyImport(e.target.files[0]);
+    e.target.value = '';
+  };
+
+  $('#loadSampleBtn').onclick = () => {
+    const fx = state.fx || 25500;
+    const nh = state.goldPrices['DOJI nhẫn']?.b || 140300000;
+    state.assets = [
+      { id: uid(), name: 'Tiền gửi ngân hàng ACB', ticker: 'Tiền gửi', category: 'cash', kind: 'deposit', quantity: 1, cost: 200000000, value: 204500000, date: today(), updatedAt: new Date().toISOString(), note: 'Kỳ hạn 6 tháng · Lãi suất 5,2%/năm' },
+      { id: uid(), name: 'Quỹ dự phòng khẩn cấp', ticker: 'Quỹ khẩn cấp', category: 'cash', kind: 'em', quantity: 1, cost: 80000000, value: 80000000, date: today(), updatedAt: new Date().toISOString(), note: 'Tách riêng khỏi tỷ trọng đầu tư' },
+      { id: uid(), name: 'Quỹ mở VESAF', ticker: 'VESAF', category: 'stock', kind: 'fund', quantity: 4500, cost: 135000000, value: 158400000, date: today(), updatedAt: new Date().toISOString(), note: 'Quỹ cổ phiếu năng động VinaCapital' },
+      { id: uid(), name: 'Cổ phiếu FPT', ticker: 'FPT', category: 'stock', kind: 'stock', quantity: 1000, cost: 112000000, value: 136500000, date: today(), updatedAt: new Date().toISOString(), note: 'Cổ phiếu công nghệ tăng trưởng' },
+      { id: uid(), name: 'Bitcoin (BTC)', ticker: 'BTC', category: 'bitcoin', kind: 'crypto', quantity: 0.08, cost: Math.round(0.08 * 68000 * 25000), value: Math.round(0.08 * 90000 * fx), date: today(), updatedAt: new Date().toISOString(), meta: { usdCost: 0.08 * 68000 }, note: 'Nắm giữ dài hạn' },
+      { id: uid(), name: 'DOJI Nhẫn tròn 9999', ticker: 'DOJI nhẫn', category: 'gold', kind: 'gold', quantity: 5, cost: 68000000, value: Math.round(5 * (nh / 10)), date: today(), updatedAt: new Date().toISOString(), note: '5 chỉ vàng nhẫn Hưng Thịnh Vượng' }
+    ];
+    saveState();
+    renderAll();
+    $('#importStatus').style.color = '#238568';
+    $('#importStatus').textContent = 'Đã nạp 6 khoản tài sản mẫu. Đang đồng bộ giá DOJI và VN-Index…';
+    refreshAllMarketData();
+  };
+
+  $('#clearAllBtn').onclick = () => {
+    if (confirm('Xoá toàn bộ dữ liệu thử nghiệm trên trang này?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      state = defaultState();
+      renderAll();
+      $('#importStatus').textContent = 'Đã đặt lại về trạng thái trống.';
+    }
+  };
+
+  $('#backupBtn').onclick = () => {
+    const content = JSON.stringify({ app: 'wealthos', version: 2, exportedAt: new Date().toISOString(), data: state }, null, 2);
+    triggerDownload(content, 'application/json', `wealthos-backup-${today()}.json`);
+    $('#restoreStatus').style.color = '#238568';
+    $('#restoreStatus').textContent = 'Đã xuất bản sao lưu JSON.';
+  };
+
+  $('#restoreFile').onchange = async e => {
+    const f = e.target.files[0];
+    if (!f) return;
+    try {
+      const j = JSON.parse(await f.text());
+      if (j.app !== 'wealthos' || !j.data) throw new Error('File không phải bản sao lưu WealthOS.');
+      state = { ...defaultState(), ...j.data };
+      saveState();
+      renderAll();
+      $('#restoreStatus').style.color = '#238568';
+      $('#restoreStatus').textContent = 'Đã khôi phục dữ liệu thành công.';
+    } catch (err) {
+      $('#restoreStatus').style.color = '#c85a5a';
+      $('#restoreStatus').textContent = err.message;
+    } finally {
+      e.target.value = '';
+    }
+  };
+
+  $('#exportCsv').onclick = () => {
+    const rows = [
+      ['Tên tài sản', 'Danh mục', 'Phân loại', 'Mã', 'Số lượng', 'Giá vốn (VND)', 'Giá trị hiện tại (VND)', 'Ngày cập nhật'],
+      ...state.assets.map(a => [a.name, LABELS[a.category], a.kind || '', a.ticker || '', a.quantity ?? '', a.cost ?? '', a.value ?? '', a.date || ''])
+    ];
+    const csv = '\ufeff' + rows.map(r => r.map(x => '"' + String(x ?? '').replaceAll('"', '""') + '"').join(',')).join('\n');
+    triggerDownload(csv, 'text/csv;charset=utf-8', `wealthos-bao-cao-${today()}.csv`);
+  };
+
+  $('#todayLabel').textContent = new Intl.DateTimeFormat('vi-VN', { dateStyle: 'long' }).format(new Date());
+}
+
+bindEvents();
+renderAll();
+sendNativeOTA({ action: 'status' });
+refreshAllMarketData();
+</script>
+</body>
+</html><!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101d2b">
+<title>WealthOS — Quản lý tài sản cá nhân</title>
+<style>
+:root{
+  --navy:#101d2b;--navy2:#17283a;--ink:#182536;--muted:#738196;--line:#e4e9ef;
+  --bg:#f3f6fa;--card:#fff;--green:#238568;--gold:#c49a38;--orange:#e58a38;
+  --purple:#7567bd;--teal:#2a9d8f;--red:#c85a5a;--radius:16px
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Be Vietnam Pro",Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;-webkit-user-select:none}
+input,textarea,select,td,th,.asset-amount,.metric-value,code{-webkit-user-select:text}
+.app-shell{min-height:100vh}
+.sidebar{position:fixed;inset:0 auto 0 0;width:252px;background:var(--navy);color:#e8eef6;padding:24px 15px;display:flex;flex-direction:column;z-index:20;transition:transform .2s}
+.brand{display:flex;align-items:center;gap:11px;padding:0 10px 26px}
+.brand-mark{width:38px;height:38px;border-radius:12px;background:#d4aa4b;color:#172435;display:grid;place-items:center;font-weight:900;font-size:21px}
+.brand b{display:block;font-size:17px;letter-spacing:.2px}
+.brand small{font-size:9px;letter-spacing:1.7px;color:#8fa0b5}
+.sidebar nav{display:grid;gap:4px;overflow-y:auto}
+.nav-item{border:0;background:transparent;color:#aebbd0;text-align:left;padding:10px 13px;border-radius:10px;display:flex;align-items:center;gap:12px;font:inherit;cursor:pointer;transition:all .15s}
+.nav-item span{font-size:13px}
+.nav-item:hover,.nav-item.active{background:#24384e;color:#fff}
+.nav-item.active{box-shadow:inset 3px 0 #d4aa4b}
+.nav-label{font-size:9px;letter-spacing:1.6px;color:#70839b;padding:16px 13px 4px;font-weight:700}
+.sidebar-foot{margin-top:auto;padding:14px 10px 0;color:#8fa0b5;font-size:11px;border-top:1px solid #29394a}
+.status-dot,.local-pill i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#39b889;margin-right:7px}
+.main{margin-left:252px;padding:26px 34px 28px;max-width:1600px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:12px;flex-wrap:wrap}
+.eyebrow{font-size:9px;letter-spacing:1.7px;color:#9aa7b7;font-weight:700}
+.topbar h1{font-size:25px;margin:3px 0 0;letter-spacing:-.5px}
+.top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.local-pill,.date-chip{border:1px solid var(--line);background:#fff;border-radius:30px;padding:8px 13px;color:#536479;font-size:11px;display:inline-flex;align-items:center;gap:6px}
+.primary,.secondary,.danger-btn{border:0;border-radius:9px;padding:10px 15px;font:600 12px inherit;cursor:pointer;transition:background .15s}
+.primary{background:var(--navy2);color:#fff}
+.primary:hover{background:#27445f}
+.secondary{background:#edf1f5;color:#45566a;border:1px solid var(--line)}
+.secondary:hover{background:#e2e8ef}
+.danger-btn{background:#fdf0f0;color:var(--red);border:1px solid #f2d5d5}
+.mobile-menu{display:none}
+.page{display:none}
+.page.active{display:block}
+.welcome-row,.section-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:17px;gap:12px;flex-wrap:wrap}
+.welcome-row h2,.section-toolbar h2{font-size:17px;margin:0 0 3px}
+.welcome-row p,.section-toolbar p,.panel-head p{margin:0;color:var(--muted);font-size:11px}
+.metric-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr;gap:14px;margin-bottom:17px}
+.metric-grid.three{grid-template-columns:repeat(3,1fr)}
+.metric-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 19px;min-width:0;box-shadow:0 3px 12px #26384a08}
+.total-card{background:linear-gradient(120deg,#172b40,#233e58);color:#fff;border:0}
+.metric-label{font-size:9px;letter-spacing:1.25px;color:#91a0b1;font-weight:700}
+.total-card .metric-label{color:#b4c1d0}
+.metric-value{font-size:clamp(19px,2vw,26px);font-weight:750;letter-spacing:-.6px;margin:8px 0 4px;overflow-wrap:anywhere}
+.metric-foot{font-size:10.5px;color:#8a98a8}
+.total-card .metric-foot{color:#b1c0d0}
+.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:16px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:19px;box-shadow:0 3px 12px #26384a08;margin-bottom:15px;min-width:0}
+.panel h3{font-size:14px;margin:0 0 4px}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px;gap:10px}
+.text-btn{border:0;background:none;color:#526b83;font-size:11px;cursor:pointer;font-weight:600}
+.allocation-wrap{display:flex;align-items:center;gap:28px;min-height:170px;flex-wrap:wrap}
+.donut{width:158px;height:158px;border-radius:50%;background:conic-gradient(#dce3eb 0 100%);display:grid;place-items:center;flex:none;position:relative}
+.donut:before{content:"";position:absolute;inset:20px;background:#fff;border-radius:50%}
+.donut>div{z-index:1;text-align:center;max-width:112px}
+.donut b{display:block;font-size:13px;overflow-wrap:anywhere}
+.donut small{font-size:8px;color:#94a0af;letter-spacing:1px}
+.legend{display:grid;gap:9px;flex:1;min-width:180px}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:11.5px;color:#536479}
+.legend-item i{width:9px;height:9px;border-radius:3px;flex:none}
+.legend-item b{margin-left:auto;color:#182536}
+.recent-list{display:grid;gap:11px}
+.recent-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid #edf0f4}
+.recent-item:last-child{border:0;padding-bottom:0}
+.recent-name{font-weight:650;font-size:12.5px}
+.recent-meta{font-size:10.5px;color:var(--muted)}
+.recent-value{font-size:12.5px;font-weight:700;text-align:right}
+.table-panel{padding-bottom:10px}
+.table-scroll{width:100%;overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px}
+th,td{text-align:right;padding:11px 10px;border-bottom:1px solid #edf0f4;white-space:nowrap;font-size:11.5px}
+th:first-child,td:first-child{text-align:left}
+th{font-size:9.5px;color:#8794a4;letter-spacing:.6px;font-weight:700;text-transform:uppercase}
+.empty{text-align:center;color:#99a5b3;padding:26px 12px;font-size:11.5px}
+.filter-row{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.filter-row input,.filter-row select{max-width:260px}
+.filter-row input,.filter-row select,.dialog-form input,.dialog-form select,.dialog-form textarea,.panel textarea,.inline-input{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 12px;background:#fff;color:var(--ink);font:inherit;font-size:12px;min-width:0}
+.asset-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.asset-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0;display:flex;flex-direction:column}
+.asset-card-top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.asset-tag{font-size:9.5px;color:#536479;background:#f1f4f7;padding:4px 9px;border-radius:20px;font-weight:600}
+.asset-ticker{font-size:10.5px;color:#8794a4;font-weight:700}
+.asset-card h3{font-size:13.5px;margin:11px 0 3px}
+.asset-amount{font-size:19px;font-weight:750;margin:8px 0 4px;overflow-wrap:anywhere}
+.asset-detail{font-size:10.5px;color:#738196;margin-top:2px}
+.asset-actions{display:flex;justify-content:flex-end;gap:6px;margin-top:auto;padding-top:12px}
+.small-btn{background:#f0f3f6;border:0;border-radius:7px;padding:6px 10px;font-size:10.5px;color:#45566a;cursor:pointer;font-weight:600}
+.small-btn:hover{background:#e2e8ef}
+.module-hero{display:flex;align-items:center;gap:17px;padding:20px 22px;border-radius:16px;color:#fff;margin-bottom:15px}
+.module-hero h2{font-size:20px;margin:3px 0}
+.module-hero p{font-size:11.5px;color:#e4e9ef;margin:0;max-width:680px}
+.gold-hero{background:linear-gradient(110deg,#5d4b25,#9d7b34)}
+.btc-hero{background:linear-gradient(110deg,#75431f,#bd7132)}
+.stock-hero{background:linear-gradient(110deg,#403b72,#7168ad)}
+.module-symbol{font-size:28px;width:52px;height:52px;display:grid;place-items:center;border:1px solid #ffffff55;border-radius:14px;flex:none}
+.market-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:14px;flex-wrap:wrap}
+.status-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:10.5px;font-weight:600;background:#eef2f6;color:#45566a}
 .mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:11px;margin-bottom:15px}
 .mini-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
 .mini-card small{display:block;font-size:9px;color:#8794a4;letter-spacing:.7px;font-weight:700;text-transform:uppercase}
