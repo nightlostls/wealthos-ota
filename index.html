@@ -2501,7 +2501,11 @@ function bindEvents() {
       if ($('#otaStatus')) { $('#otaStatus').style.color = '#526b83'; $('#otaStatus').textContent = 'Đang kết nối đám mây và tải gói cập nhật…'; }
       const btn = $('#otaUpdateBtn');
       if (btn) { btn.disabled = true; btn.textContent = 'Đang tải…'; }
-      if (!sendNativeOTA({ action: 'updateFromUrl', url, currentVersion: APP_VERSION })) {
+      if (window.AndroidBridge && typeof window.AndroidBridge.updateAppOneClick === 'function') {
+          window.AndroidBridge.updateAppOneClick();
+          return;
+        }
+        if (!sendNativeOTA({ action: 'updateFromUrl', url, currentVersion: APP_VERSION })) {
         if ($('#otaStatus')) { $('#otaStatus').style.color = '#c85a5a'; $('#otaStatus').textContent = 'Chức năng cập nhật OTA chỉ hoạt động bên trong ứng dụng macOS WealthOS.app.'; }
         if (btn) { btn.disabled = false; btn.textContent = '⬇ Cập nhật ngay'; }
       }
