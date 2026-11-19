@@ -2857,5 +2857,102 @@ refreshAllMarketData();
   }
 })();
 </script>
+<script>
+</script>
+<script>
+// === WEALTHOS_FB_FORCE_UI ===
+(function(){
+  const FB_URL = "https://theo-doi-dau-default-rtdb.asia-southeast1.firebasedatabase.app/wealthos_ma_bi_mat_cua_ban/state.json";
+  let timer = null, applying = false;
+  function getKey(){ try{ if(typeof STORAGE_KEY==="string"&&STORAGE_KEY) return STORAGE_KEY; }catch(_){} return "wealthos_state"; }
+  function readState(){
+    try{ if(typeof state!=="undefined"&&state&&typeof state==="object") return state; }catch(_){}
+    for(const k of [getKey(),"wealthos_state","wealthos","state"]){
+      try{ const raw=localStorage.getItem(k); if(raw){ const p=JSON.parse(raw); if(p&&typeof p==="object") return p; } }catch(_){}
+    }
+    return null;
+  }
+  function setStatus(txt,bg){
+    const b=document.getElementById("__fb_force_btn");
+    if(!b) return;
+    b.textContent=txt;
+    if(bg) b.style.background=bg;
+  }
+  async function pushNow(manual){
+    if(applying && !manual) return;
+    const data = readState();
+    if(!data || typeof data!=="object"){ if(manual) setStatus("Chưa có dữ liệu","#b45309"); return; }
+    data.updatedAt = Date.now();
+    try{ localStorage.setItem(getKey(),JSON.stringify(data)); localStorage.setItem("wealthos_state",JSON.stringify(data)); }catch(_){}
+    if(manual) setStatus("Đang đẩy...","#1d4ed8");
+    try{
+      const r = await fetch(FB_URL,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({updatedAt:data.updatedAt,data})});
+      if(!r.ok) throw new Error("HTTP "+r.status);
+      if(manual){ setStatus("Đã đẩy Firebase ✓","#15803d"); setTimeout(()=>setStatus("Đẩy Firebase lên mây","#0f172a"),2000); }
+    }catch(e){
+      console.warn("FB push err:",e);
+      if(manual){ setStatus("Lỗi đẩy ✕","#b91c1c"); setTimeout(()=>setStatus("Đẩy Firebase lên mây","#0f172a"),2500); }
+    }
+  }
+  async function pullOnStart(){
+    try{
+      const r = await fetch(FB_URL+"?t="+Date.now());
+      if(!r.ok) return;
+      const remote = await r.json();
+      if(!remote || !remote.data || typeof remote.updatedAt!=="number") return;
+      const local = readState();
+      const localTs = (local && typeof local.updatedAt==="number") ? local.updatedAt : 0;
+      if(remote.updatedAt > localTs){
+        applying = true;
+        const merged = Object.assign({},remote.data,{updatedAt:remote.updatedAt});
+        try{ if(typeof state!=="undefined"&&state&&typeof state==="object"){ Object.keys(state).forEach(k=>delete state[k]); Object.assign(state,merged); } }catch(_){}
+        try{ localStorage.setItem(getKey(),JSON.stringify(merged)); localStorage.setItem("wealthos_state",JSON.stringify(merged)); }catch(_){}
+        try{ if(typeof renderAll==="function") renderAll(); }catch(_){}
+        setStatus("Đã kéo mây ✓","#15803d");
+        setTimeout(()=>{ applying=false; setStatus("Đẩy Firebase lên mây","#0f172a"); },1800);
+      }
+    }catch(e){ console.warn("FB pull err:",e); }
+  }
+  function findSettingsHost(){
+    const headings = Array.from(document.querySelectorAll("h1,h2,h3,h4,div,span"));
+    for(const el of headings){
+      const t = (el.textContent || "").trim();
+      if(t === "Sao lưu & Khôi phục WealthOS" || t === "Cài đặt & dữ liệu"){
+        let box = el.closest(".card,section,article") || el.parentElement;
+        if(box && box.offsetParent !== null) return box;
+      }
+    }
+    return null;
+  }
+  function mountBtn(){
+    if(!document.body) return;
+    let btn = document.getElementById("__fb_force_btn");
+    if(!btn){
+      btn = document.createElement("button");
+      btn.id = "__fb_force_btn";
+      btn.type = "button";
+      btn.textContent = "Đẩy Firebase lên mây";
+      btn.addEventListener("click", ()=>pushNow(true));
+    }
+    const host = findSettingsHost();
+    if(host){
+      if(btn.parentElement !== host){
+        btn.style.cssText = "margin-top:12px;padding:8px 14px;border-radius:8px;border:1px solid rgba(15,23,42,0.15);background:#0f172a;color:#ffffff;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;";
+        host.appendChild(btn);
+      }
+    } else if(btn.parentElement !== document.body){
+      btn.style.cssText = "position:fixed;right:16px;bottom:16px;z-index:2147483647;padding:9px 15px;border-radius:999px;border:1px solid rgba(255,255,255,0.3);background:#0f172a;color:#ffffff;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,0.4);";
+      document.body.appendChild(btn);
+    }
+  }
+  function scheduleAuto(){ if(applying) return; clearTimeout(timer); timer=setTimeout(()=>pushNow(false),800); }
+  mountBtn();
+  document.addEventListener("DOMContentLoaded", mountBtn);
+  window.addEventListener("load", ()=>{ mountBtn(); setTimeout(pullOnStart,500); });
+  setInterval(mountBtn, 1200);
+  document.addEventListener("change", scheduleAuto, true);
+})();
+// === END WEALTHOS_FB_FORCE_UI ===
+</script>
 </body>
 </html>
