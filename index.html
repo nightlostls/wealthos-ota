@@ -219,7 +219,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <button type="button" class="nav-item" data-page="reports">▦ <span>Báo cáo</span></button>
       <button type="button" class="nav-item" data-page="settings">⚙ <span>Cài đặt & dữ liệu</span></button>
     </nav>
-    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.3 · Đồng bộ Rút/Bán/Xoá</div>
+    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.4 · Tự xoá khi rút/bán hết</div>
   </aside>
 
   <main class="main">
@@ -541,7 +541,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <div><div class="eyebrow">TIỀN GỬI</div><h2>Tiền gửi tiết kiệm</h2><p>Theo dõi sổ tiết kiệm do bạn tự nhập số dư, lãi suất, kỳ hạn, rút tiền và cảnh báo đáo hạn.</p></div>
       </div>
       <div class="section-toolbar">
-        <div><h2>Danh sách tiền gửi tiết kiệm</h2><p>Không tự ghi đè giá trị/lãi suất ngân hàng; hỗ trợ Rút tiền và Xoá từng khoản.</p></div>
+        <div><h2>Danh sách tiền gửi tiết kiệm</h2><p>Không tự ghi đè giá trị/lãi suất ngân hàng; rút hết tiền sẽ tự xoá khoản khỏi danh sách.</p></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="secondary" data-withdraw-kind="deposit">− Rút tiền tiết kiệm</button>
           <button type="button" class="primary" data-add-deposit-kind="deposit">＋ Thêm tiền gửi tiết kiệm</button>
@@ -561,7 +561,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <div><div class="eyebrow">TIỀN GỬI</div><h2>Quỹ cơ hội</h2><p>Nguồn tiền gửi / thanh khoản chủ động sẵn sàng giải ngân khi thị trường xuất hiện cơ hội tốt.</p></div>
       </div>
       <div class="section-toolbar">
-        <div><h2>Danh sách Quỹ cơ hội</h2><p>Tính vào tài sản chung; hỗ trợ Rút tiền và Xoá từng khoản.</p></div>
+        <div><h2>Danh sách Quỹ cơ hội</h2><p>Tính vào tài sản chung; rút hết tiền sẽ tự xoá khoản khỏi danh sách.</p></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="secondary" data-withdraw-kind="op">− Rút Quỹ cơ hội</button>
           <button type="button" class="primary" data-add-deposit-kind="op">＋ Thêm Quỹ cơ hội</button>
@@ -581,7 +581,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <div><div class="eyebrow">TIỀN GỬI · DỰ PHÒNG RIÊNG</div><h2>Quỹ khẩn cấp</h2><p>Tách riêng hoàn toàn khỏi tài sản chung và biểu đồ phân bổ đầu tư để bảo vệ an toàn tài chính cá nhân.</p></div>
       </div>
       <div class="section-toolbar">
-        <div><h2>Danh sách Quỹ khẩn cấp</h2><p>Không cộng vào Tổng tài sản ròng của tài sản chung; hỗ trợ Rút tiền và Xoá từng khoản.</p></div>
+        <div><h2>Danh sách Quỹ khẩn cấp</h2><p>Không cộng vào Tổng tài sản ròng của tài sản chung; rút hết tiền sẽ tự xoá khoản khỏi danh sách.</p></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="secondary" data-withdraw-kind="em">− Rút Quỹ khẩn cấp</button>
           <button type="button" class="primary" data-add-deposit-kind="em">＋ Thêm Quỹ khẩn cấp</button>
@@ -630,7 +630,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
               <h3>☁ Cập nhật ứng dụng trực tiếp từ đám mây (Không cần cài lại .app)</h3>
               <p>Tải phiên bản giao diện & công thức mới từ GitHub về thẳng ứng dụng. Toàn bộ dữ liệu tài sản của bạn được giữ nguyên 100%.</p>
             </div>
-            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.3-ota</span>
+            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.4-ota</span>
           </div>
 
           <label style="font-size:11px;color:#45566a;font-weight:600;display:block;margin-top:8px">
@@ -685,11 +685,10 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
     </section>
 
-    <footer>WealthOS 0.4.3 · Đồng bộ Rút tiền · Bán ra · Xoá khoản · Real-time</footer>
+    <footer>WealthOS 0.4.4 · Tự xoá khoản khi rút/bán hết · Đồng bộ Rút tiền & Bán ra</footer>
   </main>
 </div>
 
-<!-- MODAL BÁN RA / RÚT TIỀN -->
 <dialog id="sellDialog">
   <form method="dialog" id="sellForm" class="dialog-form">
     <div class="dialog-head">
@@ -699,7 +698,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
     <label>Chọn khoản tài sản / tiền gửi<select id="sellAssetSelect"></select></label>
     <div class="form-grid" id="sellQtyRow">
       <label id="sellQtyWrap">Số lượng bán ra (nếu có)<input id="sellQty" type="number" min="0" step="any" placeholder="Ví dụ: 10"></label>
-      <label id="sellAmountWrap">Tổng tiền thu về / rút ra (VND)<input id="sellAmount" type="number" min="1" step="1" required placeholder="Ví dụ: 2000000"></label>
+      <label id="sellAmountWrap">Tổng tiền thu về / rút ra (VND)<input id="sellAmount" type="number" min="1" step="1" required placeholder="Ví dụ: 4000000"></label>
     </div>
     <div class="form-grid">
       <label>Ngày giao dịch<input id="sellDate" type="date" required></label>
@@ -713,7 +712,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL MUA THÊM / TRUNG BÌNH GIÁ (DCA) -->
 <dialog id="dcaDialog">
   <form method="dialog" id="dcaForm" class="dialog-form">
     <div class="dialog-head">
@@ -737,7 +735,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL THÊM / SỬA TÀI SẢN & TIỀN GỬI -->
 <dialog id="assetDialog">
   <form method="dialog" id="assetForm" class="dialog-form">
     <div class="dialog-head">
@@ -784,7 +781,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL GIAO DỊCH -->
 <dialog id="transactionDialog">
   <form method="dialog" id="transactionForm" class="dialog-form">
     <div class="dialog-head">
@@ -820,7 +816,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL DÒNG TIỀN -->
 <dialog id="cashDialog">
   <form method="dialog" id="cashForm" class="dialog-form">
     <div class="dialog-head">
@@ -840,7 +835,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL CHỈ BÁO -->
 <dialog id="indicatorDialog">
   <form method="dialog" id="indicatorForm" class="dialog-form">
     <div class="dialog-head">
@@ -861,7 +855,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 </dialog>
 
 <script>
-const APP_VERSION = '0.4.3-ota';
+const APP_VERSION = '0.4.4-ota';
 const DEFAULT_OTA_URL = 'https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html';
 const STORAGE_KEY = 'wealthos_trial_v1';
 const LUONG_PER_OZ = 37.5 / 31.1035;
@@ -961,6 +955,17 @@ function getTxBucketKey(t, asset) {
     return 'deposit';
   }
   return 'deposit';
+}
+
+function pruneDepletedAssets() {
+  state.assets = state.assets.filter(a => {
+    const v = Number(a.value) || 0;
+    const hasQty = a.quantity != null && a.quantity !== '';
+    const q = hasQty ? (Number(a.quantity) || 0) : null;
+    if (a.category === 'cash') return v > 0;
+    if (q !== null) return q > 0 && v > 0;
+    return v > 0;
+  });
 }
 
 let state = loadState();
@@ -1139,6 +1144,7 @@ function revalueGoldAssets() {
 
 function renderAll() {
   const fx = Number(state.fx) || 25704;
+  pruneDepletedAssets();
   const assets = (state.assets || []).map(normalizeAsset);
   state.assets = assets;
 
@@ -1685,13 +1691,17 @@ function updateSellPreview() {
 
   if (isCash) {
     setText('#sellDialogTitle', 'Rút tiền gửi / Quỹ');
-    $('#sellPreview').innerHTML = `Số dư sau rút ước tính: <b>${money(Math.max(0, v0 - amt))}</b>`;
+    const rem = Math.max(0, v0 - amt);
+    $('#sellPreview').innerHTML = rem <= 0
+      ? `Rút hết số dư: khoản này sẽ <b>biến mất khỏi danh sách</b> sau khi xác nhận.`
+      : `Số dư sau rút ước tính: <b>${money(rem)}</b>`;
   } else {
     setText('#sellDialogTitle', 'Bán ra tài sản đầu tư');
     const ratio = qSell > 0 && q0 > 0 ? Math.min(1, qSell / q0) : (v0 > 0 ? Math.min(1, amt / v0) : 0);
     const costSold = Math.round(c0 * ratio);
     const pnl = amt > 0 ? amt - costSold : 0;
-    $('#sellPreview').innerHTML = `SL còn lại: <b>${num(Math.max(0, q0 - qSell))}</b> · Giá vốn phần bán: <b>${money(costSold)}</b> · Lãi/Lỗ chốt: <b class="${pnl >= 0 ? 'pos' : 'neg'}">${pnl >= 0 ? '+' : ''}${money(pnl)}</b>`;
+    const remQ = Math.max(0, q0 - qSell);
+    $('#sellPreview').innerHTML = `SL còn lại: <b>${num(remQ)}</b> · Giá vốn phần bán: <b>${money(costSold)}</b> · Lãi/Lỗ chốt: <b class="${pnl >= 0 ? 'pos' : 'neg'}">${pnl >= 0 ? '+' : ''}${money(pnl)}</b>`;
   }
 }
 
@@ -2267,6 +2277,7 @@ function bindEvents() {
         });
       }
 
+      pruneDepletedAssets();
       saveState();
       closeDlg($('#sellDialog'));
       renderAll();
@@ -2487,6 +2498,7 @@ function bindEvents() {
         date: $('#txDate').value || today(), quantity: qtyDelta || null,
         amount, realizedPnl, note: $('#txNote').value.trim()
       });
+      pruneDepletedAssets();
       saveState();
       closeDlg($('#transactionDialog'));
       renderAll();
@@ -2636,6 +2648,7 @@ function bindEvents() {
           goldPrices: { ...defaultState().goldPrices, ...(j.data.goldPrices || {}) },
           market: { ...defaultState().market, ...(j.data.market || {}) }
         };
+        pruneDepletedAssets();
         saveState();
         renderAll();
         refreshAllMarketData();
