@@ -8,8 +8,8 @@
 <style>
 :root{
   --navy:#101d2b;--navy2:#17283a;--ink:#182536;--muted:#738196;--line:#e4e9ef;
-  --bg:#f3f6fa;--card:#fff;--green:#238568;--gold:#c49a38;--orange:#e58a38;
-  --purple:#7567bd;--teal:#2a9d8f;--red:#c85a5a;--radius:16px
+  --bg:#f3f6fa;--card:#fff;--green:#1f8a70;--blue:#2b8cbe;--gold:#e6b84d;--orange:#f7931a;
+  --purple:#8b7cf6;--red:#c85a5a;--radius:16px
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Be Vietnam Pro",Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;-webkit-user-select:none}
@@ -77,7 +77,7 @@ input,textarea,select,td,th,.asset-amount,.metric-value,code{-webkit-user-select
 .donut>div{z-index:1;text-align:center;max-width:112px}
 .donut b{display:block;font-size:13px;overflow-wrap:anywhere}
 .donut small{font-size:8px;color:#94a0af;letter-spacing:1px}
-.legend{display:grid;gap:9px;flex:1;min-width:180px}
+.legend{display:grid;gap:9px;flex:1;min-width:190px}
 .legend-item{display:flex;align-items:center;gap:8px;font-size:11.5px;color:#536479}
 .legend-item i{width:9px;height:9px;border-radius:3px;flex:none}
 .legend-item b{margin-left:auto;color:#182536}
@@ -212,7 +212,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <button type="button" class="nav-item" data-page="reports">▦ <span>Báo cáo</span></button>
       <button type="button" class="nav-item" data-page="settings">⚙ <span>Cài đặt & dữ liệu</span></button>
     </nav>
-    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.3.9 · Sắc màu Đầu tư</div>
+    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.0 · 5 Khoản mục phân bổ</div>
   </aside>
 
   <main class="main">
@@ -248,7 +248,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <article class="metric-card">
           <div class="metric-label">TIỀN GỬI & QUỸ CƠ HỘI</div>
           <div class="metric-value" id="cashValue">0 ₫</div>
-          <div class="metric-foot" id="cashSub">Tiền gửi tiết kiệm · Quỹ cơ hội</div>
+          <div class="metric-foot" id="cashSub">Tiền gửi · Quỹ cơ hội</div>
         </article>
         <article class="metric-card">
           <div class="metric-label">TÀI SẢN ĐẦU TƯ</div>
@@ -291,12 +291,12 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
       <article class="panel table-panel">
         <div class="panel-head">
-          <div><h3>Danh mục tài sản chung</h3><p>Giá trị, tỷ trọng và lãi/lỗ tạm tính theo từng nhóm</p></div>
+          <div><h3>Danh mục tài sản chung</h3><p>Giá trị, tỷ trọng và lãi/lỗ tạm tính theo từng khoản mục</p></div>
           <button type="button" class="text-btn" data-goto="assets">Quản lý danh mục →</button>
         </div>
         <div class="table-scroll">
           <table>
-            <thead><tr><th>Danh mục</th><th>Giá trị hiện tại</th><th>Tỷ trọng</th><th>Lãi / Lỗ</th><th>Lãi / Lỗ %</th></tr></thead>
+            <thead><tr><th>Khoản mục</th><th>Giá trị hiện tại</th><th>Tỷ trọng</th><th>Lãi / Lỗ</th><th>Lãi / Lỗ %</th></tr></thead>
             <tbody id="overviewTable"><tr><td colspan="5" class="empty">Chưa có dữ liệu.</td></tr></tbody>
           </table>
         </div>
@@ -556,13 +556,13 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
     <section id="reportsPage" class="page">
       <div class="section-toolbar">
-        <div><h2>Báo cáo tài sản</h2><p>Tổng hợp giá trị, giá vốn và lãi/lỗ hiện tại theo nhóm tài sản chung (kèm dòng riêng cho Quỹ khẩn cấp).</p></div>
+        <div><h2>Báo cáo tài sản</h2><p>Tổng hợp giá trị, giá vốn và lãi/lỗ hiện tại theo từng khoản mục tài sản chung (kèm dòng riêng cho Quỹ khẩn cấp).</p></div>
         <button type="button" class="secondary" id="exportCsv">Xuất CSV (mở bằng Excel)</button>
       </div>
       <article class="panel table-panel">
         <div class="table-scroll">
           <table>
-            <thead><tr><th>Danh mục</th><th>Số khoản</th><th>Giá vốn (₫)</th><th>Giá trị hiện tại (₫)</th><th>Tỷ trọng</th><th>Lãi / Lỗ (₫)</th></tr></thead>
+            <thead><tr><th>Khoản mục</th><th>Số khoản</th><th>Giá vốn (₫)</th><th>Giá trị hiện tại (₫)</th><th>Tỷ trọng</th><th>Lãi / Lỗ (₫)</th></tr></thead>
             <tbody id="reportRows"></tbody>
           </table>
         </div>
@@ -581,7 +581,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
               <h3>☁ Cập nhật ứng dụng trực tiếp từ đám mây (Không cần cài lại .app)</h3>
               <p>Tải phiên bản giao diện & công thức mới từ GitHub về thẳng ứng dụng. Toàn bộ dữ liệu tài sản của bạn được giữ nguyên 100%.</p>
             </div>
-            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.3.9-ota</span>
+            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.0-ota</span>
           </div>
 
           <label style="font-size:11px;color:#45566a;font-weight:600;display:block;margin-top:8px">
@@ -636,7 +636,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
     </section>
 
-    <footer>WealthOS 0.3.9 · Realtime Vàng · Bitcoin · Chứng khoán VN · Tiền gửi tự nhập</footer>
+    <footer>WealthOS 0.4.0 · 5 Khoản mục phân bổ (Tiền gửi · Quỹ cơ hội · Vàng · Bitcoin · Chứng khoán VN)</footer>
   </main>
 </div>
 
@@ -783,7 +783,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 </dialog>
 
 <script>
-const APP_VERSION = '0.3.9-ota';
+const APP_VERSION = '0.4.0-ota';
 const DEFAULT_OTA_URL = 'https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html';
 const STORAGE_KEY = 'wealthos_trial_v1';
 const LUONG_PER_OZ = 37.5 / 31.1035;
@@ -835,13 +835,39 @@ window.__onNativeOTA = function(res) {
   }
 
   if (statusEl) {
-    statusEl.style.color = res.ok ? '#238568' : '#c85a5a';
+    statusEl.style.color = res.ok ? '#1f8a70' : '#c85a5a';
     statusEl.textContent = res.message || '';
   }
 };
 
-const COLORS = { cash: '#238568', gold: '#e6b84d', bitcoin: '#f7931a', stock: '#8b7cf6', other: '#8291a3' };
+const BUCKET_ORDER = ['deposit', 'opportunity', 'gold', 'bitcoin', 'stock'];
+const BUCKET_COLORS = {
+  deposit: '#1f8a70',
+  opportunity: '#2b8cbe',
+  gold: '#e6b84d',
+  bitcoin: '#f7931a',
+  stock: '#8b7cf6'
+};
+const BUCKET_LABELS = {
+  deposit: 'Tiền gửi',
+  opportunity: 'Quỹ cơ hội',
+  gold: 'Vàng',
+  bitcoin: 'Bitcoin',
+  stock: 'Chứng khoán Việt Nam'
+};
 const LABELS = { cash: 'Tiền gửi & Quỹ cơ hội', gold: 'Vàng', bitcoin: 'Bitcoin', stock: 'Chứng khoán Việt Nam', other: 'Khác' };
+
+function getCommonBucket(a) {
+  if (a.category === 'cash') {
+    if (a.kind === 'em') return null;
+    if (a.kind === 'op') return 'opportunity';
+    return 'deposit';
+  }
+  if (a.category === 'gold') return 'gold';
+  if (a.category === 'bitcoin') return 'bitcoin';
+  if (a.category === 'stock') return 'stock';
+  return null;
+}
 
 let state = loadState();
 
@@ -1034,7 +1060,7 @@ function renderAll() {
   setText('#netWorth', money(totalCommonNetWorth));
   setText('#netWorthSub', `≈ ${usd(totalCommonNetWorth / fx)} · Không gồm Quỹ khẩn cấp`);
   setText('#cashValue', money(cashCommonTotal));
-  setText('#cashSub', 'Tiền gửi tiết kiệm · Quỹ cơ hội');
+  setText('#cashSub', 'Tiền gửi · Quỹ cơ hội');
   setText('#investValue', money(investTotal));
   setText('#emergencyReserveVal', money(emTotal));
   setText('#assetCountSub', `${commonAssets.length} khoản tài sản chung · Quỹ khẩn cấp tách riêng`);
@@ -1065,39 +1091,40 @@ function renderAll() {
     }
   }
 
-  const order = ['cash', 'gold', 'bitcoin', 'stock', 'other'];
-  const catVals = Object.fromEntries(order.map(k => [k, sumVal(commonAssets.filter(a => a.category === k))]));
+  const bucketVals = Object.fromEntries(BUCKET_ORDER.map(k => [k, sumVal(commonAssets.filter(a => getCommonBucket(a) === k))]));
   let acc = 0, parts = [];
-  order.forEach(k => {
-    const pct = totalCommonNetWorth > 0 ? (catVals[k] / totalCommonNetWorth) * 100 : 0;
+  BUCKET_ORDER.forEach(k => {
+    const pct = totalCommonNetWorth > 0 ? (bucketVals[k] / totalCommonNetWorth) * 100 : 0;
     if (pct > 0) {
-      parts.push(`${COLORS[k]} ${acc}% ${acc + pct}%`);
+      parts.push(`${BUCKET_COLORS[k]} ${acc}% ${acc + pct}%`);
       acc += pct;
     }
   });
   if ($('#donut')) $('#donut').style.background = parts.length ? `conic-gradient(${parts.join(',')})` : 'conic-gradient(#dce3eb 0 100%)';
   if ($('#allocationLegend')) {
-    $('#allocationLegend').innerHTML = order.filter(k => catVals[k] > 0).map(k =>
-      `<div class="legend-item"><i style="background:${COLORS[k]}"></i><span>${LABELS[k]}</span><b>${(catVals[k] / totalCommonNetWorth * 100).toFixed(1)}%</b></div>`
+    $('#allocationLegend').innerHTML = BUCKET_ORDER.filter(k => bucketVals[k] > 0).map(k =>
+      `<div class="legend-item"><i style="background:${BUCKET_COLORS[k]}"></i><span>${BUCKET_LABELS[k]}</span><b>${(bucketVals[k] / totalCommonNetWorth * 100).toFixed(1)}%</b></div>`
     ).join('') || '<div class="empty">Chưa có dữ liệu tài sản.</div>';
   }
 
   if ($('#recentAssets')) {
-    $('#recentAssets').innerHTML = assets.slice().sort((a, b) => String(b.updatedAt || '').localeCompare(String(a.updatedAt || ''))).slice(0, 5).map(a =>
-      `<div class="recent-item"><div><div class="recent-name">${esc(a.name)}</div><div class="recent-meta">${isEmergency(a) ? 'Quỹ khẩn cấp (riêng)' : esc(LABELS[a.category] || a.category)}${a.ticker ? ' · ' + esc(a.ticker) : ''}</div></div><div class="recent-value">${money(a.value)}</div></div>`
-    ).join('') || '<div class="empty">Chưa có tài sản nào.</div>';
+    $('#recentAssets').innerHTML = assets.slice().sort((a, b) => String(b.updatedAt || '').localeCompare(String(a.updatedAt || ''))).slice(0, 5).map(a => {
+      const bKey = getCommonBucket(a);
+      const subLabel = isEmergency(a) ? 'Quỹ khẩn cấp (riêng)' : (bKey ? BUCKET_LABELS[bKey] : (LABELS[a.category] || a.category));
+      return `<div class="recent-item"><div><div class="recent-name">${esc(a.name)}</div><div class="recent-meta">${esc(subLabel)}${a.ticker ? ' · ' + esc(a.ticker) : ''}</div></div><div class="recent-value">${money(a.value)}</div></div>`;
+    }).join('') || '<div class="empty">Chưa có tài sản nào.</div>';
   }
 
   if ($('#overviewTable')) {
-    $('#overviewTable').innerHTML = order.filter(k => catVals[k] > 0).map(k => {
-      const list = commonAssets.filter(a => a.category === k);
+    $('#overviewTable').innerHTML = BUCKET_ORDER.filter(k => bucketVals[k] > 0).map(k => {
+      const list = commonAssets.filter(a => getCommonBucket(a) === k);
       const v = sumVal(list);
       const withCost = list.filter(a => Number(a.cost) > 0);
       const c = sumCost(withCost);
       const vWithCost = sumVal(withCost);
       const pnl = c > 0 ? vWithCost - c : null;
       const pct = c > 0 ? (pnl / c * 100).toFixed(2) + '%' : '—';
-      return `<tr><td><b>${LABELS[k]}</b></td><td>${money(v)}</td><td>${(v / (totalCommonNetWorth || 1) * 100).toFixed(1)}%</td><td class="${pnl > 0 ? 'pos' : pnl < 0 ? 'neg' : ''}">${pnl !== null ? (pnl > 0 ? '+' : '') + money(pnl) : '—'}</td><td class="${pnl > 0 ? 'pos' : pnl < 0 ? 'neg' : ''}">${pnl !== null ? (pnl > 0 ? '+' : '') + pct : '—'}</td></tr>`;
+      return `<tr><td><b>${BUCKET_LABELS[k]}</b></td><td>${money(v)}</td><td>${(v / (totalCommonNetWorth || 1) * 100).toFixed(1)}%</td><td class="${pnl > 0 ? 'pos' : pnl < 0 ? 'neg' : ''}">${pnl !== null ? (pnl > 0 ? '+' : '') + money(pnl) : '—'}</td><td class="${pnl > 0 ? 'pos' : pnl < 0 ? 'neg' : ''}">${pnl !== null ? (pnl > 0 ? '+' : '') + pct : '—'}</td></tr>`;
     }).join('') || '<tr><td colspan="5" class="empty">Chưa có dữ liệu.</td></tr>';
   }
 
@@ -1118,7 +1145,7 @@ function renderAssets() {
   if (!$('#assetCards')) return;
   const q = ($('#assetSearch')?.value || '').toLowerCase();
   const f = $('#assetFilter')?.value || 'all';
-  const kindNames = { fund: 'Quỹ mở', stock: 'Cổ phiếu', gold: 'Vàng', crypto: 'Crypto', deposit: 'Tiền gửi tiết kiệm', op: 'Quỹ cơ hội', em: 'Quỹ khẩn cấp' };
+  const kindNames = { fund: 'Quỹ mở', stock: 'Cổ phiếu', gold: 'Vàng', crypto: 'Crypto', deposit: 'Tiền gửi', op: 'Quỹ cơ hội', em: 'Quỹ khẩn cấp' };
   const list = state.assets.filter(a => (f === 'all' || a.category === f) && (`${a.name} ${a.ticker || ''}`).toLowerCase().includes(q));
 
   $('#assetCards').innerHTML = list.map(a => {
@@ -1410,18 +1437,17 @@ function renderIndicators() {
 
 function renderReports() {
   if (!$('#reportRows')) return;
-  const order = ['cash', 'gold', 'bitcoin', 'stock', 'other'];
   const isEmergency = a => a.category === 'cash' && a.kind === 'em';
   const commonAssets = state.assets.filter(a => !isEmergency(a));
   const totalCommon = commonAssets.reduce((s, a) => s + Number(a.value || 0), 0);
 
-  const rowsHtml = order.map(k => {
-    const list = commonAssets.filter(a => a.category === k);
+  const rowsHtml = BUCKET_ORDER.map(k => {
+    const list = commonAssets.filter(a => getCommonBucket(a) === k);
     const v = list.reduce((s, a) => s + Number(a.value || 0), 0);
     const c = list.reduce((s, a) => s + Number(a.cost || 0), 0);
     const pnl = c > 0 ? v - c : null;
     return `<tr>
-      <td><b>${LABELS[k]}</b></td>
+      <td><b>${BUCKET_LABELS[k]}</b></td>
       <td>${list.length}</td>
       <td>${c > 0 ? money(c) : '—'}</td>
       <td>${money(v)}</td>
@@ -1838,7 +1864,7 @@ async function handleLegacyImport(file) {
     renderAll();
 
     if (statusEl) {
-      statusEl.style.color = '#238568';
+      statusEl.style.color = '#1f8a70';
       statusEl.textContent = `Đã nhập thành công ${importedAssets.length} khoản tài sản. Đang đồng bộ giá thị trường…`;
     }
     refreshAllMarketData();
@@ -2241,7 +2267,7 @@ function bindEvents() {
       ];
       saveState();
       renderAll();
-      if ($('#importStatus')) { $('#importStatus').style.color = '#238568'; $('#importStatus').textContent = 'Đã nạp bộ dữ liệu mẫu. Đang đồng bộ giá Vàng, BTC và Chứng khoán VN…'; }
+      if ($('#importStatus')) { $('#importStatus').style.color = '#1f8a70'; $('#importStatus').textContent = 'Đã nạp bộ dữ liệu mẫu. Đang đồng bộ giá Vàng, BTC và Chứng khoán VN…'; }
       refreshAllMarketData();
     };
   }
@@ -2261,7 +2287,7 @@ function bindEvents() {
     $('#backupBtn').onclick = () => {
       const content = JSON.stringify({ app: 'wealthos', version: 2, exportedAt: new Date().toISOString(), data: state }, null, 2);
       triggerDownload(content, 'application/json', `wealthos-backup-${today()}.json`);
-      if ($('#restoreStatus')) { $('#restoreStatus').style.color = '#238568'; $('#restoreStatus').textContent = 'Đã xuất bản sao lưu JSON.'; }
+      if ($('#restoreStatus')) { $('#restoreStatus').style.color = '#1f8a70'; $('#restoreStatus').textContent = 'Đã xuất bản sao lưu JSON.'; }
     };
   }
 
@@ -2282,7 +2308,7 @@ function bindEvents() {
         saveState();
         renderAll();
         refreshAllMarketData();
-        if ($('#restoreStatus')) { $('#restoreStatus').style.color = '#238568'; $('#restoreStatus').textContent = 'Đã khôi phục dữ liệu và đồng bộ giá thị trường thành công.'; }
+        if ($('#restoreStatus')) { $('#restoreStatus').style.color = '#1f8a70'; $('#restoreStatus').textContent = 'Đã khôi phục dữ liệu và đồng bộ giá thị trường thành công.'; }
       } catch (err) {
         if ($('#restoreStatus')) { $('#restoreStatus').style.color = '#c85a5a'; $('#restoreStatus').textContent = err.message; }
       } finally {
