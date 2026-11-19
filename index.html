@@ -202,7 +202,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <button type="button" class="nav-item" data-page="reports">▦ <span>Báo cáo</span></button>
       <button type="button" class="nav-item" data-page="settings">⚙ <span>Cài đặt & dữ liệu</span></button>
     </nav>
-    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.3.5 · Tiền gửi & Đáo hạn</div>
+    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.3.6 · Đầy đủ mục con</div>
   </aside>
 
   <main class="main">
@@ -220,7 +220,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
     </header>
 
-    <!-- TỔNG QUAN TÀI SẢN -->
     <section id="overviewPage" class="page active">
       <div class="welcome-row">
         <div>
@@ -294,7 +293,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </article>
     </section>
 
-    <!-- TÀI SẢN -->
     <section id="assetsPage" class="page">
       <div class="section-toolbar">
         <div><h2>Tất cả tài sản</h2><p>Ghi nhận số lượng, giá vốn, giá trị hiện tại và thông tin từng khoản.</p></div>
@@ -314,7 +312,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <div id="assetCards" class="asset-grid"><div class="empty">Chưa có tài sản. Hãy thêm khoản đầu tiên hoặc nhập từ file cũ.</div></div>
     </section>
 
-    <!-- GIAO DỊCH -->
     <section id="transactionsPage" class="page">
       <div class="section-toolbar">
         <div><h2>Sổ giao dịch</h2><p>Ghi nhận mua, bán, gửi thêm, rút và điều chuyển vốn.</p></div>
@@ -330,7 +327,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </article>
     </section>
 
-    <!-- DÒNG TIỀN -->
     <section id="cashflowPage" class="page">
       <div class="section-toolbar">
         <div><h2>Dòng tiền</h2><p>Theo dõi thu nhập, chi tiêu và tiền chuyển vào đầu tư.</p></div>
@@ -351,7 +347,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </article>
     </section>
 
-    <!-- ĐẦU TƯ: VÀNG DOJI -->
     <section id="goldPage" class="page">
       <div class="module-hero gold-hero">
         <div class="module-symbol">◈</div>
@@ -409,7 +404,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </article>
     </section>
 
-    <!-- ĐẦU TƯ: BITCOIN -->
     <section id="bitcoinPage" class="page">
       <div class="module-hero btc-hero">
         <div class="module-symbol">₿</div>
@@ -452,7 +446,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </article>
     </section>
 
-    <!-- ĐẦU TƯ: CHỨNG KHOÁN VIỆT NAM -->
     <section id="stocksPage" class="page">
       <div class="module-hero stock-hero">
         <div class="module-symbol">▥</div>
@@ -492,7 +485,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </article>
     </section>
 
-    <!-- TIỀN GỬI: TIỀN GỬI TIẾT KIỆM -->
     <section id="depositsPage" class="page">
       <div class="module-hero deposit-hero">
         <div class="module-symbol">🏦</div>
@@ -504,13 +496,12 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
       <div class="metric-grid three">
         <article class="metric-card"><div class="metric-label">TỔNG TIỀN GỬI TIẾT KIỆM</div><div class="metric-value" id="depSavingTotal">0 ₫</div></article>
-        <article class="metric-card"><div class="metric-label">LÃI DỰ KIẾN / TÍCH LUỸ</div><div class="metric-value" id="depSavingInterest">0 ₫</div></article>
+        <article class="metric-card"><div class="metric-label">LÃI DỰ KIẾN / KỲ HẠN</div><div class="metric-value" id="depSavingInterest">0 ₫</div></article>
         <article class="metric-card"><div class="metric-label">CẢNH BÁO ĐÁO HẠN (≤14 NGÀY)</div><div class="metric-value" id="depSavingAlerts">0 khoản</div></article>
       </div>
       <div id="depositSavingCards" class="asset-grid"><div class="empty">Chưa có khoản tiền gửi tiết kiệm nào.</div></div>
     </section>
 
-    <!-- TIỀN GỬI: QUỸ CƠ HỘI -->
     <section id="opportunityPage" class="page">
       <div class="module-hero op-hero">
         <div class="module-symbol">🎯</div>
@@ -528,7 +519,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <div id="opportunityCards" class="asset-grid"><div class="empty">Chưa có khoản Quỹ cơ hội nào.</div></div>
     </section>
 
-    <!-- TIỀN GỬI: QUỸ KHẨN CẤP -->
     <section id="emergencyPage" class="page">
       <div class="module-hero em-hero">
         <div class="module-symbol">🛡️</div>
@@ -546,7 +536,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <div id="emergencyCards" class="asset-grid"><div class="empty">Chưa có khoản Quỹ khẩn cấp nào.</div></div>
     </section>
 
-    <!-- HỆ THỐNG: CHỈ BÁO & CẢNH BÁO -->
     <section id="indicatorsPage" class="page">
       <div class="section-toolbar">
         <div><h2>Chỉ báo & cảnh báo</h2><p>Danh mục chỉ báo vĩ mô và điều kiện theo dõi luận điểm.</p></div>
@@ -555,7 +544,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <div id="indicatorList" class="indicator-grid"><article class="panel empty">Chưa có chỉ báo nào.</article></div>
     </section>
 
-    <!-- HỆ THỐNG: BÁO CÁO -->
     <section id="reportsPage" class="page">
       <div class="section-toolbar">
         <div><h2>Báo cáo tài sản</h2><p>Tổng hợp giá trị, giá vốn và lãi/lỗ hiện tại theo nhóm tài sản chung (kèm dòng riêng cho Quỹ khẩn cấp).</p></div>
@@ -571,7 +559,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </article>
     </section>
 
-    <!-- HỆ THỐNG: CÀI ĐẶT & DỮ LIỆU -->
     <section id="settingsPage" class="page">
       <div class="section-toolbar">
         <div><h2>Cài đặt & dữ liệu</h2><p>Cập nhật phần mềm trực tiếp từ đám mây, sao lưu dữ liệu và nhập từ bản cũ.</p></div>
@@ -584,7 +571,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
               <h3>☁ Cập nhật ứng dụng trực tiếp từ đám mây (Không cần cài lại .app)</h3>
               <p>Tải phiên bản giao diện & công thức mới từ GitHub về thẳng ứng dụng. Toàn bộ dữ liệu tài sản của bạn được giữ nguyên 100%.</p>
             </div>
-            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.3.5-ota</span>
+            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.3.6-ota</span>
           </div>
 
           <label style="font-size:11px;color:#45566a;font-weight:600;display:block;margin-top:8px">
@@ -639,11 +626,10 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
     </section>
 
-    <footer>WealthOS 0.3.5 · Tiền gửi (Tiết kiệm · Quỹ cơ hội · Quỹ khẩn cấp) & Cảnh báo đáo hạn</footer>
+    <footer>WealthOS 0.3.6 · Hiển thị chi tiết các mục đầu tư & tiền gửi</footer>
   </main>
 </div>
 
-<!-- MODAL MUA THÊM / TRUNG BÌNH GIÁ (DCA) -->
 <dialog id="dcaDialog">
   <form method="dialog" id="dcaForm" class="dialog-form">
     <div class="dialog-head">
@@ -667,7 +653,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL THÊM / SỬA TÀI SẢN & TIỀN GỬI -->
 <dialog id="assetDialog">
   <form method="dialog" id="assetForm" class="dialog-form">
     <div class="dialog-head">
@@ -714,7 +699,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL GIAO DỊCH -->
 <dialog id="transactionDialog">
   <form method="dialog" id="transactionForm" class="dialog-form">
     <div class="dialog-head">
@@ -750,7 +734,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL DÒNG TIỀN -->
 <dialog id="cashDialog">
   <form method="dialog" id="cashForm" class="dialog-form">
     <div class="dialog-head">
@@ -770,7 +753,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL CHỈ BÁO -->
 <dialog id="indicatorDialog">
   <form method="dialog" id="indicatorForm" class="dialog-form">
     <div class="dialog-head">
@@ -791,7 +773,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 </dialog>
 
 <script>
-const APP_VERSION = '0.3.5-ota';
+const APP_VERSION = '0.3.6-ota';
 const DEFAULT_OTA_URL = 'https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html';
 const STORAGE_KEY = 'wealthos_trial_v1';
 const LUONG_PER_OZ = 37.5 / 31.1035;
@@ -877,6 +859,44 @@ function defaultState() {
   };
 }
 
+function normalizeAsset(raw) {
+  const a = { ...(raw || {}) };
+  a.id = a.id || uid();
+  a.name = String(a.name || a.title || a.ticker || 'Tài sản').trim();
+  const catRaw = String(a.category || a.type || a.group || '').toLowerCase();
+  if (['cash', 'deposit', 'deposits', 'bank', 'saving', 'savings', 'fund_cash', 'money'].includes(catRaw)) {
+    a.category = 'cash';
+  } else if (['gold', 'vang', 'doji'].includes(catRaw)) {
+    a.category = 'gold';
+  } else if (['bitcoin', 'btc', 'crypto', 'coin'].includes(catRaw)) {
+    a.category = 'bitcoin';
+  } else if (['stock', 'stocks', 'equity', 'fund', 'chungkhoan'].includes(catRaw)) {
+    a.category = 'stock';
+  } else {
+    a.category = catRaw || 'other';
+  }
+
+  const kindRaw = String(a.kind || a.subType || a.tag || '').toLowerCase();
+  if (a.category === 'cash') {
+    if (kindRaw.includes('em') || kindRaw.includes('khẩn') || kindRaw.includes('dự phòng')) a.kind = 'em';
+    else if (kindRaw.includes('op') || kindRaw.includes('cơ hội')) a.kind = 'op';
+    else a.kind = kindRaw || 'deposit';
+  } else {
+    a.kind = kindRaw || ({ gold: 'gold', bitcoin: 'crypto', stock: 'stock' }[a.category] || '');
+  }
+
+  a.ticker = String(a.ticker || a.symbol || a.code || '').trim();
+  a.value = Number(a.value ?? a.currentValue ?? a.amount ?? 0) || 0;
+  a.cost = a.cost === '' || a.cost == null ? 0 : (Number(a.cost) || 0);
+  a.quantity = a.quantity === '' || a.quantity == null ? null : (Number(a.quantity) || 0);
+  a.rate = Number(a.rate ?? a.interestRate ?? a.meta?.rate ?? 0) || 0;
+  a.term = Number(a.term ?? a.termMonths ?? a.meta?.term ?? 0) || 0;
+  a.date = a.date || a.startDate || '';
+  a.updatedAt = a.updatedAt || new Date().toISOString();
+  a.note = String(a.note || a.desc || '').trim();
+  return a;
+}
+
 function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -885,6 +905,11 @@ function loadState() {
     const merged = {
       ...defaultState(),
       ...parsed,
+      assets: Array.isArray(parsed.assets) ? parsed.assets.map(normalizeAsset) : [],
+      transactions: Array.isArray(parsed.transactions) ? parsed.transactions : [],
+      cashflows: Array.isArray(parsed.cashflows) ? parsed.cashflows : [],
+      indicators: Array.isArray(parsed.indicators) ? parsed.indicators : [],
+      notes: { ...defaultState().notes, ...(parsed.notes || {}) },
       goldPrices: { ...defaultState().goldPrices, ...(parsed.goldPrices || {}) },
       market: { ...defaultState().market, ...(parsed.market || {}) }
     };
@@ -965,7 +990,9 @@ function revalueGoldAssets() {
 
 function renderAll() {
   const fx = Number(state.fx) || 25500;
-  const assets = state.assets || [];
+  const assets = (state.assets || []).map(normalizeAsset);
+  state.assets = assets;
+
   const isEmergency = a => a.category === 'cash' && a.kind === 'em';
   const emergencyAssets = assets.filter(isEmergency);
   const commonAssets = assets.filter(a => !isEmergency(a));
@@ -991,27 +1018,27 @@ function renderAll() {
     $('#otaUrlInput').value = state.otaUrl || DEFAULT_OTA_URL;
   }
 
-  // Cảnh báo lãi suất đáo hạn trên Tổng quan
   const alertItems = assets.filter(a => a.category === 'cash').map(a => ({ a, m: parseDepositMeta(a) }))
     .filter(x => x.m.alertLevel === 'due' || x.m.alertLevel === 'warn')
     .sort((x, y) => (x.m.daysLeft ?? 999) - (y.m.daysLeft ?? 999));
 
-  if (alertItems.length) {
-    $('#maturityAlertPanel').style.display = 'block';
-    $('#maturityAlertList').innerHTML = alertItems.map(({ a, m }) =>
-      `<div class="recent-item">
-        <div>
-          <div class="recent-name">${esc(a.name)} ${m.rate ? `· <span class="pos">${m.rate}%/năm</span>` : ''}</div>
-          <div class="recent-meta">${esc(m.alertText)}${m.estInterest ? ` · Lãi kỳ hạn ước tính: ${money(m.estInterest)}` : ''}</div>
-        </div>
-        <div class="recent-value">${money(a.value)}</div>
-      </div>`
-    ).join('');
-  } else {
-    $('#maturityAlertPanel').style.display = 'none';
+  if ($('#maturityAlertPanel')) {
+    if (alertItems.length) {
+      $('#maturityAlertPanel').style.display = 'block';
+      $('#maturityAlertList').innerHTML = alertItems.map(({ a, m }) =>
+        `<div class="recent-item">
+          <div>
+            <div class="recent-name">${esc(a.name)} ${m.rate ? `· <span class="pos">${m.rate}%/năm</span>` : ''}</div>
+            <div class="recent-meta">${esc(m.alertText)}${m.estInterest ? ` · Lãi kỳ hạn ước tính: ${money(m.estInterest)}` : ''}</div>
+          </div>
+          <div class="recent-value">${money(a.value)}</div>
+        </div>`
+      ).join('');
+    } else {
+      $('#maturityAlertPanel').style.display = 'none';
+    }
   }
 
-  // Biểu đồ phân bổ tài sản chung
   const order = ['cash', 'gold', 'bitcoin', 'stock', 'other'];
   const catVals = Object.fromEntries(order.map(k => [k, sumVal(commonAssets.filter(a => a.category === k))]));
   let acc = 0, parts = [];
@@ -1171,7 +1198,7 @@ function renderCashflows() {
 
 function renderModules() {
   const fx = Number(state.fx) || 25500;
-  const m = state.market;
+  const m = state.market || {};
 
   const golds = state.assets.filter(a => a.category === 'gold');
   const gVal = golds.reduce((s, a) => s + Number(a.value || 0), 0);
@@ -1184,7 +1211,7 @@ function renderModules() {
   const worldVnd = m.goldUsd > 0 ? m.goldUsd * LUONG_PER_OZ * fx : 0;
   const nhan = state.goldPrices['DOJI nhẫn'] || { b: 0, s: 0 };
   $('#mktGoldUsd').textContent = m.goldUsd > 0 ? usd(m.goldUsd) : '—';
-  $('#mktGoldChg').textContent = m.goldUsd > 0 ? `24h: ${m.goldChg >= 0 ? '+' : ''}${m.goldChg.toFixed(2)}%` : '24h: —';
+  $('#mktGoldChg').textContent = m.goldUsd > 0 ? `24h: ${m.goldChg >= 0 ? '+' : ''}${Number(m.goldChg || 0).toFixed(2)}%` : '24h: —';
   $('#mktGoldVnd').textContent = worldVnd > 0 ? money(worldVnd) : '—';
   $('#mktDojiNhan').textContent = nhan.b && nhan.s ? `${num(nhan.b / 1e6, 2)} / ${num(nhan.s / 1e6, 2)} tr` : '—';
   $('#mktDojiNhanChi').textContent = nhan.b ? `Mua 1 chỉ: ${money(nhan.b / 10)}` : 'Theo chỉ: —';
@@ -1242,10 +1269,10 @@ function renderModules() {
   $('#btcCost').textContent = cCost > 0 ? money(cCost) : '—';
 
   $('#mktBtcUsd').textContent = m.btcUsd > 0 ? usd(m.btcUsd) : '—';
-  $('#mktBtcChg').textContent = m.btcUsd > 0 ? `24h: ${m.btcChg >= 0 ? '+' : ''}${m.btcChg.toFixed(2)}%` : '24h: —';
+  $('#mktBtcChg').textContent = m.btcUsd > 0 ? `24h: ${Number(m.btcChg || 0) >= 0 ? '+' : ''}${Number(m.btcChg || 0).toFixed(2)}%` : '24h: —';
   $('#mktCapUsd').textContent = m.capUsd > 0 ? `$${(m.capUsd / 1e9).toFixed(0)} tỷ` : '—';
-  $('#mktCapChg').textContent = m.capUsd > 0 ? `24h: ${m.capChg >= 0 ? '+' : ''}${m.capChg.toFixed(2)}%` : '24h: —';
-  $('#mktDom').textContent = m.btcDom > 0 ? `BTC ${m.btcDom.toFixed(1)}% · ETH ${m.ethDom.toFixed(1)}%` : '—';
+  $('#mktCapChg').textContent = m.capUsd > 0 ? `24h: ${Number(m.capChg || 0) >= 0 ? '+' : ''}${Number(m.capChg || 0).toFixed(2)}%` : '24h: —';
+  $('#mktDom').textContent = m.btcDom > 0 ? `BTC ${Number(m.btcDom).toFixed(1)}% · ETH ${Number(m.ethDom || 0).toFixed(1)}%` : '—';
   $('#mktVolUsd').textContent = m.volUsd > 0 ? `$${(m.volUsd / 1e9).toFixed(1)} tỷ` : '—';
   $('#mktFng').textContent = m.fngVal > 0 ? `${m.fngVal}/100` : '—';
   $('#mktFngLabel').textContent = m.fngText || 'Alternative.me';
@@ -1269,7 +1296,7 @@ function renderModules() {
     return `<tr>
       <td><b>${esc(sym)}</b></td>
       <td>${unitUsd > 0 ? usd(unitUsd) : '—'}</td>
-      <td class="${live?.ch >= 0 ? 'pos' : 'neg'}">${live?.ch != null ? `${live.ch >= 0 ? '+' : ''}${live.ch.toFixed(2)}%` : '—'}</td>
+      <td class="${live?.ch >= 0 ? 'pos' : 'neg'}">${live?.ch != null ? `${Number(live.ch) >= 0 ? '+' : ''}${Number(live.ch).toFixed(2)}%` : '—'}</td>
       <td>${num(q, 8)}</td>
       <td>${avgCostUsd > 0 ? usd(avgCostUsd) : '—'}</td>
       <td>${money(vVnd)}<br><small class="muted">${usd(curUsdTotal)}</small></td>
@@ -1290,7 +1317,7 @@ function renderModules() {
     if (ix && ix.p > 0) {
       $(`#idx${k}`).textContent = num(ix.p, 2);
       const el = $(`#chg${k}`);
-      el.textContent = `${ix.c >= 0 ? '+' : ''}${num(ix.c, 2)} (${ix.pc >= 0 ? '+' : ''}${ix.pc.toFixed(2)}%)`;
+      el.textContent = `${ix.c >= 0 ? '+' : ''}${num(ix.c, 2)} (${Number(ix.pc || 0) >= 0 ? '+' : ''}${Number(ix.pc || 0).toFixed(2)}%)`;
       el.className = ix.c >= 0 ? 'pos' : 'neg';
     }
   });
@@ -1305,7 +1332,7 @@ function renderModules() {
       <td><b>${esc(sym)}</b></td>
       <td>${a.kind === 'fund' ? 'Quỹ mở' : 'Cổ phiếu'}</td>
       <td>${curPrice > 0 ? money(curPrice) : '—'}</td>
-      <td class="${sq?.pc >= 0 ? 'pos' : 'neg'}">${sq?.pc != null ? `${sq.pc >= 0 ? '+' : ''}${sq.pc.toFixed(2)}%` : '—'}</td>
+      <td class="${sq?.pc >= 0 ? 'pos' : 'neg'}">${sq?.pc != null ? `${Number(sq.pc) >= 0 ? '+' : ''}${Number(sq.pc).toFixed(2)}%` : '—'}</td>
       <td>${num(q, a.kind === 'fund' ? 2 : 0)}</td>
       <td>${q > 0 && c > 0 ? money(c / q) : '—'}</td>
       <td>${money(v)}</td>
