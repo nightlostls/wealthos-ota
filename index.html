@@ -55,7 +55,7 @@ input,textarea,select,td,th,.asset-amount,.metric-value,code{-webkit-user-select
 .mobile-menu{display:none}
 .page{display:none}
 .page.active{display:block}
-.welcome-row,.section-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:17px;gap:12px;flex-wrap:wrap}
+.welcome-row,.section-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:12px;flex-wrap:wrap}
 .welcome-row h2,.section-toolbar h2{font-size:17px;margin:0 0 3px}
 .welcome-row p,.section-toolbar p,.panel-head p{margin:0;color:var(--muted);font-size:11px}
 .metric-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr;gap:14px;margin-bottom:17px}
@@ -120,16 +120,24 @@ th{font-size:9.5px;color:#8794a4;letter-spacing:.6px;font-weight:700;text-transf
 .alert-pill.warn{background:#fcf3e3;color:#9c6818}
 .alert-pill.due{background:#fdf0f0;color:#c85a5a}
 .alert-pill.ok{background:#e6f5f0;color:#1d7258}
-.module-hero{display:flex;align-items:center;gap:17px;padding:20px 22px;border-radius:16px;color:#fff;margin-bottom:15px}
-.module-hero h2{font-size:20px;margin:3px 0}
-.module-hero p{font-size:11.5px;color:#e4e9ef;margin:0;max-width:680px}
+
+/* Banner màu tích hợp số liệu cốt lõi */
+.module-hero{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 22px;border-radius:16px;color:#fff;margin-bottom:15px;flex-wrap:wrap}
+.hero-left{display:flex;align-items:center;gap:15px;min-width:220px}
+.module-hero h2{font-size:19px;margin:2px 0 0}
+.hero-stats{display:flex;gap:12px;flex-wrap:wrap;margin-left:auto}
+.hero-stat{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);border-radius:12px;padding:9px 14px;min-width:142px}
+.hero-stat small{display:block;font-size:9px;letter-spacing:.9px;text-transform:uppercase;opacity:.88;font-weight:700}
+.hero-stat b{display:block;font-size:16px;margin-top:2px;font-weight:750}
+
 .gold-hero{background:linear-gradient(115deg,#6b521c,#c99a2e);box-shadow:0 8px 24px rgba(201,154,46,.22)}
 .btc-hero{background:linear-gradient(115deg,#854112,#e87a1e);box-shadow:0 8px 24px rgba(232,122,30,.22)}
 .stock-hero{background:linear-gradient(115deg,#3e368a,#7465e3);box-shadow:0 8px 24px rgba(116,101,227,.22)}
 .deposit-hero{background:linear-gradient(110deg,#1c4d44,#297567)}
 .op-hero{background:linear-gradient(110deg,#24486b,#356b9c)}
 .em-hero{background:linear-gradient(110deg,#593b5c,#86598a)}
-.module-symbol{font-size:28px;width:52px;height:52px;display:grid;place-items:center;border:1px solid #ffffff55;border-radius:14px;flex:none;background:rgba(255,255,255,.1)}
+.module-symbol{font-size:26px;width:48px;height:48px;display:grid;place-items:center;border:1px solid #ffffff55;border-radius:13px;flex:none;background:rgba(255,255,255,.12)}
+
 .market-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:14px;flex-wrap:wrap}
 .status-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:10.5px;font-weight:600;background:#eef2f6;color:#45566a}
 .status-badge.live{background:#e6f5f0;color:#1d7258}
@@ -191,6 +199,8 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   .metric-grid,.metric-grid.three{grid-template-columns:1fr 1fr;gap:9px}
   .content-grid,.settings-grid,.indicator-grid{grid-template-columns:1fr}
   .asset-grid{grid-template-columns:1fr}
+  .hero-stats{margin-left:0;width:100%}
+  .hero-stat{flex:1;min-width:110px}
 }
 </style>
 </head>
@@ -219,7 +229,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <button type="button" class="nav-item" data-page="reports">▦ <span>Báo cáo</span></button>
       <button type="button" class="nav-item" data-page="settings">⚙ <span>Cài đặt & dữ liệu</span></button>
     </nav>
-    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.5 · Tự động đáo hạn</div>
+    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.6 · Banner gọn trực diện</div>
   </aside>
 
   <main class="main">
@@ -242,7 +252,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <div class="welcome-row">
         <div>
           <h2>Bức tranh tài chính của bạn</h2>
-          <p>Tổng tài sản ròng tính trên tài sản chung (không gồm Quỹ khẩn cấp riêng biệt) · Tự động xoay vòng gốc + lãi khi đáo hạn.</p>
+          <p>Tổng tài sản ròng tính trên tài sản chung (không gồm Quỹ khẩn cấp riêng biệt).</p>
         </div>
         <div class="date-chip" id="todayLabel"></div>
       </div>
@@ -272,7 +282,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
       <article class="panel" id="maturityAlertPanel" style="display:none">
         <div class="panel-head" style="margin-bottom:8px">
-          <div><h3>⏰ Thông báo đáo hạn tiền gửi</h3><p>Các khoản tiền gửi / quỹ sắp tới kỳ đáo hạn hoặc vừa tự động xoay vòng gốc + lãi</p></div>
+          <div><h3>⏰ Sắp đáo hạn tiền gửi</h3><p>Các khoản tiền gửi / quỹ còn ≤14 ngày tới kỳ đáo hạn</p></div>
         </div>
         <div id="maturityAlertList" class="recent-list"></div>
       </article>
@@ -280,7 +290,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <div class="content-grid">
         <article class="panel">
           <div class="panel-head">
-            <div><h3>Phân bổ tài sản</h3><p>Tỷ trọng danh mục tài sản chung (không gồm quỹ khẩn cấp)</p></div>
+            <div><h3>Phân bổ tài sản</h3><p>5 khoản mục tài sản chung (không gồm quỹ khẩn cấp)</p></div>
           </div>
           <div class="allocation-wrap">
             <div class="donut" id="donut"><div><b id="donutTotal">0 ₫</b><small>TÀI SẢN CHUNG</small></div></div>
@@ -313,7 +323,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
     <section id="assetsPage" class="page">
       <div class="section-toolbar">
-        <div><h2>Tất cả tài sản</h2><p>Ghi nhận số lượng, giá vốn, giá trị hiện tại, bán ra/rút tiền và xóa khoản.</p></div>
+        <div><h2>Tất cả tài sản</h2><p>Mua thêm, bán ra/rút tiền, sửa và xoá khoản.</p></div>
         <button type="button" class="primary" id="addAsset">＋ Thêm tài sản</button>
       </div>
       <div class="filter-row">
@@ -327,12 +337,12 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
           <option value="other">Khác</option>
         </select>
       </div>
-      <div id="assetCards" class="asset-grid"><div class="empty">Chưa có tài sản. Hãy thêm khoản đầu tiên hoặc nhập từ file cũ.</div></div>
+      <div id="assetCards" class="asset-grid"><div class="empty">Chưa có tài sản.</div></div>
     </section>
 
     <section id="transactionsPage" class="page">
       <div class="section-toolbar">
-        <div><h2>Sổ giao dịch</h2><p>Ghi nhận mua thêm, bán ra, gửi thêm, rút tiền và điều chuyển vốn.</p></div>
+        <div><h2>Sổ giao dịch</h2><p>Mua thêm, bán ra, gửi thêm, rút tiền và điều chuyển vốn.</p></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="secondary" id="quickSellTxBtn">− Bán ra / Rút tiền</button>
           <button type="button" class="primary" id="addTransaction">＋ Ghi giao dịch</button>
@@ -350,7 +360,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
     <section id="cashflowPage" class="page">
       <div class="section-toolbar">
-        <div><h2>Dòng tiền & Tổng kết bán ra theo tháng</h2><p>Theo dõi thu nhập, chi tiêu và tổng tiền bán ra/rút tiền theo từng tháng và từng danh mục.</p></div>
+        <div><h2>Dòng tiền & Tổng kết bán ra theo tháng</h2><p>Thu nhập, chi tiêu và tổng tiền bán ra/rút tiền theo từng tháng và từng danh mục.</p></div>
         <button type="button" class="primary" id="addCashflow">＋ Thêm dòng tiền</button>
       </div>
       <div class="metric-grid three">
@@ -359,9 +369,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <article class="metric-card"><div class="metric-label">TỔNG BÁN RA / RÚT TIỀN</div><div class="metric-value" id="cashflowSellTotal">0 ₫</div></article>
       </div>
       <article class="panel table-panel">
-        <div class="panel-head">
-          <div><h3>Tổng kết bán ra theo từng tháng & từng danh mục</h3><p>Gộp toàn bộ giao dịch bán tài sản và rút tiền gửi/quỹ theo tháng</p></div>
-        </div>
+        <div class="panel-head"><div><h3>Tổng kết bán ra theo từng tháng & từng danh mục</h3></div></div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Tháng</th><th>Tiền gửi</th><th>Quỹ cơ hội</th><th>Vàng</th><th>Bitcoin</th><th>Chứng khoán VN</th><th>Quỹ khẩn cấp</th><th>Tổng bán ra</th></tr></thead>
@@ -370,7 +378,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         </div>
       </article>
       <article class="panel table-panel">
-        <div class="panel-head"><div><h3>Sổ thu chi</h3><p>Các khoản thu nhập và chi tiêu đã ghi nhận</p></div></div>
+        <div class="panel-head"><div><h3>Sổ thu chi</h3></div></div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Ngày</th><th>Loại</th><th>Nội dung</th><th>Số tiền</th><th></th></tr></thead>
@@ -382,8 +390,15 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
     <section id="goldPage" class="page">
       <div class="module-hero gold-hero">
-        <div class="module-symbol">◈</div>
-        <div><div class="eyebrow">ĐẦU TƯ</div><h2>Vàng DOJI & Vàng Thế Giới</h2><p>Cập nhật giá vàng thế giới (Binance PAXG) và 3 dòng vàng DOJI (Nhẫn tròn 9999 Hưng Thịnh Vượng, Vàng miếng SJC, Nữ trang 9999).</p></div>
+        <div class="hero-left">
+          <div class="module-symbol">◈</div>
+          <div><div class="eyebrow">ĐẦU TƯ</div><h2>Vàng DOJI & Thế Giới</h2></div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><small>Giá trị nắm giữ</small><b id="goldValue">0 ₫</b></div>
+          <div class="hero-stat"><small>Tổng số lượng</small><b id="goldQty">0 chỉ</b></div>
+          <div class="hero-stat"><small>Lãi / Lỗ tạm tính</small><b id="goldPnlHero">—</b></div>
+        </div>
       </div>
 
       <div class="market-bar">
@@ -404,7 +419,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
       <article class="panel table-panel">
         <div class="panel-head">
-          <div><h3>Bảng giá vàng DOJI (đ/lượng)</h3><p>Tự động lấy từ DOJI; bạn cũng có thể sửa trực tiếp số liệu và bấm Lưu nếu nguồn tạm gián đoạn</p></div>
+          <div><h3>Bảng giá vàng DOJI (đ/lượng)</h3></div>
           <button type="button" class="secondary" id="saveManualDojiBtn">Lưu giá đã sửa</button>
         </div>
         <div class="table-scroll">
@@ -415,14 +430,8 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         </div>
       </article>
 
-      <div class="metric-grid three">
-        <article class="metric-card"><div class="metric-label">GIÁ TRỊ VÀNG NẮM GIỮ</div><div class="metric-value" id="goldValue">0 ₫</div></article>
-        <article class="metric-card"><div class="metric-label">TỔNG SỐ LƯỢNG</div><div class="metric-value" id="goldQty">0 chỉ</div></article>
-        <article class="metric-card"><div class="metric-label">TỔNG GIÁ VỐN</div><div class="metric-value" id="goldCost">—</div></article>
-      </div>
-
       <article class="panel table-panel">
-        <div class="panel-head"><div><h3>Danh mục vàng đang giữ</h3><p>Định giá theo giá mua vào (đ/chỉ) của đúng loại vàng DOJI tương ứng</p></div></div>
+        <div class="panel-head"><div><h3>Danh mục vàng đang giữ</h3></div></div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Loại vàng</th><th>Giá mua vào (/chỉ)</th><th>Số lượng (chỉ)</th><th>Giá vốn TB (/chỉ)</th><th>Giá trị hiện tại</th><th>Lãi / Lỗ</th><th>Thao tác</th></tr></thead>
@@ -440,9 +449,17 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
     <section id="bitcoinPage" class="page">
       <div class="module-hero btc-hero">
-        <div class="module-symbol">₿</div>
-        <div><div class="eyebrow">ĐẦU TƯ</div><h2>Đầu tư Bitcoin & Crypto</h2><p>Giá trực tiếp từ Binance, dữ liệu thị trường từ CoinGecko & Alternative.me, tách riêng tác động giá và tỷ giá USD/VND.</p></div>
+        <div class="hero-left">
+          <div class="module-symbol">₿</div>
+          <div><div class="eyebrow">ĐẦU TƯ</div><h2>Bitcoin & Crypto</h2></div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><small>Giá trị Crypto</small><b id="btcValue">0 ₫</b></div>
+          <div class="hero-stat"><small>Số lượng BTC</small><b id="btcQty">0 BTC</b></div>
+          <div class="hero-stat"><small>Lãi / Lỗ quy đổi</small><b id="btcPnlHero">—</b></div>
+        </div>
       </div>
+
       <div class="market-bar">
         <span id="btcStatus" class="status-badge">Nguồn: Binance · CoinGecko · Alternative.me</span>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
@@ -452,6 +469,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
           <button type="button" class="secondary" id="applyFxBtn">Lưu tỷ giá tay</button>
         </div>
       </div>
+
       <div class="mini-grid">
         <div class="mini-card"><small>Giá BTC (USD)</small><b id="mktBtcUsd">—</b><span id="mktBtcChg">24h: —</span></div>
         <div class="mini-card"><small>Tổng vốn hóa Crypto</small><b id="mktCapUsd">—</b><span id="mktCapChg">24h: —</span></div>
@@ -460,13 +478,9 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <div class="mini-card"><small>Sợ hãi & Tham lam</small><b id="mktFng">—</b><span id="mktFngLabel">Alternative.me</span></div>
         <div class="mini-card"><small>Tỷ giá USD/VND</small><b id="mktFx">—</b><span id="mktFxMode">Tự động</span></div>
       </div>
-      <div class="metric-grid three">
-        <article class="metric-card"><div class="metric-label">GIÁ TRỊ CRYPTO</div><div class="metric-value" id="btcValue">0 ₫</div></article>
-        <article class="metric-card"><div class="metric-label">SỐ LƯỢNG BTC</div><div class="metric-value" id="btcQty">0 BTC</div></article>
-        <article class="metric-card"><div class="metric-label">GIÁ VỐN QUY ĐỔI</div><div class="metric-value" id="btcCost">—</div></article>
-      </div>
+
       <article class="panel table-panel">
-        <div class="panel-head"><div><h3>Coin đang theo dõi</h3><p>Giá vốn USD, giá thị trường và phân rã lãi/lỗ theo giá coin vs tỷ giá</p></div></div>
+        <div class="panel-head"><div><h3>Coin đang theo dõi</h3></div></div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Coin</th><th>Giá (USD)</th><th>24 giờ</th><th>Số lượng</th><th>Giá vốn TB (USD)</th><th>Giá trị (VND)</th><th>Lãi / Lỗ</th><th>Thao tác</th></tr></thead>
@@ -474,6 +488,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
           </table>
         </div>
       </article>
+
       <article class="panel">
         <h3>Khung luận điểm Bitcoin</h3>
         <textarea id="bitcoinThesis" rows="3" placeholder="Ghi luận điểm, giả định và điều kiện làm luận điểm mất hiệu lực…"></textarea>
@@ -483,9 +498,17 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
     <section id="stocksPage" class="page">
       <div class="module-hero stock-hero">
-        <div class="module-symbol">▥</div>
-        <div><div class="eyebrow">ĐẦU TƯ</div><h2>Chứng khoán & Quỹ mở Việt Nam</h2><p>Chỉ số VN-Index, VN30, HNX, UPCoM và danh mục cổ phiếu / chứng chỉ quỹ (NAV Fmarket) · Cuối tuần giữ mốc đóng cửa thứ Sáu.</p></div>
+        <div class="hero-left">
+          <div class="module-symbol">▥</div>
+          <div><div class="eyebrow">ĐẦU TƯ</div><h2>Chứng khoán & Quỹ mở VN</h2></div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><small>Giá trị chứng khoán</small><b id="stockValue">0 ₫</b></div>
+          <div class="hero-stat"><small>Số mã / quỹ</small><b id="stockCount">0</b></div>
+          <div class="hero-stat"><small>Tỷ trọng quỹ mở</small><b id="fundShare">—</b></div>
+        </div>
       </div>
+
       <div class="market-bar">
         <span id="stockStatus" class="status-badge">Nguồn: VNDIRECT · TCBS · DNSE · VPS · Fmarket</span>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -494,15 +517,17 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
           <button type="button" class="secondary" id="refreshStocksBtn">↻ Làm mới chỉ số & giá CK</button>
         </div>
       </div>
+
       <div class="mini-grid">
         <div class="mini-card"><small>VN-INDEX</small><b id="idxVNINDEX">—</b><span id="chgVNINDEX">Đang tải…</span></div>
         <div class="mini-card"><small>VN30</small><b id="idxVN30">—</b><span id="chgVN30">Đang tải…</span></div>
         <div class="mini-card"><small>HNX-INDEX</small><b id="idxHNX">—</b><span id="chgHNX">Đang tải…</span></div>
         <div class="mini-card"><small>UPCoM-INDEX</small><b id="idxUPCOM">—</b><span id="chgUPCOM">Đang tải…</span></div>
       </div>
+
       <div class="panel" style="padding:12px 14px">
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-          <span class="muted">Cập nhật nhanh chỉ số nếu nguồn API chặn kết nối:</span>
+          <span class="muted">Nhập nhanh chỉ số nếu nguồn API chặn kết nối:</span>
           <select id="manualIdxKey" class="inline-input" style="width:130px">
             <option value="VNINDEX">VN-INDEX</option>
             <option value="VN30">VN30</option>
@@ -514,13 +539,9 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
           <button type="button" class="secondary" id="saveManualIdxBtn">Lưu chỉ số</button>
         </div>
       </div>
-      <div class="metric-grid three">
-        <article class="metric-card"><div class="metric-label">GIÁ TRỊ CHỨNG KHOÁN</div><div class="metric-value" id="stockValue">0 ₫</div></article>
-        <article class="metric-card"><div class="metric-label">SỐ MÃ / QUỸ</div><div class="metric-value" id="stockCount">0</div></article>
-        <article class="metric-card"><div class="metric-label">TỶ TRỌNG QUỸ MỞ</div><div class="metric-value" id="fundShare">—</div></article>
-      </div>
+
       <article class="panel table-panel">
-        <div class="panel-head"><div><h3>Danh mục cổ phiếu và quỹ mở</h3><p>Hiệu suất từng mã cổ phiếu vệ tinh và quỹ mở lõi</p></div></div>
+        <div class="panel-head"><div><h3>Danh mục cổ phiếu và quỹ mở</h3></div></div>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Mã</th><th>Loại</th><th>Giá hiện tại</th><th>Hôm nay</th><th>Số lượng</th><th>Giá vốn TB</th><th>Giá trị</th><th>Lãi / Lỗ</th><th>Thao tác</th></tr></thead>
@@ -528,6 +549,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
           </table>
         </div>
       </article>
+
       <article class="panel">
         <h3>Khung đánh giá quỹ và cổ phiếu</h3>
         <textarea id="stocksThesis" rows="3" placeholder="Ghi luận điểm thị trường và tiêu chí lựa chọn…"></textarea>
@@ -537,67 +559,76 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
     <section id="depositsPage" class="page">
       <div class="module-hero deposit-hero">
-        <div class="module-symbol">🏦</div>
-        <div><div class="eyebrow">TIỀN GỬI</div><h2>Tiền gửi tiết kiệm</h2><p>Theo dõi sổ tiết kiệm do bạn tự nhập số dư, lãi suất, kỳ hạn, tự động đáo hạn gộp gốc + lãi và rút tiền.</p></div>
+        <div class="hero-left">
+          <div class="module-symbol">🏦</div>
+          <div><div class="eyebrow">TIỀN GỬI</div><h2>Tiền gửi tiết kiệm</h2></div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><small>Tổng tiền gửi tiết kiệm</small><b id="depSavingTotal">0 ₫</b></div>
+          <div class="hero-stat"><small>Lãi kỳ hạn ước tính</small><b id="depSavingInterest">0 ₫</b></div>
+          <div class="hero-stat"><small>Sắp đáo hạn (≤14 ngày)</small><b id="depSavingAlerts">0 khoản</b></div>
+        </div>
       </div>
+
       <div class="section-toolbar">
-        <div><h2>Danh sách tiền gửi tiết kiệm</h2><p>Tự động đảo kỳ (gốc + lãi kỳ trước) khi đến hạn; rút hết tiền sẽ tự xoá khoản khỏi danh sách.</p></div>
+        <div><h2>Danh sách tài khoản / sổ tiết kiệm</h2></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="secondary" data-withdraw-kind="deposit">− Rút tiền tiết kiệm</button>
           <button type="button" class="primary" data-add-deposit-kind="deposit">＋ Thêm tiền gửi tiết kiệm</button>
         </div>
-      </div>
-      <div class="metric-grid three">
-        <article class="metric-card"><div class="metric-label">TỔNG TIỀN GỬI TIẾT KIỆM</div><div class="metric-value" id="depSavingTotal">0 ₫</div></article>
-        <article class="metric-card"><div class="metric-label">LÃI KỲ HẠN ƯỚC TÍNH</div><div class="metric-value" id="depSavingInterest">0 ₫</div></article>
-        <article class="metric-card"><div class="metric-label">SẮP ĐÁO HẠN (≤14 NGÀY)</div><div class="metric-value" id="depSavingAlerts">0 khoản</div></article>
       </div>
       <div id="depositSavingCards" class="asset-grid"><div class="empty">Chưa có khoản tiền gửi tiết kiệm nào.</div></div>
     </section>
 
     <section id="opportunityPage" class="page">
       <div class="module-hero op-hero">
-        <div class="module-symbol">🎯</div>
-        <div><div class="eyebrow">TIỀN GỬI</div><h2>Quỹ cơ hội</h2><p>Nguồn tiền gửi / thanh khoản chủ động · Tự động đảo kỳ gộp gốc + lãi khi hết kỳ hạn.</p></div>
+        <div class="hero-left">
+          <div class="module-symbol">🎯</div>
+          <div><div class="eyebrow">TIỀN GỬI</div><h2>Quỹ cơ hội</h2></div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><small>Tổng Quỹ cơ hội</small><b id="opTotalVal">0 ₫</b></div>
+          <div class="hero-stat"><small>Lãi suất bình quân</small><b id="opAvgRate">—</b></div>
+          <div class="hero-stat"><small>Sắp đáo hạn (≤14 ngày)</small><b id="opAlertsVal">0 khoản</b></div>
+        </div>
       </div>
+
       <div class="section-toolbar">
-        <div><h2>Danh sách Quỹ cơ hội</h2><p>Tính vào tài sản chung; tự động đảo kỳ khi đến hạn; rút hết tiền sẽ tự xoá khoản.</p></div>
+        <div><h2>Danh sách Quỹ cơ hội</h2></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="secondary" data-withdraw-kind="op">− Rút Quỹ cơ hội</button>
           <button type="button" class="primary" data-add-deposit-kind="op">＋ Thêm Quỹ cơ hội</button>
         </div>
-      </div>
-      <div class="metric-grid three">
-        <article class="metric-card"><div class="metric-label">TỔNG QUỸ CƠ HỘI</div><div class="metric-value" id="opTotalVal">0 ₫</div></article>
-        <article class="metric-card"><div class="metric-label">LÃI SUẤT BÌNH QUÂN</div><div class="metric-value" id="opAvgRate">—</div></article>
-        <article class="metric-card"><div class="metric-label">SẮP ĐÁO HẠN (≤14 NGÀY)</div><div class="metric-value" id="opAlertsVal">0 khoản</div></article>
       </div>
       <div id="opportunityCards" class="asset-grid"><div class="empty">Chưa có khoản Quỹ cơ hội nào.</div></div>
     </section>
 
     <section id="emergencyPage" class="page">
       <div class="module-hero em-hero">
-        <div class="module-symbol">🛡️</div>
-        <div><div class="eyebrow">TIỀN GỬI · DỰ PHÒNG RIÊNG</div><h2>Quỹ khẩn cấp</h2><p>Tách riêng hoàn toàn khỏi tài sản chung · Tự động đảo kỳ gộp gốc + lãi khi đến hạn.</p></div>
+        <div class="hero-left">
+          <div class="module-symbol">🛡️</div>
+          <div><div class="eyebrow">TIỀN GỬI · DỰ PHÒNG RIÊNG</div><h2>Quỹ khẩn cấp</h2></div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><small>Tổng Quỹ khẩn cấp</small><b id="emPageTotalVal">0 ₫</b></div>
+          <div class="hero-stat"><small>Số khoản dự phòng</small><b id="emPageCount">0</b></div>
+          <div class="hero-stat"><small>Sắp đáo hạn (≤14 ngày)</small><b id="emAlertsVal">0 khoản</b></div>
+        </div>
       </div>
+
       <div class="section-toolbar">
-        <div><h2>Danh sách Quỹ khẩn cấp</h2><p>Không cộng vào Tổng tài sản ròng của tài sản chung; rút hết tiền sẽ tự xoá khoản.</p></div>
+        <div><h2>Danh sách Quỹ khẩn cấp</h2></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="secondary" data-withdraw-kind="em">− Rút Quỹ khẩn cấp</button>
           <button type="button" class="primary" data-add-deposit-kind="em">＋ Thêm Quỹ khẩn cấp</button>
         </div>
-      </div>
-      <div class="metric-grid three">
-        <article class="metric-card reserve-card"><div class="metric-label">TỔNG QUỸ KHẨN CẤP (RIÊNG)</div><div class="metric-value" id="emPageTotalVal">0 ₫</div></article>
-        <article class="metric-card"><div class="metric-label">SỐ KHOẢN DỰ PHÒNG</div><div class="metric-value" id="emPageCount">0</div></article>
-        <article class="metric-card"><div class="metric-label">SẮP ĐÁO HẠN (≤14 NGÀY)</div><div class="metric-value" id="emAlertsVal">0 khoản</div></article>
       </div>
       <div id="emergencyCards" class="asset-grid"><div class="empty">Chưa có khoản Quỹ khẩn cấp nào.</div></div>
     </section>
 
     <section id="indicatorsPage" class="page">
       <div class="section-toolbar">
-        <div><h2>Chỉ báo & cảnh báo</h2><p>Danh mục chỉ báo vĩ mô và điều kiện theo dõi luận điểm.</p></div>
+        <div><h2>Chỉ báo & cảnh báo</h2></div>
         <button type="button" class="primary" id="addIndicator">＋ Thêm chỉ báo</button>
       </div>
       <div id="indicatorList" class="indicator-grid"><article class="panel empty">Chưa có chỉ báo nào.</article></div>
@@ -605,7 +636,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
     <section id="reportsPage" class="page">
       <div class="section-toolbar">
-        <div><h2>Báo cáo tài sản</h2><p>Tổng hợp giá trị, giá vốn và lãi/lỗ hiện tại theo từng khoản mục tài sản chung (kèm dòng riêng cho Quỹ khẩn cấp).</p></div>
+        <div><h2>Báo cáo tài sản</h2></div>
         <button type="button" class="secondary" id="exportCsv">Xuất CSV (mở bằng Excel)</button>
       </div>
       <article class="panel table-panel">
@@ -620,17 +651,17 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
     <section id="settingsPage" class="page">
       <div class="section-toolbar">
-        <div><h2>Cài đặt & dữ liệu</h2><p>Cập nhật phần mềm trực tiếp từ đám mây, sao lưu dữ liệu và nhập từ bản cũ.</p></div>
+        <div><h2>Cài đặt & dữ liệu</h2></div>
       </div>
 
       <div class="settings-grid">
         <article class="panel full-span ota-box">
           <div class="panel-head" style="margin-bottom:8px">
             <div>
-              <h3>☁ Cập nhật ứng dụng trực tiếp từ đám mây (Không cần cài lại .app)</h3>
-              <p>Tải phiên bản giao diện & công thức mới từ GitHub về thẳng ứng dụng. Toàn bộ dữ liệu tài sản của bạn được giữ nguyên 100%.</p>
+              <h3>☁ Cập nhật ứng dụng trực tiếp từ đám mây</h3>
+              <p>Tải bản giao diện & công thức mới từ GitHub về thẳng ứng dụng, giữ nguyên dữ liệu tài sản.</p>
             </div>
-            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.5-ota</span>
+            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.6-ota</span>
           </div>
 
           <label style="font-size:11px;color:#45566a;font-weight:600;display:block;margin-top:8px">
@@ -650,7 +681,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
         <article class="panel">
           <h3>Chuyển dữ liệu từ ứng dụng cũ</h3>
-          <p class="muted">Hỗ trợ cả file sao lưu <code>.json</code> hoặc file <code>.html</code> kèm dữ liệu từ <b>theo-doi-dau-tu-canh-bao.html</b>.</p>
+          <p class="muted">Hỗ trợ file sao lưu <code>.json</code> hoặc <code>.html</code> từ <b>theo-doi-dau-tu-canh-bao.html</b>.</p>
           <label class="file-drop">
             <span>＋</span>
             <b>Chọn file JSON hoặc HTML kèm dữ liệu</b>
@@ -666,7 +697,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
         <article class="panel">
           <h3>Sao lưu & Khôi phục WealthOS</h3>
-          <p class="muted">Xuất toàn bộ dữ liệu hiện tại thành file JSON để lưu trữ hoặc chuyển sang thiết bị khác.</p>
+          <p class="muted">Xuất toàn bộ dữ liệu hiện tại thành file JSON.</p>
           <button type="button" class="primary" id="backupBtn">Tải bản sao lưu JSON</button>
           <div class="divider"></div>
           <h3>Khôi phục từ sao lưu WealthOS</h3>
@@ -685,7 +716,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
     </section>
 
-    <footer>WealthOS 0.4.5 · Tự động đáo hạn gốc + lãi · Đồng bộ Rút tiền & Bán ra</footer>
+    <footer>WealthOS 0.4.6 · Banner gọn trực diện · Tự động đáo hạn gốc + lãi</footer>
   </main>
 </div>
 
@@ -855,7 +886,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 </dialog>
 
 <script>
-const APP_VERSION = '0.4.5-ota';
+const APP_VERSION = '0.4.6-ota';
 const DEFAULT_OTA_URL = 'https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html';
 const STORAGE_KEY = 'wealthos_trial_v1';
 const LUONG_PER_OZ = 37.5 / 31.1035;
@@ -1485,7 +1516,7 @@ function renderModules() {
   const gCost = golds.reduce((s, a) => s + Number(a.cost || 0), 0);
   setText('#goldValue', money(gVal));
   setText('#goldQty', num(gQty) + ' chỉ');
-  setText('#goldCost', gCost > 0 ? money(gCost) : '—');
+  setText('#goldPnlHero', gCost > 0 ? `${gVal - gCost >= 0 ? '+' : ''}${money(gVal - gCost)}` : '—');
 
   const worldVnd = m.goldUsd > 0 ? m.goldUsd * LUONG_PER_OZ * fx : 0;
   const nhan = state.goldPrices['DOJI nhẫn'] || { b: 0, s: 0 };
@@ -1553,7 +1584,7 @@ function renderModules() {
   const cCost = cryptos.reduce((s, a) => s + Number(a.cost || 0), 0);
   setText('#btcValue', money(cVal));
   setText('#btcQty', num(btcQty, 8) + ' BTC');
-  setText('#btcCost', cCost > 0 ? money(cCost) : '—');
+  setText('#btcPnlHero', cCost > 0 ? `${cVal - cCost >= 0 ? '+' : ''}${money(cVal - cCost)}` : '—');
 
   setText('#mktBtcUsd', m.btcUsd > 0 ? usd(m.btcUsd) : '—');
   setText('#mktBtcChg', m.btcUsd > 0 ? `24h: ${Number(m.btcChg || 0) >= 0 ? '+' : ''}${Number(m.btcChg || 0).toFixed(2)}%` : '24h: —');
@@ -1950,7 +1981,7 @@ async function fetchVnIndices() {
       statusEl.textContent = `Chỉ số VN: Đã cập nhật ${okCount}/4 chỉ số lúc ${nowTime}`;
       statusEl.className = 'status-badge live';
     } else {
-      statusEl.textContent = 'Chỉ số VN: Đang giữ chốt phiên gần nhất (có thể nhập nhanh bên dưới)';
+      statusEl.textContent = 'Chỉ số VN: Đang giữ chốt phiên gần nhất';
       statusEl.className = 'status-badge stale';
     }
   }
