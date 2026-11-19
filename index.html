@@ -49,6 +49,7 @@ input,textarea,select,td,th,.asset-amount,.metric-value,code{-webkit-user-select
 .primary:hover{background:#27445f}
 .secondary{background:#edf1f5;color:#45566a;border:1px solid var(--line)}
 .secondary:hover{background:#e2e8ef}
+.secondary.active-auto{background:#e6f5f0;color:#1d7258;border-color:#bfe5d8}
 .danger-btn{background:#fdf0f0;color:var(--red);border:1px solid #f2d5d5}
 .danger-btn:hover{background:#fae2e2}
 .mobile-menu{display:none}
@@ -217,7 +218,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <button type="button" class="nav-item" data-page="reports">▦ <span>Báo cáo</span></button>
       <button type="button" class="nav-item" data-page="settings">⚙ <span>Cài đặt & dữ liệu</span></button>
     </nav>
-    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.1 · Bán ra & Rút tiền</div>
+    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.2 · Real-time Auto</div>
   </aside>
 
   <main class="main">
@@ -228,6 +229,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
       <div class="top-actions">
         <span class="local-pill" id="livePill"><i></i> <span id="livePillText">macOS App · USD/VND: 25.704</span></span>
+        <button type="button" class="secondary active-auto" id="autoSyncToggleBtn" title="Tự động cập nhật giá mỗi 60 giây">⚡ Auto 60s: Bật</button>
         <button type="button" class="secondary" id="quickOtaBtn" title="Kiểm tra cập nhật ứng dụng từ đám mây">☁ Cập nhật App</button>
         <button type="button" class="secondary" id="syncMarketBtn">↻ Cập nhật giá</button>
         <button type="button" class="primary" id="quickAdd">＋ Thêm tài sản</button>
@@ -239,7 +241,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <div class="welcome-row">
         <div>
           <h2>Bức tranh tài chính của bạn</h2>
-          <p>Tổng tài sản ròng tính trên tài sản chung (không gồm Quỹ khẩn cấp riêng biệt).</p>
+          <p>Tổng tài sản ròng tính trên tài sản chung (không gồm Quỹ khẩn cấp riêng biệt) · Cập nhật tự động giá thị trường.</p>
         </div>
         <div class="date-chip" id="todayLabel"></div>
       </div>
@@ -481,7 +483,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
     <section id="stocksPage" class="page">
       <div class="module-hero stock-hero">
         <div class="module-symbol">▥</div>
-        <div><div class="eyebrow">ĐẦU TƯ</div><h2>Chứng khoán & Quỹ mở Việt Nam</h2><p>Chỉ số VN-Index, VN30, HNX, UPCoM và danh mục cổ phiếu / chứng chỉ quỹ (NAV Fmarket).</p></div>
+        <div><div class="eyebrow">ĐẦU TƯ</div><h2>Chứng khoán & Quỹ mở Việt Nam</h2><p>Chỉ số VN-Index, VN30, HNX, UPCoM và danh mục cổ phiếu / chứng chỉ quỹ (NAV Fmarket) · Cuối tuần giữ mốc đóng cửa thứ Sáu.</p></div>
       </div>
       <div class="market-bar">
         <span id="stockStatus" class="status-badge">Nguồn: VNDIRECT · TCBS · DNSE · VPS · Fmarket</span>
@@ -499,7 +501,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
       <div class="panel" style="padding:12px 14px">
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-          <span class="muted">Cập nhật nhanh chỉ số nếu mạng chặn API:</span>
+          <span class="muted">Cập nhật nhanh chỉ số nếu nguồn API chặn kết nối:</span>
           <select id="manualIdxKey" class="inline-input" style="width:130px">
             <option value="VNINDEX">VN-INDEX</option>
             <option value="VN30">VN30</option>
@@ -627,7 +629,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
               <h3>☁ Cập nhật ứng dụng trực tiếp từ đám mây (Không cần cài lại .app)</h3>
               <p>Tải phiên bản giao diện & công thức mới từ GitHub về thẳng ứng dụng. Toàn bộ dữ liệu tài sản của bạn được giữ nguyên 100%.</p>
             </div>
-            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.1-ota</span>
+            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.2-ota</span>
           </div>
 
           <label style="font-size:11px;color:#45566a;font-weight:600;display:block;margin-top:8px">
@@ -682,11 +684,10 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
     </section>
 
-    <footer>WealthOS 0.4.1 · Bán ra & Rút tiền · Tổng kết bán ra theo tháng · Chỉ số VN</footer>
+    <footer>WealthOS 0.4.2 · Tự động cập nhật real-time · Dữ liệu lưu cục bộ trên máy Mac</footer>
   </main>
 </div>
 
-<!-- MODAL BÁN RA / RÚT TIỀN -->
 <dialog id="sellDialog">
   <form method="dialog" id="sellForm" class="dialog-form">
     <div class="dialog-head">
@@ -710,7 +711,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL MUA THÊM / TRUNG BÌNH GIÁ (DCA) -->
 <dialog id="dcaDialog">
   <form method="dialog" id="dcaForm" class="dialog-form">
     <div class="dialog-head">
@@ -734,7 +734,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL THÊM / SỬA TÀI SẢN & TIỀN GỬI -->
 <dialog id="assetDialog">
   <form method="dialog" id="assetForm" class="dialog-form">
     <div class="dialog-head">
@@ -781,7 +780,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL GIAO DỊCH -->
 <dialog id="transactionDialog">
   <form method="dialog" id="transactionForm" class="dialog-form">
     <div class="dialog-head">
@@ -817,7 +815,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL DÒNG TIỀN -->
 <dialog id="cashDialog">
   <form method="dialog" id="cashForm" class="dialog-form">
     <div class="dialog-head">
@@ -837,7 +834,6 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
-<!-- MODAL CHỈ BÁO -->
 <dialog id="indicatorDialog">
   <form method="dialog" id="indicatorForm" class="dialog-form">
     <div class="dialog-head">
@@ -858,7 +854,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 </dialog>
 
 <script>
-const APP_VERSION = '0.4.1-ota';
+const APP_VERSION = '0.4.2-ota';
 const DEFAULT_OTA_URL = 'https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html';
 const STORAGE_KEY = 'wealthos_trial_v1';
 const LUONG_PER_OZ = 37.5 / 31.1035;
@@ -961,10 +957,12 @@ function getTxBucketKey(t, asset) {
 }
 
 let state = loadState();
+let autoSyncTimer = null;
 
 function defaultState() {
   return {
     otaUrl: DEFAULT_OTA_URL,
+    autoSync: true,
     fx: 25704,
     fxAuto: true,
     assets: [],
@@ -1047,6 +1045,7 @@ function loadState() {
     const merged = {
       ...defaultState(),
       ...parsed,
+      autoSync: parsed.autoSync !== false,
       assets: Array.isArray(parsed.assets) ? parsed.assets.map(normalizeAsset) : [],
       transactions: Array.isArray(parsed.transactions) ? parsed.transactions : [],
       cashflows: Array.isArray(parsed.cashflows) ? parsed.cashflows : [],
@@ -1157,6 +1156,13 @@ function renderAll() {
   setText('#assetCountSub', `${commonAssets.length} khoản tài sản chung · Quỹ khẩn cấp tách riêng`);
   setText('#donutTotal', money(totalCommonNetWorth));
   setText('#livePillText', `${navigator.onLine ? 'Online' : 'Offline'} · USD/VND: ${num(fx, 0)}`);
+
+  const autoBtn = $('#autoSyncToggleBtn');
+  if (autoBtn) {
+    autoBtn.textContent = state.autoSync ? '⚡ Auto 60s: Bật' : '⏸ Auto 60s: Tắt';
+    autoBtn.classList.toggle('active-auto', !!state.autoSync);
+  }
+
   if ($('#otaUrlInput') && !$('#otaUrlInput').value) {
     $('#otaUrlInput').value = state.otaUrl || DEFAULT_OTA_URL;
   }
@@ -1529,7 +1535,7 @@ function renderModules() {
         el.className = ix.c >= 0 ? 'pos' : 'neg';
       }
     } else if (el) {
-      el.textContent = 'Chưa có dữ liệu';
+      el.textContent = 'Chốt phiên gần nhất';
       el.className = 'muted';
     }
   });
@@ -1603,7 +1609,6 @@ function renderReports() {
   $('#reportRows').innerHTML = rowsHtml.join('');
 }
 
-/* ====== BÁN RA / RÚT TIỀN ====== */
 function openSellModal(filterFn, preselectedAssetId) {
   const list = state.assets.filter(filterFn || (a => Number(a.value) > 0));
   if (!list.length) {
@@ -1651,7 +1656,6 @@ function updateSellPreview() {
   }
 }
 
-/* ====== MUA THÊM / TRUNG BÌNH GIÁ (DCA) ====== */
 function openDcaModal(categoryFilter, preselectedAssetId) {
   const candidates = state.assets.filter(a => categoryFilter ? a.category === categoryFilter : ['gold', 'bitcoin', 'stock'].includes(a.category));
   if (!candidates.length) {
@@ -1705,7 +1709,7 @@ async function fetchTextWithFallback(targetUrl) {
   ];
   for (const url of attempts) {
     const ac = new AbortController();
-    const timer = setTimeout(() => ac.abort(), 8000);
+    const timer = setTimeout(() => ac.abort(), 7000);
     try {
       const res = await fetch(url, { signal: ac.signal });
       clearTimeout(timer);
@@ -1728,7 +1732,7 @@ async function fetchJsonWithFallback(targetUrl, opts) {
   ];
   for (const url of attempts) {
     const ac = new AbortController();
-    const timer = setTimeout(() => ac.abort(), 8000);
+    const timer = setTimeout(() => ac.abort(), 7000);
     try {
       const res = await fetch(url, { ...(opts || {}), signal: ac.signal });
       clearTimeout(timer);
@@ -1860,7 +1864,7 @@ async function fetchVnIndices() {
       statusEl.textContent = `Chỉ số VN: Đã cập nhật ${okCount}/4 chỉ số lúc ${nowTime}`;
       statusEl.className = 'status-badge live';
     } else {
-      statusEl.textContent = 'Chỉ số VN: Nguồn mạng đang chặn, bạn có thể nhập chỉ số nhanh bên dưới';
+      statusEl.textContent = 'Chỉ số VN: Đang giữ chốt phiên gần nhất (có thể nhập nhanh bên dưới)';
       statusEl.className = 'status-badge stale';
     }
   }
@@ -1957,6 +1961,20 @@ async function refreshAllMarketData() {
   saveState();
   renderAll();
   if (btn) { btn.disabled = false; btn.textContent = '↻ Cập nhật giá'; }
+}
+
+function resetAutoSyncLoop() {
+  if (autoSyncTimer) {
+    clearInterval(autoSyncTimer);
+    autoSyncTimer = null;
+  }
+  if (state.autoSync) {
+    autoSyncTimer = setInterval(() => {
+      if (!document.hidden && navigator.onLine) {
+        refreshAllMarketData();
+      }
+    }, 60000);
+  }
 }
 
 async function handleLegacyImport(file) {
@@ -2120,6 +2138,14 @@ function bindEvents() {
   $$('[data-goto]').forEach(b => b.onclick = () => showPage(b.dataset.goto));
   if ($('#menuBtn')) $('#menuBtn').onclick = () => $('#sidebarPanel').classList.toggle('open');
   if ($('#syncMarketBtn')) $('#syncMarketBtn').onclick = refreshAllMarketData;
+  if ($('#autoSyncToggleBtn')) {
+    $('#autoSyncToggleBtn').onclick = () => {
+      state.autoSync = !state.autoSync;
+      saveState();
+      resetAutoSyncLoop();
+      renderAll();
+    };
+  }
   if ($('#refreshStocksBtn')) $('#refreshStocksBtn').onclick = async () => { await fetchVnIndices(); await refreshAllMarketData(); };
   if ($('#refreshDojiBtn')) $('#refreshDojiBtn').onclick = async () => { await fetchDojiGoldPrices(); saveState(); renderAll(); };
 
@@ -2616,6 +2642,7 @@ function bindEvents() {
 
 bindEvents();
 renderAll();
+resetAutoSyncLoop();
 sendNativeOTA({ action: 'status' });
 refreshAllMarketData();
 </script>
