@@ -211,7 +211,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 @media (max-width: 1024px), (hover: none) and (pointer: coarse) {
   .main, main, .content {
     margin-left: 0 !important;
-    padding-bottom: 92px !important;
+    padding-bottom: 138px !important;
   }
   #__wos_mobile_topbar {
     display: flex !important;
@@ -262,8 +262,8 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
     right: 0 !important;
     bottom: 0 !important;
     width: 100% !important;
-    height: 68px !important;
-    padding: 6px 4px 8px 4px !important;
+    height: auto !important; min-height: 108px !important;
+    padding: 8px 4px calc(48px + env(safe-area-inset-bottom, 0px)) 4px !important;
     background: #0f172a !important;
     border-top: 1px solid rgba(255,255,255,0.16) !important;
     z-index: 2147483647 !important;
