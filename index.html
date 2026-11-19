@@ -2962,84 +2962,64 @@ refreshAllMarketData();
 // === END WEALTHOS_FB_FORCE_UI ===
 </script>
 <script>
+</script>
+<script>
 // === WEALTHOS_MOBILE_DRAWER_CLOSE ===
 (function(){
   if (window.__wealthosDrawerFixBound) return;
   window.__wealthosDrawerFixBound = true;
 
-  function isMobileView() {
-    return window.innerWidth <= 900;
+  function getSidebar() {
+    return document.getElementById("sidebarPanel") || document.querySelector(".sidebar");
   }
 
-  function findOpenDrawer() {
-    const candidates = Array.from(document.querySelectorAll("aside, nav, [class*="sidebar"], [class*="drawer"], [id*="sidebar"], [id*="drawer"]"));
-    for (const el of candidates) {
-      if (!el || el.offsetWidth === 0 || el.offsetHeight === 0) continue;
-      const rect = el.getBoundingClientRect();
-      const cs = window.getComputedStyle(el);
-      const visible = cs.display !== "none" && cs.visibility !== "hidden" && parseFloat(cs.opacity || "1") > 0.05;
-      const onScreen = rect.left < window.innerWidth * 0.6 && rect.right > 60;
-      if (visible && onScreen && rect.height > 250) {
-        return { el, rect };
-      }
-    }
-    return null;
+  function isSidebarOpen(sb) {
+    if (!sb) return false;
+    if (sb.classList.contains("open")) return true;
+    const rect = sb.getBoundingClientRect();
+    return window.innerWidth <= 900 && rect.left >= -5 && rect.width > 100;
   }
 
-  function closeDrawer(targetEl) {
-    const closeBtns = document.querySelectorAll("[data-close-sidebar], [data-close-drawer], .sidebar-backdrop, .drawer-backdrop, .overlay");
-    for (const b of closeBtns) {
-      if (b && b.offsetParent !== null) {
-        try { b.click(); } catch (_) {}
-      }
-    }
-    if (typeof window.closeSidebar === "function") { try { window.closeSidebar(); } catch (_) {} }
-    if (typeof window.toggleSidebar === "function") {
-      const stillOpen = findOpenDrawer();
-      if (stillOpen) { try { window.toggleSidebar(false); } catch (_) {} }
-    }
-    if (targetEl) {
-      targetEl.classList.remove("open", "active", "show", "is-open", "drawer-open");
-      targetEl.style.transform = "translateX(-100%)";
-      setTimeout(() => { targetEl.style.transform = ""; }, 260);
-    }
-    document.body.classList.remove("sidebar-open", "drawer-open", "menu-open", "overflow-hidden");
-    document.documentElement.classList.remove("sidebar-open", "drawer-open", "menu-open");
-  }
-
-  function handleOutsideTap(ev) {
-    if (!isMobileView()) return;
-    const openInfo = findOpenDrawer();
-    if (!openInfo) return;
-    const x = ev.clientX !== undefined ? ev.clientX : (ev.touches && ev.touches[0] ? ev.touches[0].clientX : 0);
-    if (x > openInfo.rect.right) {
-      if (!openInfo.el.contains(ev.target)) {
-        closeDrawer(openInfo.el);
-      }
-    }
+  function closeSidebarNow() {
+    const sb = getSidebar();
+    if (!sb) return;
+    sb.classList.remove("open");
+    sb.style.transform = "";
   }
 
   let startX = 0, startY = 0;
+
   document.addEventListener("touchstart", function(e) {
     if (!e.touches || !e.touches[0]) return;
+    const sb = getSidebar();
+    if (!isSidebarOpen(sb)) return;
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
-    handleOutsideTap(e);
+    const rect = sb.getBoundingClientRect();
+    if (startX > rect.right && !sb.contains(e.target)) {
+      closeSidebarNow();
+    }
   }, { passive: true, capture: true });
 
   document.addEventListener("touchend", function(e) {
-    if (!isMobileView() || !e.changedTouches || !e.changedTouches[0]) return;
-    const openInfo = findOpenDrawer();
-    if (!openInfo) return;
+    if (!e.changedTouches || !e.changedTouches[0]) return;
+    const sb = getSidebar();
+    if (!isSidebarOpen(sb)) return;
     const dx = e.changedTouches[0].clientX - startX;
     const dy = Math.abs(e.changedTouches[0].clientY - startY);
-    if (dx < -55 && dy < 70) {
-      closeDrawer(openInfo.el);
+    if (dx < -45 && dy < 80) {
+      closeSidebarNow();
     }
   }, { passive: true, capture: true });
 
   document.addEventListener("click", function(e) {
-    handleOutsideTap(e);
+    if (e.target && e.target.closest && e.target.closest("#menuBtn")) return;
+    const sb = getSidebar();
+    if (!isSidebarOpen(sb)) return;
+    const rect = sb.getBoundingClientRect();
+    if (e.clientX > rect.right && !sb.contains(e.target)) {
+      closeSidebarNow();
+    }
   }, true);
 })();
 // === END WEALTHOS_MOBILE_DRAWER_CLOSE ===
