@@ -205,143 +205,114 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   .hero-stat{flex:1;min-width:110px}
 }
 
+
+
 /* === WEALTHOS_MOBILE_BOTTOM_NAV_CSS === */
-@media (max-width: 900px) {
-  #sidebarPanel, .sidebar, #menuBtn {
-    display: none !important;
-  }
+@media (max-width: 1024px), (hover: none) and (pointer: coarse) {
   .main, main, .content {
     margin-left: 0 !important;
-    padding: 14px 12px 92px 12px !important;
-    width: 100% !important;
-    max-width: 100% !important;
+    padding-bottom: 92px !important;
   }
   #__wos_mobile_topbar {
     display: flex !important;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 14px;
-    margin: -14px -12px 14px -12px;
+    padding: 10px 12px;
+    margin: 0 0 12px 0;
     background: #0f172a;
     color: #f8fafc;
     position: sticky;
     top: 0;
-    z-index: 999;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    z-index: 2147483640;
+    border-radius: 12px;
   }
-  #__wos_mobile_topbar .wos-m-brand {
+  #__wos_mobile_topbar .wos-m-left {
     display: flex;
     align-items: center;
     gap: 8px;
     font-weight: 700;
-    font-size: 15px;
-  }
-  #__wos_mobile_topbar .wos-m-badge {
-    background: #eab308;
-    color: #0f172a;
-    font-weight: 800;
-    width: 26px;
-    height: 26px;
-    border-radius: 7px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
+    font-size: 14px;
   }
   #__wos_mobile_topbar .wos-m-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
   }
   #__wos_mobile_topbar button {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.12);
     color: #f8fafc;
-    border: 1px solid rgba(255,255,255,0.14);
-    border-radius: 10px;
-    height: 36px;
-    padding: 0 11px;
-    font-size: 13px;
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 9px;
+    height: 34px;
+    padding: 0 9px;
+    font-size: 12px;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 4px;
     cursor: pointer;
-  }
-  #__wos_mobile_topbar button.wos-gear-btn {
-    width: 36px;
-    padding: 0;
-    font-size: 17px;
   }
   #__wos_mobile_bottom_nav {
     display: grid !important;
-    grid-template-columns: repeat(5, 1fr);
-    align-items: end;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 68px;
-    padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px)) 4px;
-    background: #0f172a;
-    border-top: 1px solid rgba(255,255,255,0.12);
-    z-index: 1000;
-    box-shadow: 0 -6px 20px rgba(0,0,0,0.35);
+    grid-template-columns: repeat(5, 1fr) !important;
+    align-items: end !important;
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 68px !important;
+    padding: 6px 4px 8px 4px !important;
+    background: #0f172a !important;
+    border-top: 1px solid rgba(255,255,255,0.16) !important;
+    z-index: 2147483647 !important;
+    box-shadow: 0 -6px 20px rgba(0,0,0,0.35) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
   #__wos_mobile_bottom_nav button {
-    background: transparent;
-    border: none;
-    color: #94a3b8;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-    font-size: 10.5px;
-    font-weight: 600;
-    padding: 4px 2px;
-    cursor: pointer;
-    line-height: 1.1;
+    background: transparent !important;
+    border: none !important;
+    color: #cbd5e1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    font-size: 10.5px !important;
+    font-weight: 600 !important;
+    padding: 4px 2px !important;
+    cursor: pointer !important;
+    line-height: 1.1 !important;
   }
   #__wos_mobile_bottom_nav button .wos-nav-ico {
-    font-size: 18px;
-    line-height: 1;
+    font-size: 18px !important;
+    line-height: 1 !important;
   }
   #__wos_mobile_bottom_nav button.active {
-    color: #facc15;
+    color: #facc15 !important;
   }
   #__wos_mobile_bottom_nav button.wos-center-btn {
-    position: relative;
-    top: -10px;
-    color: #f8fafc;
+    position: relative !important;
+    top: -10px !important;
+    color: #ffffff !important;
   }
   #__wos_mobile_bottom_nav button.wos-center-btn .wos-nav-ico {
-    width: 46px;
-    height: 46px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #facc15, #eab308);
-    color: #0f172a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    box-shadow: 0 6px 16px rgba(234,179,8,0.45);
-    border: 3px solid #0f172a;
-  }
-  #__wos_mobile_bottom_nav button.wos-center-btn.active {
-    color: #facc15;
-  }
-  .grid, .row, .cards, .kpi-grid, .settings-grid {
-    grid-template-columns: 1fr !important;
-  }
-  table {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    width: 46px !important;
+    height: 46px !important;
+    border-radius: 999px !important;
+    background: linear-gradient(135deg, #facc15, #eab308) !important;
+    color: #0f172a !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 20px !important;
+    box-shadow: 0 6px 16px rgba(234,179,8,0.45) !important;
+    border: 3px solid #0f172a !important;
   }
 }
-@media (min-width: 901px) {
+@media (min-width: 1025px) and (hover: hover) {
   #__wos_mobile_topbar, #__wos_mobile_bottom_nav {
     display: none !important;
   }
@@ -3169,6 +3140,8 @@ refreshAllMarketData();
 // === END WEALTHOS_MOBILE_DRAWER_CLOSE ===
 </script>
 <script>
+</script>
+<script>
 // === WEALTHOS_MOBILE_BOTTOM_NAV_JS ===
 (function(){
   if (window.__wosMobileNavReady) return;
@@ -3185,28 +3158,29 @@ refreshAllMarketData();
   function clickSidebarItem(keywords) {
     const sb = document.getElementById("sidebarPanel") || document.querySelector(".sidebar");
     if (!sb) return false;
-    const items = Array.from(sb.querySelectorAll("button, a, [data-tab], nav > div, .nav-item"));
+    const items = Array.from(sb.querySelectorAll("button, a, [data-tab], nav > div, .nav-item, li"));
     for (const kw of keywords) {
       const found = items.find(el => (el.textContent || "").trim().toLowerCase().includes(kw));
       if (found) {
         found.click();
+        sb.classList.remove("open");
         return true;
       }
     }
     return false;
   }
 
-  function syncActiveState() {
+  function toggleSidebarDrawer() {
     const sb = document.getElementById("sidebarPanel") || document.querySelector(".sidebar");
-    const nav = document.getElementById("__wos_mobile_bottom_nav");
-    if (!sb || !nav) return;
-    const activeEl = sb.querySelector(".active, [aria-current="page"]");
-    const activeText = activeEl ? (activeEl.textContent || "").trim().toLowerCase() : "";
-    nav.querySelectorAll("button").forEach(btn => {
-      const kws = (btn.dataset.match || "").split("|").filter(Boolean);
-      const isMatch = kws.some(k => activeText.includes(k));
-      btn.classList.toggle("active", isMatch);
-    });
+    if (!sb) return;
+    sb.classList.toggle("open");
+    if (sb.classList.contains("open")) {
+      sb.style.display = "flex";
+      sb.style.transform = "translateX(0)";
+      sb.style.zIndex = "2147483645";
+    } else {
+      sb.style.transform = "";
+    }
   }
 
   function mountMobileBars() {
@@ -3217,17 +3191,19 @@ refreshAllMarketData();
       const top = document.createElement("div");
       top.id = "__wos_mobile_topbar";
       top.innerHTML = `
-        <div class="wos-m-brand"><span class="wos-m-badge">W</span><span>WealthOS</span></div>
+        <div class="wos-m-left">
+          <button type="button" id="__wos_m_menu_btn">☰</button>
+          <span>WealthOS</span>
+        </div>
         <div class="wos-m-actions">
           <button type="button" id="__wos_m_tx_btn">⇄ Giao dịch</button>
-          <button type="button" id="__wos_m_report_btn">📊 Báo cáo</button>
-          <button type="button" id="__wos_m_gear_btn" class="wos-gear-btn" title="Cài đặt & dữ liệu">⚙️</button>
+          <button type="button" id="__wos_m_gear_btn" title="Cài đặt & dữ liệu">⚙️</button>
         </div>
       `;
       main.insertBefore(top, main.firstChild);
-      top.querySelector("#__wos_m_tx_btn").addEventListener("click", () => { clickSidebarItem(["giao dịch"]); syncActiveState(); });
-      top.querySelector("#__wos_m_report_btn").addEventListener("click", () => { clickSidebarItem(["báo cáo", "chỉ báo"]); syncActiveState(); });
-      top.querySelector("#__wos_m_gear_btn").addEventListener("click", () => { clickSidebarItem(["cài đặt & dữ liệu", "cài đặt"]); syncActiveState(); });
+      top.querySelector("#__wos_m_menu_btn").addEventListener("click", toggleSidebarDrawer);
+      top.querySelector("#__wos_m_tx_btn").addEventListener("click", () => clickSidebarItem(["giao dịch"]));
+      top.querySelector("#__wos_m_gear_btn").addEventListener("click", () => clickSidebarItem(["cài đặt & dữ liệu", "cài đặt"]));
     }
 
     if (!document.getElementById("__wos_mobile_bottom_nav")) {
@@ -3236,24 +3212,19 @@ refreshAllMarketData();
       NAV_ITEMS.forEach(item => {
         const btn = document.createElement("button");
         btn.type = "button";
-        btn.dataset.match = item.match.join("|");
         if (item.center) btn.classList.add("wos-center-btn");
         btn.innerHTML = `<span class="wos-nav-ico">${item.icon}</span><span>${item.label}</span>`;
-        btn.addEventListener("click", () => {
-          clickSidebarItem(item.match);
-          setTimeout(syncActiveState, 60);
-        });
+        btn.addEventListener("click", () => clickSidebarItem(item.match));
         nav.appendChild(btn);
       });
       document.body.appendChild(nav);
     }
-    syncActiveState();
   }
 
   mountMobileBars();
   document.addEventListener("DOMContentLoaded", mountMobileBars);
   window.addEventListener("load", mountMobileBars);
-  setInterval(mountMobileBars, 1200);
+  setInterval(mountMobileBars, 1000);
 })();
 // === END WEALTHOS_MOBILE_BOTTOM_NAV_JS ===
 </script>
