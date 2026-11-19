@@ -219,7 +219,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <button type="button" class="nav-item" data-page="reports">▦ <span>Báo cáo</span></button>
       <button type="button" class="nav-item" data-page="settings">⚙ <span>Cài đặt & dữ liệu</span></button>
     </nav>
-    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.4 · Tự xoá khi rút/bán hết</div>
+    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.5 · Tự động đáo hạn</div>
   </aside>
 
   <main class="main">
@@ -242,7 +242,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <div class="welcome-row">
         <div>
           <h2>Bức tranh tài chính của bạn</h2>
-          <p>Tổng tài sản ròng tính trên tài sản chung (không gồm Quỹ khẩn cấp riêng biệt) · Cập nhật tự động giá thị trường.</p>
+          <p>Tổng tài sản ròng tính trên tài sản chung (không gồm Quỹ khẩn cấp riêng biệt) · Tự động xoay vòng gốc + lãi khi đáo hạn.</p>
         </div>
         <div class="date-chip" id="todayLabel"></div>
       </div>
@@ -272,7 +272,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
       <article class="panel" id="maturityAlertPanel" style="display:none">
         <div class="panel-head" style="margin-bottom:8px">
-          <div><h3>⏰ Cảnh báo đáo hạn tiền gửi</h3><p>Các khoản tiền gửi tiết kiệm / quỹ cơ hội có kỳ hạn sắp đáo hạn hoặc đã tới hạn</p></div>
+          <div><h3>⏰ Thông báo đáo hạn tiền gửi</h3><p>Các khoản tiền gửi / quỹ sắp tới kỳ đáo hạn hoặc vừa tự động xoay vòng gốc + lãi</p></div>
         </div>
         <div id="maturityAlertList" class="recent-list"></div>
       </article>
@@ -538,10 +538,10 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
     <section id="depositsPage" class="page">
       <div class="module-hero deposit-hero">
         <div class="module-symbol">🏦</div>
-        <div><div class="eyebrow">TIỀN GỬI</div><h2>Tiền gửi tiết kiệm</h2><p>Theo dõi sổ tiết kiệm do bạn tự nhập số dư, lãi suất, kỳ hạn, rút tiền và cảnh báo đáo hạn.</p></div>
+        <div><div class="eyebrow">TIỀN GỬI</div><h2>Tiền gửi tiết kiệm</h2><p>Theo dõi sổ tiết kiệm do bạn tự nhập số dư, lãi suất, kỳ hạn, tự động đáo hạn gộp gốc + lãi và rút tiền.</p></div>
       </div>
       <div class="section-toolbar">
-        <div><h2>Danh sách tiền gửi tiết kiệm</h2><p>Không tự ghi đè giá trị/lãi suất ngân hàng; rút hết tiền sẽ tự xoá khoản khỏi danh sách.</p></div>
+        <div><h2>Danh sách tiền gửi tiết kiệm</h2><p>Tự động đảo kỳ (gốc + lãi kỳ trước) khi đến hạn; rút hết tiền sẽ tự xoá khoản khỏi danh sách.</p></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="secondary" data-withdraw-kind="deposit">− Rút tiền tiết kiệm</button>
           <button type="button" class="primary" data-add-deposit-kind="deposit">＋ Thêm tiền gửi tiết kiệm</button>
@@ -550,7 +550,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <div class="metric-grid three">
         <article class="metric-card"><div class="metric-label">TỔNG TIỀN GỬI TIẾT KIỆM</div><div class="metric-value" id="depSavingTotal">0 ₫</div></article>
         <article class="metric-card"><div class="metric-label">LÃI KỲ HẠN ƯỚC TÍNH</div><div class="metric-value" id="depSavingInterest">0 ₫</div></article>
-        <article class="metric-card"><div class="metric-label">CẢNH BÁO ĐÁO HẠN (≤14 NGÀY)</div><div class="metric-value" id="depSavingAlerts">0 khoản</div></article>
+        <article class="metric-card"><div class="metric-label">SẮP ĐÁO HẠN (≤14 NGÀY)</div><div class="metric-value" id="depSavingAlerts">0 khoản</div></article>
       </div>
       <div id="depositSavingCards" class="asset-grid"><div class="empty">Chưa có khoản tiền gửi tiết kiệm nào.</div></div>
     </section>
@@ -558,10 +558,10 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
     <section id="opportunityPage" class="page">
       <div class="module-hero op-hero">
         <div class="module-symbol">🎯</div>
-        <div><div class="eyebrow">TIỀN GỬI</div><h2>Quỹ cơ hội</h2><p>Nguồn tiền gửi / thanh khoản chủ động sẵn sàng giải ngân khi thị trường xuất hiện cơ hội tốt.</p></div>
+        <div><div class="eyebrow">TIỀN GỬI</div><h2>Quỹ cơ hội</h2><p>Nguồn tiền gửi / thanh khoản chủ động · Tự động đảo kỳ gộp gốc + lãi khi hết kỳ hạn.</p></div>
       </div>
       <div class="section-toolbar">
-        <div><h2>Danh sách Quỹ cơ hội</h2><p>Tính vào tài sản chung; rút hết tiền sẽ tự xoá khoản khỏi danh sách.</p></div>
+        <div><h2>Danh sách Quỹ cơ hội</h2><p>Tính vào tài sản chung; tự động đảo kỳ khi đến hạn; rút hết tiền sẽ tự xoá khoản.</p></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="secondary" data-withdraw-kind="op">− Rút Quỹ cơ hội</button>
           <button type="button" class="primary" data-add-deposit-kind="op">＋ Thêm Quỹ cơ hội</button>
@@ -570,7 +570,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <div class="metric-grid three">
         <article class="metric-card"><div class="metric-label">TỔNG QUỸ CƠ HỘI</div><div class="metric-value" id="opTotalVal">0 ₫</div></article>
         <article class="metric-card"><div class="metric-label">LÃI SUẤT BÌNH QUÂN</div><div class="metric-value" id="opAvgRate">—</div></article>
-        <article class="metric-card"><div class="metric-label">CẢNH BÁO ĐÁO HẠN</div><div class="metric-value" id="opAlertsVal">0 khoản</div></article>
+        <article class="metric-card"><div class="metric-label">SẮP ĐÁO HẠN (≤14 NGÀY)</div><div class="metric-value" id="opAlertsVal">0 khoản</div></article>
       </div>
       <div id="opportunityCards" class="asset-grid"><div class="empty">Chưa có khoản Quỹ cơ hội nào.</div></div>
     </section>
@@ -578,10 +578,10 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
     <section id="emergencyPage" class="page">
       <div class="module-hero em-hero">
         <div class="module-symbol">🛡️</div>
-        <div><div class="eyebrow">TIỀN GỬI · DỰ PHÒNG RIÊNG</div><h2>Quỹ khẩn cấp</h2><p>Tách riêng hoàn toàn khỏi tài sản chung và biểu đồ phân bổ đầu tư để bảo vệ an toàn tài chính cá nhân.</p></div>
+        <div><div class="eyebrow">TIỀN GỬI · DỰ PHÒNG RIÊNG</div><h2>Quỹ khẩn cấp</h2><p>Tách riêng hoàn toàn khỏi tài sản chung · Tự động đảo kỳ gộp gốc + lãi khi đến hạn.</p></div>
       </div>
       <div class="section-toolbar">
-        <div><h2>Danh sách Quỹ khẩn cấp</h2><p>Không cộng vào Tổng tài sản ròng của tài sản chung; rút hết tiền sẽ tự xoá khoản khỏi danh sách.</p></div>
+        <div><h2>Danh sách Quỹ khẩn cấp</h2><p>Không cộng vào Tổng tài sản ròng của tài sản chung; rút hết tiền sẽ tự xoá khoản.</p></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="secondary" data-withdraw-kind="em">− Rút Quỹ khẩn cấp</button>
           <button type="button" class="primary" data-add-deposit-kind="em">＋ Thêm Quỹ khẩn cấp</button>
@@ -590,7 +590,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <div class="metric-grid three">
         <article class="metric-card reserve-card"><div class="metric-label">TỔNG QUỸ KHẨN CẤP (RIÊNG)</div><div class="metric-value" id="emPageTotalVal">0 ₫</div></article>
         <article class="metric-card"><div class="metric-label">SỐ KHOẢN DỰ PHÒNG</div><div class="metric-value" id="emPageCount">0</div></article>
-        <article class="metric-card"><div class="metric-label">CẢNH BÁO ĐÁO HẠN</div><div class="metric-value" id="emAlertsVal">0 khoản</div></article>
+        <article class="metric-card"><div class="metric-label">SẮP ĐÁO HẠN (≤14 NGÀY)</div><div class="metric-value" id="emAlertsVal">0 khoản</div></article>
       </div>
       <div id="emergencyCards" class="asset-grid"><div class="empty">Chưa có khoản Quỹ khẩn cấp nào.</div></div>
     </section>
@@ -630,7 +630,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
               <h3>☁ Cập nhật ứng dụng trực tiếp từ đám mây (Không cần cài lại .app)</h3>
               <p>Tải phiên bản giao diện & công thức mới từ GitHub về thẳng ứng dụng. Toàn bộ dữ liệu tài sản của bạn được giữ nguyên 100%.</p>
             </div>
-            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.4-ota</span>
+            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.5-ota</span>
           </div>
 
           <label style="font-size:11px;color:#45566a;font-weight:600;display:block;margin-top:8px">
@@ -679,13 +679,13 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
           <h3>Tình trạng hệ thống</h3>
           <div class="system-row"><span>Ứng dụng macOS</span><b>WealthOS.app (Native Cocoa + OTA Engine)</b></div>
           <div class="system-row"><span>Thư mục chứa bản cập nhật OTA</span><b id="otaPathDisplay" style="font-family:monospace;font-size:11px">~/Library/Application Support/WealthOS/ota</b></div>
-          <div class="system-row"><span>Đồng bộ Google Drive</span><b class="pending">Chưa kết nối</b></div>
+          <div class="system-row"><span>Tự động đáo hạn tiền gửi</span><b style="color:#1f8a70">Đang bật (Gộp gốc + lãi kỳ trước)</b></div>
           <div class="system-row"><span>Mã hóa dữ liệu</span><b class="pending">Chưa kích hoạt</b></div>
         </article>
       </div>
     </section>
 
-    <footer>WealthOS 0.4.4 · Tự xoá khoản khi rút/bán hết · Đồng bộ Rút tiền & Bán ra</footer>
+    <footer>WealthOS 0.4.5 · Tự động đáo hạn gốc + lãi · Đồng bộ Rút tiền & Bán ra</footer>
   </main>
 </div>
 
@@ -855,7 +855,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 </dialog>
 
 <script>
-const APP_VERSION = '0.4.4-ota';
+const APP_VERSION = '0.4.5-ota';
 const DEFAULT_OTA_URL = 'https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html';
 const STORAGE_KEY = 'wealthos_trial_v1';
 const LUONG_PER_OZ = 37.5 / 31.1035;
@@ -1083,6 +1083,53 @@ function saveState() {
   }
 }
 
+function rolloverDeposits() {
+  const nowStart = new Date();
+  nowStart.setHours(0, 0, 0, 0);
+  let changed = false;
+
+  state.assets.forEach(a => {
+    if (a.category !== 'cash') return;
+    const parsedNote = parseRateAndTermFromNote(a.note);
+    const rate = Number(a.rate ?? a.meta?.rate ?? parsedNote.rate ?? 0) || 0;
+    const term = Number(a.term ?? a.meta?.term ?? parsedNote.term ?? 0) || 0;
+    if (!(term > 0) || !a.date) return;
+
+    let baseDate = new Date(`${String(a.date).slice(0, 10)}T00:00:00`);
+    if (!Number.isFinite(baseDate.getTime())) return;
+
+    let principal = Number(a.cost) > 0 ? Number(a.cost) : (Number(a.value) || 0);
+    let currentVal = Number(a.value) || principal;
+    let rolledCount = 0;
+
+    while (rolledCount < 24) {
+      const nextMat = new Date(baseDate.getFullYear(), baseDate.getMonth() + term, baseDate.getDate());
+      if (nextMat > nowStart) break;
+      const periodInterest = rate > 0 ? Math.round(principal * (rate / 100) * (term / 12)) : Math.max(0, Math.round(currentVal - principal));
+      principal = Math.round(principal + periodInterest);
+      currentVal = principal;
+      baseDate = nextMat;
+      rolledCount++;
+      changed = true;
+    }
+
+    if (rolledCount > 0) {
+      const newDateStr = `${baseDate.getFullYear()}-${String(baseDate.getMonth() + 1).padStart(2, '0')}-${String(baseDate.getDate()).padStart(2, '0')}`;
+      a.date = newDateStr;
+      a.cost = principal;
+      a.value = currentVal;
+      a.rate = rate;
+      a.term = term;
+      a.updatedAt = new Date().toISOString();
+      const baseClean = String(a.note || '').replace(/\s*·?\s*(?:Lãi\s*suất|lãi)\s*[0-9.,]+\s*%.*$/i, '').trim();
+      const termPart = `Lãi suất ${rate}%/năm · Kỳ hạn ${term} tháng · Gốc mới sau đáo hạn: ${money(principal)}`;
+      a.note = baseClean ? `${baseClean} · ${termPart}` : termPart;
+    }
+  });
+
+  if (changed) saveState();
+}
+
 function parseDepositMeta(a) {
   const parsedNote = parseRateAndTermFromNote(a.note);
   const rate = Number(a.rate ?? a.meta?.rate ?? parsedNote.rate ?? 0) || 0;
@@ -1102,15 +1149,9 @@ function parseDepositMeta(a) {
     nowStart.setHours(0, 0, 0, 0);
     const endStart = new Date(end.getFullYear(), end.getMonth(), end.getDate());
     daysLeft = Math.round((endStart - nowStart) / 86400000);
-    if (daysLeft < 0) {
-      alertLevel = 'due';
-      alertText = `Đã quá hạn ${Math.abs(daysLeft)} ngày (${maturityDate})`;
-    } else if (daysLeft === 0) {
-      alertLevel = 'due';
-      alertText = `Đáo hạn hôm nay (${maturityDate})`;
-    } else if (daysLeft <= 14) {
+    if (daysLeft <= 14) {
       alertLevel = 'warn';
-      alertText = `Sắp đáo hạn sau ${daysLeft} ngày (${maturityDate})`;
+      alertText = daysLeft === 0 ? `Đáo hạn hôm nay (${maturityDate})` : `Sắp đáo hạn sau ${daysLeft} ngày (${maturityDate})`;
     } else {
       alertLevel = 'ok';
       alertText = `Đáo hạn ${maturityDate} (còn ${daysLeft} ngày)`;
@@ -1144,6 +1185,7 @@ function revalueGoldAssets() {
 
 function renderAll() {
   const fx = Number(state.fx) || 25704;
+  rolloverDeposits();
   pruneDepletedAssets();
   const assets = (state.assets || []).map(normalizeAsset);
   state.assets = assets;
@@ -1181,7 +1223,7 @@ function renderAll() {
   }
 
   const alertItems = assets.filter(a => a.category === 'cash').map(a => ({ a, m: parseDepositMeta(a) }))
-    .filter(x => x.m.alertLevel === 'due' || x.m.alertLevel === 'warn')
+    .filter(x => x.m.alertLevel === 'warn')
     .sort((x, y) => (x.m.daysLeft ?? 999) - (y.m.daysLeft ?? 999));
 
   if ($('#maturityAlertPanel')) {
@@ -1191,7 +1233,7 @@ function renderAll() {
         `<div class="recent-item">
           <div>
             <div class="recent-name">${esc(a.name)} ${m.rate ? `· <span class="pos">${m.rate}%/năm</span>` : ''}</div>
-            <div class="recent-meta">${esc(m.alertText)}${m.estInterest ? ` · Lãi kỳ hạn ước tính: ${money(m.estInterest)}` : ''}</div>
+            <div class="recent-meta">${esc(m.alertText)}${m.estInterest ? ` · Gốc + lãi kỳ tới: ${money(Number(a.value || 0) + m.estInterest)}` : ''}</div>
           </div>
           <div class="recent-value">${money(a.value)}</div>
         </div>`
@@ -1309,9 +1351,7 @@ function renderAssets() {
 
 function buildDepositCardHtml(a) {
   const m = parseDepositMeta(a);
-  const badgeHtml = m.alertLevel === 'due'
-    ? `<span class="alert-pill due">⚠ ${esc(m.alertText)}</span>`
-    : m.alertLevel === 'warn'
+  const badgeHtml = m.alertLevel === 'warn'
     ? `<span class="alert-pill warn">⏰ ${esc(m.alertText)}</span>`
     : m.alertLevel === 'ok'
     ? `<span class="alert-pill ok">${esc(m.alertText)}</span>`
@@ -1341,10 +1381,7 @@ function renderDepositsSections() {
   const emList = cashList.filter(a => a.kind === 'em');
 
   const sumV = arr => arr.reduce((s, a) => s + (Number(a.value) || 0), 0);
-  const countAlerts = arr => arr.filter(a => {
-    const lv = parseDepositMeta(a).alertLevel;
-    return lv === 'warn' || lv === 'due';
-  }).length;
+  const countAlerts = arr => arr.filter(a => parseDepositMeta(a).alertLevel === 'warn').length;
 
   const savingInterest = savingList.reduce((s, a) => s + parseDepositMeta(a).estInterest, 0);
   setText('#depSavingTotal', money(sumV(savingList)));
