@@ -25,6 +25,16 @@ input,textarea,select,td,th,.asset-amount,.metric-value,code{-webkit-user-select
 .nav-item span{font-size:13px}
 .nav-item:hover,.nav-item.active{background:#24384e;color:#fff}
 .nav-item.active{box-shadow:inset 3px 0 #d4aa4b}
+.nav-badge{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:700;flex:none}
+.nav-item[data-page="gold"] .nav-badge{background:rgba(230,184,77,.18);color:#f0c34e;box-shadow:0 0 0 1px rgba(240,195,78,.28)}
+.nav-item[data-page="gold"] span{color:#f5d782;font-weight:600}
+.nav-item[data-page="bitcoin"] .nav-badge{background:rgba(247,147,26,.18);color:#ff9d2e;box-shadow:0 0 0 1px rgba(255,157,46,.28)}
+.nav-item[data-page="bitcoin"] span{color:#ffc078;font-weight:600}
+.nav-item[data-page="stocks"] .nav-badge{background:rgba(139,124,246,.2);color:#a79bff;box-shadow:0 0 0 1px rgba(167,155,255,.3)}
+.nav-item[data-page="stocks"] span{color:#cbc3ff;font-weight:600}
+.nav-item[data-page="gold"].active{box-shadow:inset 3px 0 #f0c34e;background:#263646}
+.nav-item[data-page="bitcoin"].active{box-shadow:inset 3px 0 #ff9d2e;background:#2b323d}
+.nav-item[data-page="stocks"].active{box-shadow:inset 3px 0 #a79bff;background:#242e47}
 .nav-label{font-size:9px;letter-spacing:1.6px;color:#70839b;padding:13px 13px 4px;font-weight:700}
 .sidebar-foot{margin-top:auto;padding:12px 10px 0;color:#8fa0b5;font-size:11px;border-top:1px solid #29394a}
 .status-dot,.local-pill i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#39b889;margin-right:7px}
@@ -107,13 +117,13 @@ th{font-size:9.5px;color:#8794a4;letter-spacing:.6px;font-weight:700;text-transf
 .module-hero{display:flex;align-items:center;gap:17px;padding:20px 22px;border-radius:16px;color:#fff;margin-bottom:15px}
 .module-hero h2{font-size:20px;margin:3px 0}
 .module-hero p{font-size:11.5px;color:#e4e9ef;margin:0;max-width:680px}
-.gold-hero{background:linear-gradient(110deg,#5d4b25,#9d7b34)}
-.btc-hero{background:linear-gradient(110deg,#75431f,#bd7132)}
-.stock-hero{background:linear-gradient(110deg,#403b72,#7168ad)}
+.gold-hero{background:linear-gradient(115deg,#6b521c,#c99a2e);box-shadow:0 8px 24px rgba(201,154,46,.22)}
+.btc-hero{background:linear-gradient(115deg,#854112,#e87a1e);box-shadow:0 8px 24px rgba(232,122,30,.22)}
+.stock-hero{background:linear-gradient(115deg,#3e368a,#7465e3);box-shadow:0 8px 24px rgba(116,101,227,.22)}
 .deposit-hero{background:linear-gradient(110deg,#1c4d44,#297567)}
 .op-hero{background:linear-gradient(110deg,#24486b,#356b9c)}
 .em-hero{background:linear-gradient(110deg,#593b5c,#86598a)}
-.module-symbol{font-size:28px;width:52px;height:52px;display:grid;place-items:center;border:1px solid #ffffff55;border-radius:14px;flex:none}
+.module-symbol{font-size:28px;width:52px;height:52px;display:grid;place-items:center;border:1px solid #ffffff55;border-radius:14px;flex:none;background:rgba(255,255,255,.1)}
 .market-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:14px;flex-wrap:wrap}
 .status-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:10.5px;font-weight:600;background:#eef2f6;color:#45566a}
 .status-badge.live{background:#e6f5f0;color:#1d7258}
@@ -190,9 +200,9 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <button type="button" class="nav-item" data-page="transactions">⇄ <span>Giao dịch</span></button>
       <button type="button" class="nav-item" data-page="cashflow">↗ <span>Dòng tiền</span></button>
       <div class="nav-label">ĐẦU TƯ</div>
-      <button type="button" class="nav-item" data-page="gold">◈ <span>Vàng</span></button>
-      <button type="button" class="nav-item" data-page="bitcoin">₿ <span>Bitcoin</span></button>
-      <button type="button" class="nav-item" data-page="stocks">▥ <span>Chứng khoán Việt Nam</span></button>
+      <button type="button" class="nav-item" data-page="gold"><span class="nav-badge">◈</span> <span>Vàng</span></button>
+      <button type="button" class="nav-item" data-page="bitcoin"><span class="nav-badge">₿</span> <span>Bitcoin</span></button>
+      <button type="button" class="nav-item" data-page="stocks"><span class="nav-badge">▥</span> <span>Chứng khoán Việt Nam</span></button>
       <div class="nav-label">TIỀN GỬI</div>
       <button type="button" class="nav-item" data-page="deposits">🏦 <span>Tiền gửi tiết kiệm</span></button>
       <button type="button" class="nav-item" data-page="opportunity">🎯 <span>Quỹ cơ hội</span></button>
@@ -202,7 +212,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <button type="button" class="nav-item" data-page="reports">▦ <span>Báo cáo</span></button>
       <button type="button" class="nav-item" data-page="settings">⚙ <span>Cài đặt & dữ liệu</span></button>
     </nav>
-    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.3.8 · Đầy đủ danh mục</div>
+    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.3.9 · Sắc màu Đầu tư</div>
   </aside>
 
   <main class="main">
@@ -571,7 +581,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
               <h3>☁ Cập nhật ứng dụng trực tiếp từ đám mây (Không cần cài lại .app)</h3>
               <p>Tải phiên bản giao diện & công thức mới từ GitHub về thẳng ứng dụng. Toàn bộ dữ liệu tài sản của bạn được giữ nguyên 100%.</p>
             </div>
-            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.3.8-ota</span>
+            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.3.9-ota</span>
           </div>
 
           <label style="font-size:11px;color:#45566a;font-weight:600;display:block;margin-top:8px">
@@ -626,7 +636,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
     </section>
 
-    <footer>WealthOS 0.3.8 · Realtime Vàng · Bitcoin · Chứng khoán VN · Tiền gửi tự nhập</footer>
+    <footer>WealthOS 0.3.9 · Realtime Vàng · Bitcoin · Chứng khoán VN · Tiền gửi tự nhập</footer>
   </main>
 </div>
 
@@ -773,7 +783,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 </dialog>
 
 <script>
-const APP_VERSION = '0.3.8-ota';
+const APP_VERSION = '0.3.9-ota';
 const DEFAULT_OTA_URL = 'https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html';
 const STORAGE_KEY = 'wealthos_trial_v1';
 const LUONG_PER_OZ = 37.5 / 31.1035;
@@ -830,7 +840,7 @@ window.__onNativeOTA = function(res) {
   }
 };
 
-const COLORS = { cash: '#238568', gold: '#c49a38', bitcoin: '#e58a38', stock: '#7567bd', other: '#8291a3' };
+const COLORS = { cash: '#238568', gold: '#e6b84d', bitcoin: '#f7931a', stock: '#8b7cf6', other: '#8291a3' };
 const LABELS = { cash: 'Tiền gửi & Quỹ cơ hội', gold: 'Vàng', bitcoin: 'Bitcoin', stock: 'Chứng khoán Việt Nam', other: 'Khác' };
 
 let state = loadState();
