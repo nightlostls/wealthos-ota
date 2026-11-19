@@ -170,6 +170,7 @@ footer{padding:16px 0;color:#9aa7b7;font-size:10.5px}
 .dialog-head h2{font-size:18px;margin:2px 0}
 .icon-btn{border:0;background:#f0f3f6;border-radius:50%;width:30px;height:30px;font-size:18px;cursor:pointer;display:grid;place-items:center}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.form-grid.single-col{grid-template-columns:1fr}
 .dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:6px}
 dialog{border:0;border-radius:17px;padding:0;box-shadow:0 25px 80px #101d2b44;background:#fff;color:var(--ink)}
 dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
@@ -218,7 +219,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <button type="button" class="nav-item" data-page="reports">▦ <span>Báo cáo</span></button>
       <button type="button" class="nav-item" data-page="settings">⚙ <span>Cài đặt & dữ liệu</span></button>
     </nav>
-    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.2 · Real-time Auto</div>
+    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.4.3 · Đồng bộ Rút/Bán/Xoá</div>
   </aside>
 
   <main class="main">
@@ -629,7 +630,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
               <h3>☁ Cập nhật ứng dụng trực tiếp từ đám mây (Không cần cài lại .app)</h3>
               <p>Tải phiên bản giao diện & công thức mới từ GitHub về thẳng ứng dụng. Toàn bộ dữ liệu tài sản của bạn được giữ nguyên 100%.</p>
             </div>
-            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.2-ota</span>
+            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.4.3-ota</span>
           </div>
 
           <label style="font-size:11px;color:#45566a;font-weight:600;display:block;margin-top:8px">
@@ -684,26 +685,27 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
     </section>
 
-    <footer>WealthOS 0.4.2 · Tự động cập nhật real-time · Dữ liệu lưu cục bộ trên máy Mac</footer>
+    <footer>WealthOS 0.4.3 · Đồng bộ Rút tiền · Bán ra · Xoá khoản · Real-time</footer>
   </main>
 </div>
 
+<!-- MODAL BÁN RA / RÚT TIỀN -->
 <dialog id="sellDialog">
   <form method="dialog" id="sellForm" class="dialog-form">
     <div class="dialog-head">
-      <div><div class="eyebrow">SELL / WITHDRAW</div><h2 id="sellDialogTitle">Bán ra / Rút tiền</h2></div>
+      <div><div class="eyebrow">SELL / WITHDRAW</div><h2 id="sellDialogTitle">Rút tiền gửi / Quỹ</h2></div>
       <button type="button" class="icon-btn" data-close-dialog aria-label="Đóng">×</button>
     </div>
     <label>Chọn khoản tài sản / tiền gửi<select id="sellAssetSelect"></select></label>
     <div class="form-grid" id="sellQtyRow">
-      <label>Số lượng bán ra (nếu có)<input id="sellQty" type="number" min="0" step="any" placeholder="Ví dụ: 10"></label>
-      <label>Tổng tiền thu về / rút ra (VND)<input id="sellAmount" type="number" min="1" step="1" required placeholder="Ví dụ: 5000000"></label>
+      <label id="sellQtyWrap">Số lượng bán ra (nếu có)<input id="sellQty" type="number" min="0" step="any" placeholder="Ví dụ: 10"></label>
+      <label id="sellAmountWrap">Tổng tiền thu về / rút ra (VND)<input id="sellAmount" type="number" min="1" step="1" required placeholder="Ví dụ: 2000000"></label>
     </div>
     <div class="form-grid">
       <label>Ngày giao dịch<input id="sellDate" type="date" required></label>
-      <label>Ghi chú<input id="sellNote" maxlength="120" placeholder="Chốt lời, cơ cấu, rút tất toán…"></label>
+      <label>Ghi chú<input id="sellNote" maxlength="120" placeholder="Cần gấp, chốt lời, cơ cấu…"></label>
     </div>
-    <div class="dca-preview" id="sellPreview">Nhập số tiền thu về / rút ra để xem số dư và lãi/lỗ chốt.</div>
+    <div class="dca-preview" id="sellPreview">Nhập số tiền thu về / rút ra để xem số dư còn lại.</div>
     <div class="dialog-actions">
       <button type="button" class="secondary" data-close-dialog>Huỷ</button>
       <button type="submit" class="primary" id="confirmSellBtn">Xác nhận</button>
@@ -711,6 +713,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
+<!-- MODAL MUA THÊM / TRUNG BÌNH GIÁ (DCA) -->
 <dialog id="dcaDialog">
   <form method="dialog" id="dcaForm" class="dialog-form">
     <div class="dialog-head">
@@ -734,6 +737,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
+<!-- MODAL THÊM / SỬA TÀI SẢN & TIỀN GỬI -->
 <dialog id="assetDialog">
   <form method="dialog" id="assetForm" class="dialog-form">
     <div class="dialog-head">
@@ -780,6 +784,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
+<!-- MODAL GIAO DỊCH -->
 <dialog id="transactionDialog">
   <form method="dialog" id="transactionForm" class="dialog-form">
     <div class="dialog-head">
@@ -815,6 +820,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
+<!-- MODAL DÒNG TIỀN -->
 <dialog id="cashDialog">
   <form method="dialog" id="cashForm" class="dialog-form">
     <div class="dialog-head">
@@ -834,6 +840,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
   </form>
 </dialog>
 
+<!-- MODAL CHỈ BÁO -->
 <dialog id="indicatorDialog">
   <form method="dialog" id="indicatorForm" class="dialog-form">
     <div class="dialog-head">
@@ -854,7 +861,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 </dialog>
 
 <script>
-const APP_VERSION = '0.4.2-ota';
+const APP_VERSION = '0.4.3-ota';
 const DEFAULT_OTA_URL = 'https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html';
 const STORAGE_KEY = 'wealthos_trial_v1';
 const LUONG_PER_OZ = 37.5 / 31.1035;
@@ -1238,6 +1245,30 @@ function renderAll() {
   if ($('#stocksThesis')) $('#stocksThesis').value = state.notes.stocksThesis || '';
 }
 
+function attachCardRowActions(container) {
+  if (!container) return;
+  container.onclick = e => {
+    const dcaBtn = e.target.closest('[data-dca-asset]');
+    if (dcaBtn) { e.preventDefault(); openDcaModal(null, dcaBtn.dataset.dcaAsset); return; }
+
+    const sellBtn = e.target.closest('[data-sell-asset]');
+    if (sellBtn) { e.preventDefault(); openSellModal(null, sellBtn.dataset.sellAsset); return; }
+
+    const editBtn = e.target.closest('[data-edit-asset]');
+    if (editBtn) { e.preventDefault(); openAssetModal(state.assets.find(a => a.id === editBtn.dataset.editAsset)); return; }
+
+    const delBtn = e.target.closest('[data-delete-asset]');
+    if (delBtn) {
+      e.preventDefault();
+      if (confirm('Xoá khoản này khỏi danh sách?')) {
+        state.assets = state.assets.filter(a => a.id !== delBtn.dataset.deleteAsset);
+        saveState();
+        renderAll();
+      }
+    }
+  };
+}
+
 function renderAssets() {
   if (!$('#assetCards')) return;
   const q = ($('#assetSearch')?.value || '').toLowerCase();
@@ -1267,6 +1298,7 @@ function renderAssets() {
       </div>
     </article>`;
   }).join('') || '<div class="empty">Không tìm thấy tài sản phù hợp.</div>';
+  attachCardRowActions($('#assetCards'));
 }
 
 function buildDepositCardHtml(a) {
@@ -1314,6 +1346,7 @@ function renderDepositsSections() {
   setText('#depSavingAlerts', `${countAlerts(savingList)} khoản`);
   if ($('#depositSavingCards')) {
     $('#depositSavingCards').innerHTML = savingList.map(buildDepositCardHtml).join('') || '<div class="empty">Chưa có khoản tiền gửi tiết kiệm nào.</div>';
+    attachCardRowActions($('#depositSavingCards'));
   }
 
   const opRates = opList.map(a => parseDepositMeta(a).rate).filter(r => r > 0);
@@ -1322,6 +1355,7 @@ function renderDepositsSections() {
   setText('#opAlertsVal', `${countAlerts(opList)} khoản`);
   if ($('#opportunityCards')) {
     $('#opportunityCards').innerHTML = opList.map(buildDepositCardHtml).join('') || '<div class="empty">Chưa có khoản Quỹ cơ hội nào.</div>';
+    attachCardRowActions($('#opportunityCards'));
   }
 
   setText('#emPageTotalVal', money(sumV(emList)));
@@ -1329,6 +1363,7 @@ function renderDepositsSections() {
   setText('#emAlertsVal', `${countAlerts(emList)} khoản`);
   if ($('#emergencyCards')) {
     $('#emergencyCards').innerHTML = emList.map(buildDepositCardHtml).join('') || '<div class="empty">Chưa có khoản Quỹ khẩn cấp nào.</div>';
+    attachCardRowActions($('#emergencyCards'));
   }
 }
 
@@ -1465,6 +1500,7 @@ function renderModules() {
         </td>
       </tr>`;
     }).join('') || '<tr><td colspan="7" class="empty">Chưa có vàng nào.</td></tr>';
+    attachCardRowActions($('#goldHoldingsRows'));
   }
 
   const cryptos = state.assets.filter(a => a.category === 'bitcoin');
@@ -1516,6 +1552,7 @@ function renderModules() {
         </td>
       </tr>`;
     }).join('') || '<tr><td colspan="8" class="empty">Chưa có coin nào.</td></tr>';
+    attachCardRowActions($('#btcHoldingsRows'));
   }
 
   const stocks = state.assets.filter(a => a.category === 'stock');
@@ -1562,6 +1599,7 @@ function renderModules() {
         </td>
       </tr>`;
     }).join('') || '<tr><td colspan="9" class="empty">Chưa có cổ phiếu hoặc quỹ mở.</td></tr>';
+    attachCardRowActions($('#stockHoldingsRows'));
   }
 }
 
@@ -1627,16 +1665,17 @@ function openSellModal(filterFn, preselectedAssetId) {
   $('#sellDate').value = today();
   $('#sellNote').value = '';
   updateSellPreview();
-  $('#sellDialog').showModal();
+  if ($('#sellDialog')) $('#sellDialog').showModal();
 }
 
 function updateSellPreview() {
   const asset = state.assets.find(a => a.id === $('#sellAssetSelect')?.value);
   if (!asset || !$('#sellPreview')) return;
   const isCash = asset.category === 'cash';
-  if ($('#sellQtyRow')) $('#sellQtyRow').style.gridTemplateColumns = isCash ? '0fr 1fr' : '1fr 1fr';
-  const qtyInp = $('#sellQty');
-  if (qtyInp && qtyInp.parentElement) qtyInp.parentElement.style.display = isCash ? 'none' : 'grid';
+  const qtyWrap = $('#sellQtyWrap');
+  const qtyRow = $('#sellQtyRow');
+  if (qtyWrap) qtyWrap.style.display = isCash ? 'none' : 'grid';
+  if (qtyRow) qtyRow.classList.toggle('single-col', isCash);
 
   const amt = Number($('#sellAmount')?.value) || 0;
   const q0 = Number(asset.quantity) || 0;
@@ -1645,10 +1684,10 @@ function updateSellPreview() {
   const qSell = isCash ? 0 : (Number($('#sellQty')?.value) || 0);
 
   if (isCash) {
-    $('#sellDialogTitle').textContent = 'Rút tiền gửi / Quỹ';
+    setText('#sellDialogTitle', 'Rút tiền gửi / Quỹ');
     $('#sellPreview').innerHTML = `Số dư sau rút ước tính: <b>${money(Math.max(0, v0 - amt))}</b>`;
   } else {
-    $('#sellDialogTitle').textContent = 'Bán ra tài sản đầu tư';
+    setText('#sellDialogTitle', 'Bán ra tài sản đầu tư');
     const ratio = qSell > 0 && q0 > 0 ? Math.min(1, qSell / q0) : (v0 > 0 ? Math.min(1, amt / v0) : 0);
     const costSold = Math.round(c0 * ratio);
     const pnl = amt > 0 ? amt - costSold : 0;
@@ -1673,7 +1712,7 @@ function openDcaModal(categoryFilter, preselectedAssetId) {
   $('#dcaDate').value = today();
   $('#dcaNote').value = '';
   updateDcaPreview();
-  $('#dcaDialog').showModal();
+  if ($('#dcaDialog')) $('#dcaDialog').showModal();
 }
 
 function updateDcaPreview() {
@@ -2126,7 +2165,7 @@ function openAssetModal(asset, presetCategory, presetKind) {
   $('#assetTerm').value = asset?.term ?? '';
   $('#assetDate').value = asset?.date || today();
   $('#assetNote').value = asset?.note || '';
-  $('#assetDialog').showModal();
+  if ($('#assetDialog')) $('#assetDialog').showModal();
 }
 
 function bindEvents() {
@@ -2184,11 +2223,11 @@ function bindEvents() {
   if ($('#sellForm')) {
     $('#sellForm').onsubmit = e => {
       e.preventDefault();
-      const asset = state.assets.find(a => a.id === $('#sellAssetSelect').value);
-      const amt = Number($('#sellAmount').value) || 0;
-      const txDate = $('#sellDate').value || today();
-      const note = ($('#sellNote').value || '').trim();
-      if (!asset || amt <= 0) return;
+      const asset = state.assets.find(a => a.id === $('#sellAssetSelect')?.value);
+      const amt = Number($('#sellAmount')?.value) || 0;
+      const txDate = $('#sellDate')?.value || today();
+      const note = ($('#sellNote')?.value || '').trim();
+      if (!asset || !(amt > 0)) return;
 
       const isCash = asset.category === 'cash';
       const q0 = Number(asset.quantity) || 0;
@@ -2240,13 +2279,6 @@ function bindEvents() {
   if ($('#dcaAssetSelect')) $('#dcaAssetSelect').onchange = updateDcaPreview;
   if ($('#dcaQty')) $('#dcaQty').oninput = updateDcaPreview;
   if ($('#dcaAmount')) $('#dcaAmount').oninput = updateDcaPreview;
-
-  document.addEventListener('click', e => {
-    const dcaBtn = e.target.closest('[data-dca-asset]');
-    if (dcaBtn) openDcaModal(null, dcaBtn.dataset.dcaAsset);
-    const sellBtn = e.target.closest('[data-sell-asset]');
-    if (sellBtn) openSellModal(null, sellBtn.dataset.sellAsset);
-  });
 
   if ($('#dcaForm')) {
     $('#dcaForm').onsubmit = e => {
@@ -2391,16 +2423,6 @@ function bindEvents() {
 
   if ($('#assetSearch')) $('#assetSearch').oninput = renderAssets;
   if ($('#assetFilter')) $('#assetFilter').onchange = renderAssets;
-  document.addEventListener('click', e => {
-    const editBtn = e.target.closest('[data-edit-asset]');
-    const delBtn = e.target.closest('[data-delete-asset]');
-    if (editBtn) openAssetModal(state.assets.find(a => a.id === editBtn.dataset.editAsset));
-    if (delBtn && confirm('Xoá khoản này khỏi danh sách?')) {
-      state.assets = state.assets.filter(a => a.id !== delBtn.dataset.deleteAsset);
-      saveState();
-      renderAll();
-    }
-  });
 
   if ($('#addTransaction')) {
     $('#addTransaction').onclick = () => {
@@ -2412,7 +2434,7 @@ function bindEvents() {
       $('#txQtyDelta').value = '';
       $('#txAmount').value = '';
       $('#txNote').value = '';
-      $('#transactionDialog').showModal();
+      if ($('#transactionDialog')) $('#transactionDialog').showModal();
     };
   }
 
@@ -2482,7 +2504,7 @@ function bindEvents() {
     };
   }
 
-  if ($('#addCashflow')) $('#addCashflow').onclick = () => { $('#cfDate').value = today(); $('#cashDialog').showModal(); };
+  if ($('#addCashflow')) $('#addCashflow').onclick = () => { $('#cfDate').value = today(); if ($('#cashDialog')) $('#cashDialog').showModal(); };
   if ($('#cashForm')) {
     $('#cashForm').onsubmit = e => {
       e.preventDefault();
@@ -2506,7 +2528,7 @@ function bindEvents() {
     };
   }
 
-  if ($('#addIndicator')) $('#addIndicator').onclick = () => $('#indicatorDialog').showModal();
+  if ($('#addIndicator')) $('#addIndicator').onclick = () => { if ($('#indicatorDialog')) $('#indicatorDialog').showModal(); };
   if ($('#indicatorForm')) {
     $('#indicatorForm').onsubmit = e => {
       e.preventDefault();
