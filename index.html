@@ -202,7 +202,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       <button type="button" class="nav-item" data-page="reports">▦ <span>Báo cáo</span></button>
       <button type="button" class="nav-item" data-page="settings">⚙ <span>Cài đặt & dữ liệu</span></button>
     </nav>
-    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.3.6 · Đầy đủ mục con</div>
+    <div class="sidebar-foot"><span class="status-dot"></span> Phiên bản 0.3.7 · Live Vàng · BTC · CK VN</div>
   </aside>
 
   <main class="main">
@@ -212,7 +212,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
         <h1 id="pageTitle">Tổng quan tài sản</h1>
       </div>
       <div class="top-actions">
-        <span class="local-pill" id="livePill"><i></i> <span id="livePillText">macOS App · USD/VND: 25.500</span></span>
+        <span class="local-pill" id="livePill"><i></i> <span id="livePillText">macOS App · USD/VND: 25.704</span></span>
         <button type="button" class="secondary" id="quickOtaBtn" title="Kiểm tra cập nhật ứng dụng từ đám mây">☁ Cập nhật App</button>
         <button type="button" class="secondary" id="syncMarketBtn">↻ Cập nhật giá</button>
         <button type="button" class="primary" id="quickAdd">＋ Thêm tài sản</button>
@@ -254,7 +254,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
       <article class="panel" id="maturityAlertPanel" style="display:none">
         <div class="panel-head" style="margin-bottom:8px">
-          <div><h3>⏰ Cảnh báo lãi suất đáo hạn tiền gửi</h3><p>Các khoản tiền gửi tiết kiệm / quỹ cơ hội sắp đáo hạn hoặc đã tới hạn</p></div>
+          <div><h3>⏰ Cảnh báo đáo hạn tiền gửi</h3><p>Các khoản tiền gửi tiết kiệm / quỹ cơ hội có kỳ hạn sắp đáo hạn hoặc đã tới hạn</p></div>
         </div>
         <div id="maturityAlertList" class="recent-list"></div>
       </article>
@@ -350,7 +350,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
     <section id="goldPage" class="page">
       <div class="module-hero gold-hero">
         <div class="module-symbol">◈</div>
-        <div><div class="eyebrow">ĐẦU TƯ</div><h2>Vàng DOJI & Vàng Thế Giới</h2><p>Tự động cập nhật vàng thế giới (Binance PAXG) và 3 dòng vàng DOJI (Nhẫn tròn 9999 Hưng Thịnh Vượng, Vàng miếng SJC, Nữ trang 9999).</p></div>
+        <div><div class="eyebrow">ĐẦU TƯ</div><h2>Vàng DOJI & Vàng Thế Giới</h2><p>Cập nhật giá vàng thế giới (Binance PAXG) và 3 dòng vàng DOJI (Nhẫn tròn 9999 Hưng Thịnh Vượng, Vàng miếng SJC, Nữ trang 9999).</p></div>
       </div>
 
       <div class="market-bar">
@@ -488,15 +488,15 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
     <section id="depositsPage" class="page">
       <div class="module-hero deposit-hero">
         <div class="module-symbol">🏦</div>
-        <div><div class="eyebrow">TIỀN GỬI</div><h2>Tiền gửi tiết kiệm</h2><p>Theo dõi sổ tiết kiệm, lãi suất năm, kỳ hạn, ngày đáo hạn và cảnh báo lãi suất sắp đáo hạn.</p></div>
+        <div><div class="eyebrow">TIỀN GỬI</div><h2>Tiền gửi tiết kiệm</h2><p>Theo dõi sổ tiết kiệm do bạn tự nhập số dư, lãi suất, kỳ hạn và cảnh báo đáo hạn.</p></div>
       </div>
       <div class="section-toolbar">
-        <div><h2>Danh sách tiền gửi tiết kiệm</h2><p>Cảnh báo tự động khi còn dưới 14 ngày đáo hạn hoặc đã đến hạn tất toán/tái tục.</p></div>
+        <div><h2>Danh sách tiền gửi tiết kiệm</h2><p>Không tự ghi đè giá trị/lãi suất ngân hàng; cảnh báo khi còn ≤14 ngày đáo hạn hoặc đã tới hạn.</p></div>
         <button type="button" class="primary" data-add-deposit-kind="deposit">＋ Thêm tiền gửi tiết kiệm</button>
       </div>
       <div class="metric-grid three">
         <article class="metric-card"><div class="metric-label">TỔNG TIỀN GỬI TIẾT KIỆM</div><div class="metric-value" id="depSavingTotal">0 ₫</div></article>
-        <article class="metric-card"><div class="metric-label">LÃI DỰ KIẾN / KỲ HẠN</div><div class="metric-value" id="depSavingInterest">0 ₫</div></article>
+        <article class="metric-card"><div class="metric-label">LÃI KỲ HẠN ƯỚC TÍNH</div><div class="metric-value" id="depSavingInterest">0 ₫</div></article>
         <article class="metric-card"><div class="metric-label">CẢNH BÁO ĐÁO HẠN (≤14 NGÀY)</div><div class="metric-value" id="depSavingAlerts">0 khoản</div></article>
       </div>
       <div id="depositSavingCards" class="asset-grid"><div class="empty">Chưa có khoản tiền gửi tiết kiệm nào.</div></div>
@@ -571,7 +571,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
               <h3>☁ Cập nhật ứng dụng trực tiếp từ đám mây (Không cần cài lại .app)</h3>
               <p>Tải phiên bản giao diện & công thức mới từ GitHub về thẳng ứng dụng. Toàn bộ dữ liệu tài sản của bạn được giữ nguyên 100%.</p>
             </div>
-            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.3.6-ota</span>
+            <span class="status-badge" id="otaVersionBadge">Phiên bản: 0.3.7-ota</span>
           </div>
 
           <label style="font-size:11px;color:#45566a;font-weight:600;display:block;margin-top:8px">
@@ -626,7 +626,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
       </div>
     </section>
 
-    <footer>WealthOS 0.3.6 · Hiển thị chi tiết các mục đầu tư & tiền gửi</footer>
+    <footer>WealthOS 0.3.7 · Realtime Vàng · Bitcoin · Chứng khoán VN · Tiền gửi tự nhập</footer>
   </main>
 </div>
 
@@ -683,11 +683,11 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
           <option value="crypto">Bitcoin / Crypto</option>
         </select>
       </label>
-      <label>Mã / loại tài sản<input id="assetTicker" maxlength="30" placeholder="DOJI nhẫn, VESAF, FPT, ACB…"></label>
+      <label>Mã / loại tài sản<input id="assetTicker" maxlength="30" placeholder="DOJI nhẫn, VESAF, FPT, HPG, BTC, LINK…"></label>
       <label>Số lượng<input id="assetQuantity" type="number" min="0" step="any" placeholder="0"></label>
       <label>Giá trị hiện tại (VND)<input id="assetValue" type="number" min="0" step="1" required placeholder="0"></label>
       <label>Giá vốn / gốc gửi (VND)<input id="assetCost" type="number" min="0" step="1" placeholder="Không bắt buộc"></label>
-      <label>Lãi suất (%/năm — nếu gửi)<input id="assetRate" type="number" min="0" max="50" step="0.05" placeholder="Ví dụ: 5.5"></label>
+      <label>Lãi suất (%/năm — nếu gửi)<input id="assetRate" type="number" min="0" max="50" step="0.05" placeholder="Ví dụ: 8.5"></label>
       <label>Kỳ hạn (tháng — nếu gửi)<input id="assetTerm" type="number" min="0" max="120" step="1" placeholder="Ví dụ: 6"></label>
       <label>Ngày gửi / cập nhật<input id="assetDate" type="date"></label>
     </div>
@@ -773,7 +773,7 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 </dialog>
 
 <script>
-const APP_VERSION = '0.3.6-ota';
+const APP_VERSION = '0.3.7-ota';
 const DEFAULT_OTA_URL = 'https://api.github.com/repos/nightlostls/wealthos-ota/contents/index.html';
 const STORAGE_KEY = 'wealthos_trial_v1';
 const LUONG_PER_OZ = 37.5 / 31.1035;
@@ -837,7 +837,7 @@ let state = loadState();
 function defaultState() {
   return {
     otaUrl: DEFAULT_OTA_URL,
-    fx: 25500,
+    fx: 25704,
     fxAuto: true,
     assets: [],
     transactions: [],
@@ -845,9 +845,9 @@ function defaultState() {
     indicators: [],
     notes: { goldThesis: '', bitcoinThesis: '', stocksThesis: '' },
     goldPrices: {
-      'DOJI nhẫn': { b: 140300000, s: 143300000, src: 'Nhập sẵn' },
-      'DOJI miếng': { b: 141800000, s: 144800000, src: 'Nhập sẵn' },
-      'DOJI nữ trang 9999': { b: 138800000, s: 141800000, src: 'Nhập sẵn' }
+      'DOJI nhẫn': { b: 132500000, s: 136500000, src: 'Đã lưu' },
+      'DOJI miếng': { b: 141800000, s: 144800000, src: 'Đã lưu' },
+      'DOJI nữ trang 9999': { b: 138800000, s: 141800000, src: 'Đã lưu' }
     },
     market: {
       goldUsd: 0, goldChg: 0,
@@ -859,10 +859,21 @@ function defaultState() {
   };
 }
 
+function parseRateAndTermFromNote(noteStr) {
+  const txt = String(noteStr || '');
+  const rMatch = /(?:lãi\s*suất|lãi)\s*([0-9]+(?:[.,][0-9]+)?)\s*%/i.exec(txt);
+  const tMatch = /(?:kỳ\s*hạn)\s*([0-9]+)\s*tháng/i.exec(txt);
+  return {
+    rate: rMatch ? Number(rMatch[1].replace(',', '.')) || 0 : 0,
+    term: tMatch ? Number(tMatch[1]) || 0 : 0
+  };
+}
+
 function normalizeAsset(raw) {
   const a = { ...(raw || {}) };
   a.id = a.id || uid();
   a.name = String(a.name || a.title || a.ticker || 'Tài sản').trim();
+
   const catRaw = String(a.category || a.type || a.group || '').toLowerCase();
   if (['cash', 'deposit', 'deposits', 'bank', 'saving', 'savings', 'fund_cash', 'money'].includes(catRaw)) {
     a.category = 'cash';
@@ -877,9 +888,10 @@ function normalizeAsset(raw) {
   }
 
   const kindRaw = String(a.kind || a.subType || a.tag || '').toLowerCase();
+  const comboTxt = `${a.name} ${a.ticker || ''} ${kindRaw}`.toLowerCase();
   if (a.category === 'cash') {
-    if (kindRaw.includes('em') || kindRaw.includes('khẩn') || kindRaw.includes('dự phòng')) a.kind = 'em';
-    else if (kindRaw.includes('op') || kindRaw.includes('cơ hội')) a.kind = 'op';
+    if (kindRaw === 'em' || comboTxt.includes('khẩn cấp') || comboTxt.includes('dự phòng')) a.kind = 'em';
+    else if (kindRaw === 'op' || comboTxt.includes('cơ hội')) a.kind = 'op';
     else a.kind = kindRaw || 'deposit';
   } else {
     a.kind = kindRaw || ({ gold: 'gold', bitcoin: 'crypto', stock: 'stock' }[a.category] || '');
@@ -889,8 +901,10 @@ function normalizeAsset(raw) {
   a.value = Number(a.value ?? a.currentValue ?? a.amount ?? 0) || 0;
   a.cost = a.cost === '' || a.cost == null ? 0 : (Number(a.cost) || 0);
   a.quantity = a.quantity === '' || a.quantity == null ? null : (Number(a.quantity) || 0);
-  a.rate = Number(a.rate ?? a.interestRate ?? a.meta?.rate ?? 0) || 0;
-  a.term = Number(a.term ?? a.termMonths ?? a.meta?.term ?? 0) || 0;
+
+  const parsedNote = parseRateAndTermFromNote(a.note);
+  a.rate = Number(a.rate ?? a.interestRate ?? a.meta?.rate ?? parsedNote.rate ?? 0) || 0;
+  a.term = Number(a.term ?? a.termMonths ?? a.meta?.term ?? parsedNote.term ?? 0) || 0;
   a.date = a.date || a.startDate || '';
   a.updatedAt = a.updatedAt || new Date().toISOString();
   a.note = String(a.note || a.desc || '').trim();
@@ -931,8 +945,9 @@ function saveState() {
 }
 
 function parseDepositMeta(a) {
-  const rate = Number(a.rate ?? a.meta?.rate ?? 0) || 0;
-  const term = Number(a.term ?? a.meta?.term ?? 0) || 0;
+  const parsedNote = parseRateAndTermFromNote(a.note);
+  const rate = Number(a.rate ?? a.meta?.rate ?? parsedNote.rate ?? 0) || 0;
+  const term = Number(a.term ?? a.meta?.term ?? parsedNote.term ?? 0) || 0;
   const startStr = a.date || '';
   let maturityDate = null;
   let daysLeft = null;
@@ -973,8 +988,8 @@ function getGoldBidPerChi(asset) {
   const key = `${asset?.ticker || ''} ${asset?.name || ''}`.toLowerCase();
   let row = null;
   if (key.includes('nữ trang') || key.includes('9999')) row = gp['DOJI nữ trang 9999'];
-  if (key.includes('nhẫn') || key.includes('hưng thịnh')) row = gp['DOJI nhẫn'];
   else if (key.includes('miếng') || key.includes('sjc') || key.includes('avpl')) row = gp['DOJI miếng'];
+  else if (key.includes('nhẫn') || key.includes('hưng thịnh')) row = gp['DOJI nhẫn'];
   if (!row) row = gp[asset?.ticker] || gp[asset?.name] || gp['DOJI nhẫn'];
   return row && Number(row.b) > 0 ? Number(row.b) / 10 : 0;
 }
@@ -989,7 +1004,7 @@ function revalueGoldAssets() {
 }
 
 function renderAll() {
-  const fx = Number(state.fx) || 25500;
+  const fx = Number(state.fx) || 25704;
   const assets = (state.assets || []).map(normalizeAsset);
   state.assets = assets;
 
@@ -1123,7 +1138,7 @@ function buildDepositCardHtml(a) {
 
   return `<article class="asset-card">
     <div class="asset-card-top">
-      <span class="asset-tag">${m.rate > 0 ? `Lãi ${m.rate}%/năm` : 'Không kỳ hạn / Chưa nhập lãi'}${m.term > 0 ? ` · ${m.term}T` : ''}</span>
+      <span class="asset-tag">${m.rate > 0 ? `Lãi ${m.rate}%/năm` : 'Tự nhập / Chưa đặt lãi'}${m.term > 0 ? ` · ${m.term}T` : ''}</span>
       ${badgeHtml}
     </div>
     <h3>${esc(a.name)}</h3>
@@ -1131,7 +1146,7 @@ function buildDepositCardHtml(a) {
     <div class="asset-detail">${Number(a.cost) > 0 ? 'Gốc: ' + money(a.cost) : 'Chưa ghi vốn gốc'}${m.estInterest > 0 ? ` · Lãi kỳ hạn: <span class="pos">+${money(m.estInterest)}</span>` : ''}</div>
     ${a.note ? `<div class="asset-detail" style="margin-top:4px">${esc(a.note)}</div>` : ''}
     <div class="asset-actions">
-      <button type="button" class="small-btn" data-edit-asset="${esc(a.id)}">Sửa / Lãi suất</button>
+      <button type="button" class="small-btn" data-edit-asset="${esc(a.id)}">Sửa</button>
       <button type="button" class="small-btn" data-delete-asset="${esc(a.id)}">Xoá</button>
     </div>
   </article>`;
@@ -1197,7 +1212,7 @@ function renderCashflows() {
 }
 
 function renderModules() {
-  const fx = Number(state.fx) || 25500;
+  const fx = Number(state.fx) || 25704;
   const m = state.market || {};
 
   const golds = state.assets.filter(a => a.category === 'gold');
@@ -1211,7 +1226,7 @@ function renderModules() {
   const worldVnd = m.goldUsd > 0 ? m.goldUsd * LUONG_PER_OZ * fx : 0;
   const nhan = state.goldPrices['DOJI nhẫn'] || { b: 0, s: 0 };
   $('#mktGoldUsd').textContent = m.goldUsd > 0 ? usd(m.goldUsd) : '—';
-  $('#mktGoldChg').textContent = m.goldUsd > 0 ? `24h: ${m.goldChg >= 0 ? '+' : ''}${Number(m.goldChg || 0).toFixed(2)}%` : '24h: —';
+  $('#mktGoldChg').textContent = m.goldUsd > 0 ? `24h: ${Number(m.goldChg || 0) >= 0 ? '+' : ''}${Number(m.goldChg || 0).toFixed(2)}%` : '24h: —';
   $('#mktGoldVnd').textContent = worldVnd > 0 ? money(worldVnd) : '—';
   $('#mktDojiNhan').textContent = nhan.b && nhan.s ? `${num(nhan.b / 1e6, 2)} / ${num(nhan.s / 1e6, 2)} tr` : '—';
   $('#mktDojiNhanChi').textContent = nhan.b ? `Mua 1 chỉ: ${money(nhan.b / 10)}` : 'Theo chỉ: —';
@@ -1240,7 +1255,7 @@ function renderModules() {
       <td>${spread !== null ? money(spread) : '—'}</td>
       <td class="${prem > 0 ? 'pos' : prem < 0 ? 'neg' : ''}">${prem !== null ? `${prem >= 0 ? '+' : ''}${money(prem)} (${premPct})` : '—'}</td>
       <td>${row.b ? money(row.b / 10) : '—'} / ${row.s ? money(row.s / 10) : '—'}</td>
-      <td><span class="muted">${esc(row.src || 'Nhập sẵn')}</span></td>
+      <td><span class="muted">${esc(row.src || 'Đã lưu')}</span></td>
     </tr>`;
   }).join('');
 
@@ -1409,7 +1424,7 @@ function updateDcaPreview() {
   const asset = state.assets.find(a => a.id === $('#dcaAssetSelect')?.value);
   const addQ = Number($('#dcaQty')?.value) || 0;
   const addAmt = Number($('#dcaAmount')?.value) || 0;
-  const fx = Number(state.fx) || 25500;
+  const fx = Number(state.fx) || 25704;
   if (!asset) return;
 
   const q0 = Number(asset.quantity) || 0;
@@ -1485,7 +1500,7 @@ async function fetchDojiGoldPrices() {
 
   const doc = new DOMParser().parseFromString(xmlText, 'text/xml');
   const rows = [];
-  const w = state.market.goldUsd > 0 ? state.market.goldUsd * LUONG_PER_OZ * (Number(state.fx) || 25500) : 140000000;
+  const w = state.market.goldUsd > 0 ? state.market.goldUsd * LUONG_PER_OZ * (Number(state.fx) || 25704) : 140000000;
   const scaleLuong = raw => {
     const v = Number(String(raw || '').replace(/\D/g, ''));
     if (!v) return 0;
@@ -1583,7 +1598,7 @@ async function fetchVnIndices() {
       statusEl.textContent = `Chỉ số VN: Đã cập nhật ${okCount}/4 chỉ số lúc ${nowTime}`;
       statusEl.className = 'status-badge live';
     } else {
-      statusEl.textContent = 'Chỉ số VN: Không kết nối được nguồn dữ liệu';
+      statusEl.textContent = 'Chỉ số VN: Đang dùng số liệu gần nhất';
       statusEl.className = 'status-badge stale';
     }
   }
@@ -1661,7 +1676,7 @@ async function refreshAllMarketData() {
     })
   ]);
 
-  const fx = Number(state.fx) || 25500;
+  const fx = Number(state.fx) || 25704;
   state.assets.forEach(a => {
     const q = Number(a.quantity) || 0;
     if (!(q > 0)) return;
@@ -1690,7 +1705,7 @@ async function handleLegacyImport(file) {
 
     if (file.name.toLowerCase().endsWith('.html') || rawText.trim().startsWith('<')) {
       const match = /<script[^>]*id=["']seed["'][^>]*>([\s\S]*?)<\/script>/i.exec(rawText);
-      if (!match) throw new Error('File HTML này chưa nhúng dữ liệu. Hãy dùng nút “Tải bản HTML kèm dữ liệu” hoặc “Sao lưu (JSON)” trên trang cũ.');
+      if (!match) throw new Error('File HTML này chưa nhúng dữ liệu.');
       payload = JSON.parse(match[1]);
     } else {
       payload = JSON.parse(rawText);
@@ -1701,7 +1716,7 @@ async function handleLegacyImport(file) {
     }
 
     const d = payload.data;
-    const fx = Number(d.fx) || 25500;
+    const fx = Number(d.fx) || 25704;
     const importedAssets = [];
     const importedTx = [];
     const lotsOf = (h, qk, ck) => Array.isArray(h.lots) && h.lots.length ? h.lots : (Number(h[qk]) > 0 ? [{ q: Number(h[qk]), p: Number(h[ck]) || 0, d: h.d || '' }] : []);
@@ -1772,19 +1787,7 @@ async function handleLegacyImport(file) {
       });
     });
 
-    const catNames = { crypto: 'Tiền điện tử', stock: 'Chứng khoán', gold: 'Vàng', dep: 'Tiền gửi', op: 'Quỹ cơ hội', em: 'Quỹ khẩn cấp' };
-    (d.wd || []).forEach(w => {
-      const txType = w.t === 'ban' ? 'sell' : w.t === 'chuyen' ? 'transfer' : 'withdraw';
-      const amt = Number(w.a) || 0, cost = Number(w.c) || 0;
-      importedTx.push({
-        id: uid(), type: txType, assetName: catNames[w.f] || w.f || 'Danh mục',
-        date: w.d || today(), amount: amt,
-        realizedPnl: w.t === 'ban' && cost > 0 ? amt - cost : null,
-        note: `${w.t === 'chuyen' ? `Chuyển sang ${catNames[w.to] || w.to}. ` : ''}${w.n || ''}`.trim()
-      });
-    });
-
-    if (state.assets.length > 0 && !confirm(`Hiện đang có ${state.assets.length} tài sản. Bạn muốn THAY THẾ bằng ${importedAssets.length} tài sản từ file cũ? (Bấm Huỷ để gộp thêm)`)) {
+    if (state.assets.length > 0 && !confirm(`Hiện đang có ${state.assets.length} tài sản. Bạn muốn THAY THẾ bằng ${importedAssets.length} tài sản từ file cũ?`)) {
       state.assets.push(...importedAssets);
       state.transactions.push(...importedTx);
     } else {
@@ -1797,7 +1800,7 @@ async function handleLegacyImport(file) {
     renderAll();
 
     statusEl.style.color = '#238568';
-    statusEl.textContent = `Đã nhập thành công ${importedAssets.length} khoản tài sản và ${importedTx.length} giao dịch từ file cũ. Đang đồng bộ giá thị trường…`;
+    statusEl.textContent = `Đã nhập thành công ${importedAssets.length} khoản tài sản. Đang đồng bộ giá thị trường…`;
     refreshAllMarketData();
   } catch (err) {
     statusEl.style.color = '#c85a5a';
@@ -1875,7 +1878,7 @@ function bindEvents() {
     const asset = state.assets.find(a => a.id === $('#dcaAssetSelect').value);
     const addQ = Number($('#dcaQty').value) || 0;
     const addAmt = Number($('#dcaAmount').value) || 0;
-    const fx = Number(state.fx) || 25500;
+    const fx = Number(state.fx) || 25704;
     if (!asset || addQ <= 0 || addAmt <= 0) return;
 
     const q0 = Number(asset.quantity) || 0;
@@ -1973,7 +1976,7 @@ function bindEvents() {
     const prev = existingId ? state.assets.find(x => x.id === existingId) : null;
     const cat = $('#assetCategory').value;
     const kind = $('#assetKind').value || prev?.kind || ({ cash: 'deposit', gold: 'gold', bitcoin: 'crypto', stock: 'stock' }[cat] || '');
-    const record = {
+    const record = normalizeAsset({
       ...(prev || {}),
       id: existingId || uid(),
       name: $('#assetName').value.trim(),
@@ -1988,7 +1991,7 @@ function bindEvents() {
       date: $('#assetDate').value || today(),
       note: $('#assetNote').value.trim(),
       updatedAt: new Date().toISOString()
-    };
+    });
     if (prev) {
       state.assets = state.assets.map(x => x.id === existingId ? record : x);
     } else {
@@ -2151,21 +2154,23 @@ function bindEvents() {
   };
 
   $('#loadSampleBtn').onclick = () => {
-    const fx = state.fx || 25500;
-    const nh = state.goldPrices['DOJI nhẫn']?.b || 140300000;
+    const fx = state.fx || 25704;
+    const nh = state.goldPrices['DOJI nhẫn']?.b || 132500000;
     state.assets = [
-      { id: uid(), name: 'Tiền gửi tiết kiệm ACB', ticker: 'Tiết kiệm', category: 'cash', kind: 'deposit', quantity: 1, cost: 200000000, value: 204500000, rate: 5.5, term: 6, date: today(), updatedAt: new Date().toISOString(), note: 'Sổ tiết kiệm kỳ hạn 6 tháng' },
-      { id: uid(), name: 'Quỹ cơ hội dự trữ', ticker: 'Quỹ cơ hội', category: 'cash', kind: 'op', quantity: 1, cost: 50000000, value: 50500000, rate: 4.5, term: 3, date: today(), updatedAt: new Date().toISOString(), note: 'Sẵn sàng giải ngân khi thị trường điều chỉnh' },
-      { id: uid(), name: 'Quỹ dự phòng khẩn cấp', ticker: 'Quỹ khẩn cấp', category: 'cash', kind: 'em', quantity: 1, cost: 80000000, value: 80000000, rate: 0, term: 0, date: today(), updatedAt: new Date().toISOString(), note: 'Tách riêng khỏi tài sản chung' },
-      { id: uid(), name: 'Quỹ mở VESAF', ticker: 'VESAF', category: 'stock', kind: 'fund', quantity: 4500, cost: 135000000, value: 158400000, date: today(), updatedAt: new Date().toISOString(), note: 'Quỹ cổ phiếu năng động VinaCapital' },
-      { id: uid(), name: 'Cổ phiếu FPT', ticker: 'FPT', category: 'stock', kind: 'stock', quantity: 1000, cost: 112000000, value: 136500000, date: today(), updatedAt: new Date().toISOString(), note: 'Cổ phiếu công nghệ tăng trưởng' },
-      { id: uid(), name: 'Bitcoin (BTC)', ticker: 'BTC', category: 'bitcoin', kind: 'crypto', quantity: 0.08, cost: Math.round(0.08 * 68000 * 25000), value: Math.round(0.08 * 90000 * fx), date: today(), updatedAt: new Date().toISOString(), meta: { usdCost: 0.08 * 68000 }, note: 'Nắm giữ dài hạn' },
-      { id: uid(), name: 'DOJI Nhẫn tròn 9999', ticker: 'DOJI nhẫn', category: 'gold', kind: 'gold', quantity: 5, cost: 68000000, value: Math.round(5 * (nh / 10)), date: today(), updatedAt: new Date().toISOString(), note: '5 chỉ vàng nhẫn Hưng Thịnh Vượng' }
+      { id: uid(), name: 'tikop · Tiền gửi ngân hàng', ticker: 'Tiền gửi tiết kiệm', category: 'cash', kind: 'deposit', quantity: 1, cost: 10000000, value: 10233845, rate: 8.5, term: 5, date: '2026-08-10', updatedAt: new Date().toISOString(), note: 'Lãi suất 8.5%/năm · Kỳ hạn 5 tháng' },
+      { id: uid(), name: 'topi · Quỹ cơ hội', ticker: 'Quỹ cơ hội', category: 'cash', kind: 'op', quantity: 1, cost: 4697000, value: 4727922, rate: 7.9, term: 1, date: '2026-10-10', updatedAt: new Date().toISOString(), note: 'Lãi suất 7.9%/năm · Kỳ hạn 1 tháng' },
+      { id: uid(), name: 'cake · Quỹ khẩn cấp', ticker: 'Quỹ khẩn cấp', category: 'cash', kind: 'em', quantity: 1, cost: 30000000, value: 30310055, rate: 9.4, term: 6, date: '2026-10-10', updatedAt: new Date().toISOString(), note: 'Tách riêng khỏi tài sản chung' },
+      { id: uid(), name: 'VESAF (Quỹ mở)', ticker: 'VESAF', category: 'stock', kind: 'fund', quantity: 127.46, cost: 3999950, value: 3861727, date: '2026-10-13', updatedAt: new Date().toISOString(), note: 'Chứng chỉ quỹ mở' },
+      { id: uid(), name: 'FPT (Cổ phiếu)', ticker: 'FPT', category: 'stock', kind: 'stock', quantity: 15, cost: 817750, value: 710250, date: '2026-11-19', updatedAt: new Date().toISOString(), note: 'Cổ phiếu niêm yết' },
+      { id: uid(), name: 'HPG (Cổ phiếu)', ticker: 'HPG', category: 'stock', kind: 'stock', quantity: 50, cost: 1035000, value: 1025000, date: '2026-11-19', updatedAt: new Date().toISOString(), note: 'Cổ phiếu niêm yết' },
+      { id: uid(), name: 'BTC (Crypto)', ticker: 'BTC', category: 'bitcoin', kind: 'crypto', quantity: 0.00302903, cost: 6298854, value: Math.round(0.00302903 * (state.market.btcUsd || 62690) * fx), date: '2026-11-05', updatedAt: new Date().toISOString(), meta: { usdCost: 243.22717351682616 }, note: 'Vốn gốc: $243.23' },
+      { id: uid(), name: 'LINK (Crypto)', ticker: 'LINK', category: 'bitcoin', kind: 'crypto', quantity: 10.10535, cost: 3209435, value: Math.round(10.10535 * (state.market.cryptoPrices?.LINK?.p || 9.028) * fx), date: '2026-10-10', updatedAt: new Date().toISOString(), meta: { usdCost: 124.09369799999999 }, note: 'Vốn gốc: $124.09' },
+      { id: uid(), name: 'Nhẫn', ticker: 'DOJI nhẫn', category: 'gold', kind: 'gold', quantity: 1, cost: 13670000, value: Math.round(1 * (nh / 10)), date: '2026-11-19', updatedAt: new Date().toISOString(), note: '1 chỉ vàng nhẫn DOJI' }
     ];
     saveState();
     renderAll();
     $('#importStatus').style.color = '#238568';
-    $('#importStatus').textContent = 'Đã nạp bộ dữ liệu mẫu. Đang đồng bộ giá DOJI và VN-Index…';
+    $('#importStatus').textContent = 'Đã nạp bộ dữ liệu mẫu. Đang đồng bộ giá Vàng, BTC và Chứng khoán VN…';
     refreshAllMarketData();
   };
 
@@ -2191,11 +2196,18 @@ function bindEvents() {
     try {
       const j = JSON.parse(await f.text());
       if (j.app !== 'wealthos' || !j.data) throw new Error('File không phải bản sao lưu WealthOS.');
-      state = { ...defaultState(), ...j.data };
+      state = {
+        ...defaultState(),
+        ...j.data,
+        assets: Array.isArray(j.data.assets) ? j.data.assets.map(normalizeAsset) : [],
+        goldPrices: { ...defaultState().goldPrices, ...(j.data.goldPrices || {}) },
+        market: { ...defaultState().market, ...(j.data.market || {}) }
+      };
       saveState();
       renderAll();
+      refreshAllMarketData();
       $('#restoreStatus').style.color = '#238568';
-      $('#restoreStatus').textContent = 'Đã khôi phục dữ liệu thành công.';
+      $('#restoreStatus').textContent = 'Đã khôi phục dữ liệu và đồng bộ giá thị trường thành công.';
     } catch (err) {
       $('#restoreStatus').style.color = '#c85a5a';
       $('#restoreStatus').textContent = err.message;
