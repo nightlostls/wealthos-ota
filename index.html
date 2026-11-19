@@ -2818,5 +2818,40 @@ resetAutoSyncLoop();
 sendNativeOTA({ action: 'status' });
 refreshAllMarketData();
 </script>
+
+<script>
+(function() {
+  function hookAndroidBridge() {
+    if (!window.AndroidBridge) return;
+    var otaBtn = document.getElementById('quickOtaBtn');
+    if (otaBtn && typeof window.AndroidBridge.updateAppOneClick === 'function') {
+      otaBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        window.AndroidBridge.updateAppOneClick();
+      }, true);
+    }
+    var pill = document.getElementById('livePillText');
+    if (pill && pill.textContent.indexOf('macOS App') !== -1) {
+      pill.textContent = pill.textContent.replace('macOS App', 'Android App');
+    }
+    if (typeof window.triggerDownload === 'function' && typeof window.AndroidBridge.saveExportFile === 'function') {
+      var origDownload = window.triggerDownload;
+      window.triggerDownload = function(content, mime, filename) {
+        try {
+          window.AndroidBridge.saveExportFile(filename, content);
+        } catch (err) {
+          origDownload(content, mime, filename);
+        }
+      };
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hookAndroidBridge);
+  } else {
+    hookAndroidBridge();
+  }
+})();
+</script>
 </body>
 </html>
