@@ -207,52 +207,164 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 
 
 
+
+
 /* === WEALTHOS_MOBILE_BOTTOM_NAV_CSS === */
 @media (max-width: 1024px), (hover: none) and (pointer: coarse) {
+  :root {
+    --wos-bg: #090909;
+    --wos-bg-sub: #111111;
+    --wos-card: #181818;
+    --wos-card-sub: #202020;
+    --wos-border: #292929;
+    --wos-text: #F5F5F5;
+    --wos-muted: #929292;
+    --wos-green: #25C76F;
+    --wos-red: #F04452;
+    --wos-accent: #F5B82E;
+  }
+
+  html, body {
+    background: #090909 !important;
+    color: #F5F5F5 !important;
+    overflow-x: hidden !important;
+  }
+
   .main, main, .content {
     margin-left: 0 !important;
-    padding-bottom: 78px !important;
+    padding: 0 12px 78px 12px !important;
+    background: #090909 !important;
+    color: #F5F5F5 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
+
+  /* 3. Header tối giản 3 phần: Trái Menu | Giữa Tiêu đề | Phải Hành động */
   #__wos_mobile_topbar {
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 12px;
-    margin: 0 0 12px 0;
-    background: #0f172a;
-    color: #f8fafc;
-    position: sticky;
-    top: 0;
-    z-index: 2147483640;
-    border-radius: 12px;
+    display: grid !important;
+    grid-template-columns: 44px 1fr auto !important;
+    align-items: center !important;
+    gap: 8px !important;
+    height: 52px !important;
+    padding: 0 12px !important;
+    margin: 0 -12px 12px -12px !important;
+    background: #090909 !important;
+    color: #F5F5F5 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 2147483640 !important;
+    border-bottom: 1px solid #292929 !important;
   }
-  #__wos_mobile_topbar .wos-m-left {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 700;
-    font-size: 14px;
+  #__wos_mobile_topbar .wos-m-title {
+    text-align: center !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    color: #F5F5F5 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
   #__wos_mobile_topbar .wos-m-actions {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
   }
   #__wos_mobile_topbar button {
-    background: rgba(255,255,255,0.12);
-    color: #f8fafc;
-    border: 1px solid rgba(255,255,255,0.16);
-    border-radius: 9px;
-    height: 34px;
-    padding: 0 9px;
-    font-size: 12px;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    cursor: pointer;
+    background: #181818 !important;
+    color: #F5F5F5 !important;
+    border: 1px solid #292929 !important;
+    border-radius: 10px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    padding: 0 9px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
   }
+
+  /* Ẩn cụm công cụ desktop rườm rà trên mobile */
+  .main > .topbar, .main > header:not(#__wos_mobile_topbar), .zoom-controls, .page-eyebrow {
+    display: none !important;
+  }
+
+  /* 2 & 5 & 6. Thẻ tối màu đồng nhất, loại bỏ nền trắng và gradient sặc sỡ */
+  .card, .panel, .box, .kpi, .stat-card, .hero-card, .asset-hero, [class*="card"], [class*="banner"] {
+    background: #181818 !important;
+    background-image: none !important;
+    color: #F5F5F5 !important;
+    border: 1px solid #292929 !important;
+    border-radius: 14px !important;
+    box-shadow: none !important;
+  }
+  .sub-card, .mini-card, .kpi-sub, .stat-box, .metric-box {
+    background: #202020 !important;
+    background-image: none !important;
+    border: 1px solid #292929 !important;
+    border-radius: 10px !important;
+  }
+
+  h1, h2, h3, h4, strong, b, .value, .amount, .num {
+    color: #F5F5F5 !important;
+  }
+  p, small, .muted, .sub, .label, .caption, th {
+    color: #929292 !important;
+  }
+  .pos, .positive, .profit, .up, [class*="green"] {
+    color: #25C76F !important;
+  }
+  .neg, .negative, .loss, .down, [class*="red"] {
+    color: #F04452 !important;
+  }
+
+  /* Input, select, pill, button chuẩn dark */
+  input, select, textarea {
+    background: #111111 !important;
+    color: #F5F5F5 !important;
+    border: 1px solid #292929 !important;
+    border-radius: 10px !important;
+  }
+  button:not(#__wos_mobile_bottom_nav button):not(#__wos_mobile_topbar button) {
+    background: #202020 !important;
+    color: #F5F5F5 !important;
+    border: 1px solid #292929 !important;
+    border-radius: 10px !important;
+    min-height: 38px !important;
+  }
+  button.primary, .btn-primary {
+    background: #F5B82E !important;
+    color: #090909 !important;
+    border-color: #F5B82E !important;
+    font-weight: 700 !important;
+  }
+
+  /* Bố cục 1 cột gọn gàng */
+  .grid, .row, .cards, .kpi-grid, .settings-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  /* Bảng dữ liệu tối màu, chữ gọn không tràn */
+  table {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    background: #181818 !important;
+    border-collapse: collapse !important;
+  }
+  tr, td, th {
+    background: transparent !important;
+    border-color: #292929 !important;
+    color: #F5F5F5 !important;
+    font-size: 13px !important;
+    padding: 10px 8px !important;
+  }
+
+  /* 8. Thanh điều hướng đáy nền #090909, tỷ lệ gọn sát */
   #__wos_mobile_bottom_nav {
     display: grid !important;
     grid-template-columns: repeat(5, 1fr) !important;
@@ -262,19 +374,18 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
     right: 0 !important;
     bottom: 0 !important;
     width: 100% !important;
-    height: auto !important; min-height: 0 !important;
-    padding: 5px 4px 14px 4px !important;
-    background: #0f172a !important;
-    border-top: 1px solid rgba(255,255,255,0.16) !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 5px 4px 12px 4px !important;
+    background: #090909 !important;
+    border-top: 1px solid #292929 !important;
     z-index: 2147483647 !important;
-    box-shadow: 0 -6px 20px rgba(0,0,0,0.35) !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+    box-shadow: none !important;
   }
   #__wos_mobile_bottom_nav button {
     background: transparent !important;
     border: none !important;
-    color: #cbd5e1 !important;
+    color: #929292 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -282,33 +393,37 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
     gap: 3px !important;
     font-size: 10.5px !important;
     font-weight: 600 !important;
-    padding: 4px 2px !important;
+    padding: 3px 2px !important;
     cursor: pointer !important;
     line-height: 1.1 !important;
   }
   #__wos_mobile_bottom_nav button .wos-nav-ico {
-    font-size: 18px !important;
+    font-size: 17px !important;
     line-height: 1 !important;
   }
   #__wos_mobile_bottom_nav button.active {
-    color: #facc15 !important;
+    color: #F5B82E !important;
   }
   #__wos_mobile_bottom_nav button.wos-center-btn {
     position: relative !important;
-    top: -7px !important;
-    color: #ffffff !important;
+    top: -6px !important;
+    color: #F5F5F5 !important;
   }
   #__wos_mobile_bottom_nav button.wos-center-btn .wos-nav-ico {
-    width: 40px !important; height: 40px !important;
+    width: 38px !important;
+    height: 38px !important;
     border-radius: 999px !important;
-    background: linear-gradient(135deg, #facc15, #eab308) !important;
-    color: #0f172a !important;
+    background: #F5B82E !important;
+    color: #090909 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: 20px !important;
-    box-shadow: 0 6px 16px rgba(234,179,8,0.45) !important;
-    border: 3px solid #0f172a !important;
+    font-size: 18px !important;
+    border: 2px solid #090909 !important;
+    box-shadow: none !important;
+  }
+  #__wos_mobile_bottom_nav button.wos-center-btn.active {
+    color: #F5B82E !important;
   }
 }
 @media (min-width: 1025px) and (hover: hover) {
@@ -3141,6 +3256,8 @@ refreshAllMarketData();
 <script>
 </script>
 <script>
+</script>
+<script>
 // === WEALTHOS_MOBILE_BOTTOM_NAV_JS ===
 (function(){
   if (window.__wosMobileNavReady) return;
@@ -3163,6 +3280,8 @@ refreshAllMarketData();
       if (found) {
         found.click();
         sb.classList.remove("open");
+        sb.style.transform = "";
+        setTimeout(syncHeaderAndNav, 50);
         return true;
       }
     }
@@ -3175,10 +3294,29 @@ refreshAllMarketData();
     sb.classList.toggle("open");
     if (sb.classList.contains("open")) {
       sb.style.display = "flex";
+      sb.style.background = "#111111";
+      sb.style.borderRight = "1px solid #292929";
       sb.style.transform = "translateX(0)";
       sb.style.zIndex = "2147483645";
     } else {
       sb.style.transform = "";
+    }
+  }
+
+  function syncHeaderAndNav() {
+    const sb = document.getElementById("sidebarPanel") || document.querySelector(".sidebar");
+    const nav = document.getElementById("__wos_mobile_bottom_nav");
+    const titleEl = document.querySelector("#__wos_mobile_topbar .wos-m-title");
+    if (!sb) return;
+    const activeEl = sb.querySelector(".active, [aria-current=\"page\"]");
+    const activeText = activeEl ? (activeEl.textContent || "").trim() : "WealthOS";
+    if (titleEl && activeText) titleEl.textContent = activeText;
+    if (nav) {
+      const low = activeText.toLowerCase();
+      nav.querySelectorAll("button").forEach(btn => {
+        const kws = (btn.dataset.match || "").split("|").filter(Boolean);
+        btn.classList.toggle("active", kws.some(k => low.includes(k)));
+      });
     }
   }
 
@@ -3190,12 +3328,10 @@ refreshAllMarketData();
       const top = document.createElement("div");
       top.id = "__wos_mobile_topbar";
       top.innerHTML = `
-        <div class="wos-m-left">
-          <button type="button" id="__wos_m_menu_btn">☰</button>
-          <span>WealthOS</span>
-        </div>
+        <button type="button" id="__wos_m_menu_btn" aria-label="Menu">☰</button>
+        <div class="wos-m-title">WealthOS</div>
         <div class="wos-m-actions">
-          <button type="button" id="__wos_m_tx_btn">⇄ Giao dịch</button>
+          <button type="button" id="__wos_m_tx_btn" title="Giao dịch">⇄</button>
           <button type="button" id="__wos_m_gear_btn" title="Cài đặt & dữ liệu">⚙️</button>
         </div>
       `;
@@ -3211,6 +3347,7 @@ refreshAllMarketData();
       NAV_ITEMS.forEach(item => {
         const btn = document.createElement("button");
         btn.type = "button";
+        btn.dataset.match = item.match.join("|");
         if (item.center) btn.classList.add("wos-center-btn");
         btn.innerHTML = `<span class="wos-nav-ico">${item.icon}</span><span>${item.label}</span>`;
         btn.addEventListener("click", () => clickSidebarItem(item.match));
@@ -3218,6 +3355,7 @@ refreshAllMarketData();
       });
       document.body.appendChild(nav);
     }
+    syncHeaderAndNav();
   }
 
   mountMobileBars();
