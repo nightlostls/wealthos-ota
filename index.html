@@ -433,6 +433,145 @@ dialog::backdrop{background:#0c1724a8;backdrop-filter:blur(3px)}
 }
 /* === END WEALTHOS_MOBILE_BOTTOM_NAV_CSS === */
 
+
+/* === WEALTHOS_THEME_TOGGLE_CSS === */
+html[data-wos-theme="light"] body,
+html[data-wos-theme="light"] .main,
+html[data-wos-theme="light"] main,
+html[data-wos-theme="light"] .content {
+  background: #f4f6f8 !important;
+  color: #0f172a !important;
+}
+html[data-wos-theme="light"] #__wos_mobile_topbar,
+html[data-wos-theme="light"] #__wos_mobile_bottom_nav {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+html[data-wos-theme="light"] #__wos_mobile_topbar button {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+html[data-wos-theme="light"] #__wos_mobile_bottom_nav button {
+  color: #64748b !important;
+}
+html[data-wos-theme="light"] #__wos_mobile_bottom_nav button.active,
+html[data-wos-theme="light"] #__wos_mobile_bottom_nav button.wos-center-btn.active {
+  color: #b45309 !important;
+}
+html[data-wos-theme="light"] #__wos_mobile_bottom_nav button.wos-center-btn .wos-nav-ico {
+  border-color: #ffffff !important;
+}
+html[data-wos-theme="light"] .card,
+html[data-wos-theme="light"] .panel,
+html[data-wos-theme="light"] .box,
+html[data-wos-theme="light"] .kpi,
+html[data-wos-theme="light"] .stat-card,
+html[data-wos-theme="light"] .hero-card,
+html[data-wos-theme="light"] .asset-hero,
+html[data-wos-theme="light"] [class*="card"],
+html[data-wos-theme="light"] [class*="banner"],
+html[data-wos-theme="light"] table {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+html[data-wos-theme="light"] .sub-card,
+html[data-wos-theme="light"] .mini-card,
+html[data-wos-theme="light"] .kpi-sub,
+html[data-wos-theme="light"] .stat-box,
+html[data-wos-theme="light"] .metric-box {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+html[data-wos-theme="light"] h1,
+html[data-wos-theme="light"] h2,
+html[data-wos-theme="light"] h3,
+html[data-wos-theme="light"] h4,
+html[data-wos-theme="light"] strong,
+html[data-wos-theme="light"] b,
+html[data-wos-theme="light"] .value,
+html[data-wos-theme="light"] .amount,
+html[data-wos-theme="light"] .num,
+html[data-wos-theme="light"] tr,
+html[data-wos-theme="light"] td {
+  color: #0f172a !important;
+}
+html[data-wos-theme="light"] p,
+html[data-wos-theme="light"] small,
+html[data-wos-theme="light"] .muted,
+html[data-wos-theme="light"] .sub,
+html[data-wos-theme="light"] .label,
+html[data-wos-theme="light"] .caption,
+html[data-wos-theme="light"] th {
+  color: #475569 !important;
+}
+html[data-wos-theme="light"] input,
+html[data-wos-theme="light"] select,
+html[data-wos-theme="light"] textarea {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+html[data-wos-theme="light"] button:not(#__wos_mobile_bottom_nav button):not(#__wos_mobile_topbar button):not(.wos-theme-seg-btn.active) {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+#__wos_settings_theme_card {
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border: 1px solid #292929;
+  background: #181818;
+}
+html[data-wos-theme="light"] #__wos_settings_theme_card {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+#__wos_settings_theme_card .wos-theme-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+#__wos_settings_theme_card .wos-theme-title {
+  font-weight: 700;
+  font-size: 15px;
+}
+#__wos_settings_theme_card .wos-theme-desc {
+  font-size: 12.5px;
+  color: #929292;
+}
+html[data-wos-theme="light"] #__wos_settings_theme_card .wos-theme-desc {
+  color: #475569 !important;
+}
+#__wos_settings_theme_card .wos-theme-seg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+#__wos_settings_theme_card .wos-theme-seg-btn {
+  height: 40px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+}
+#__wos_settings_theme_card .wos-theme-seg-btn.active {
+  background: #F5B82E !important;
+  color: #090909 !important;
+  border-color: #F5B82E !important;
+}
+/* === END WEALTHOS_THEME_TOGGLE_CSS === */
+
 </style>
 </head>
 <body>
@@ -3364,6 +3503,84 @@ refreshAllMarketData();
   setInterval(mountMobileBars, 1000);
 })();
 // === END WEALTHOS_MOBILE_BOTTOM_NAV_JS ===
+</script>
+<script>
+// === WEALTHOS_THEME_TOGGLE_JS ===
+(function(){
+  const STORAGE_KEY = "__wos_theme_mode";
+  function getSavedTheme() {
+    try {
+      const v = localStorage.getItem(STORAGE_KEY);
+      return (v === "light" || v === "dark") ? v : "dark";
+    } catch (e) {
+      return "dark";
+    }
+  }
+  function applyTheme(mode) {
+    const clean = (mode === "light") ? "light" : "dark";
+    document.documentElement.setAttribute("data-wos-theme", clean);
+    try { localStorage.setItem(STORAGE_KEY, clean); } catch (e) {}
+    document.querySelectorAll(".wos-theme-seg-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.theme === clean);
+    });
+  }
+
+  function isSettingsVisible() {
+    const sb = document.getElementById("sidebarPanel") || document.querySelector(".sidebar");
+    const activeEl = sb ? sb.querySelector(".active, [aria-current=\"page\"]") : null;
+    const activeText = activeEl ? (activeEl.textContent || "").toLowerCase() : "";
+    if (activeText.includes("cài đặt") || activeText.includes("dữ liệu")) return true;
+    const all = Array.from(document.querySelectorAll("h1, h2, h3, h4, .card, section, div"));
+    return all.some(el => {
+      const t = (el.textContent || "");
+      const hasBackup = t.includes("Sao lưu & Khôi phục") || t.includes("Cập nhật ứng dụng") || t.includes("Cài đặt & dữ liệu");
+      if (!hasBackup) return false;
+      const r = el.getBoundingClientRect();
+      return r.width > 0 && r.height > 0 && r.top >= -200 && r.top < window.innerHeight;
+    });
+  }
+
+  function mountThemeCardInSettings() {
+    if (!document.body) return;
+    if (!isSettingsVisible()) return;
+    if (document.getElementById("__wos_settings_theme_card")) {
+      applyTheme(getSavedTheme());
+      return;
+    }
+    const main = document.querySelector(".main, main, .content") || document.body;
+    const topbar = document.getElementById("__wos_mobile_topbar");
+    const card = document.createElement("div");
+    card.id = "__wos_settings_theme_card";
+    card.innerHTML = `
+      <div class="wos-theme-head">
+        <div>
+          <div class="wos-theme-title">Giao diện hiển thị (Sáng / Tối)</div>
+          <div class="wos-theme-desc">Chọn chế độ màu phù hợp môi trường sử dụng</div>
+        </div>
+      </div>
+      <div class="wos-theme-seg">
+        <button type="button" class="wos-theme-seg-btn" data-theme="dark">🌙 Chế độ Tối</button>
+        <button type="button" class="wos-theme-seg-btn" data-theme="light">☀️ Chế độ Sáng</button>
+      </div>
+    `;
+    card.querySelectorAll(".wos-theme-seg-btn").forEach(btn => {
+      btn.addEventListener("click", () => applyTheme(btn.dataset.theme));
+    });
+    if (topbar && topbar.parentNode === main) {
+      topbar.insertAdjacentElement("afterend", card);
+    } else {
+      main.insertBefore(card, main.firstChild);
+    }
+    applyTheme(getSavedTheme());
+  }
+
+  applyTheme(getSavedTheme());
+  mountThemeCardInSettings();
+  document.addEventListener("DOMContentLoaded", () => { applyTheme(getSavedTheme()); mountThemeCardInSettings(); });
+  window.addEventListener("load", () => { applyTheme(getSavedTheme()); mountThemeCardInSettings(); });
+  setInterval(mountThemeCardInSettings, 800);
+})();
+// === END WEALTHOS_THEME_TOGGLE_JS ===
 </script>
 </body>
 </html>
