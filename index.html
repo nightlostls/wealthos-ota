@@ -3601,5 +3601,156 @@ refreshAllMarketData();
 })();
 // === END WEALTHOS_THEME_TOGGLE_JS ===
 </script>
+<script>
+// === WEALTHOS_DCA_USD_COMMA_PATCH ===
+(function(){
+  if (window.__wosDcaUsdCommaPatched) return;
+  window.__wosDcaUsdCommaPatched = true;
+
+  function parseSmartNum(raw) {
+    if (raw === null || raw === undefined) return 0;
+    let s = String(raw).trim().replace(/\s+/g, "");
+    if (!s) return 0;
+    const commas = (s.match(/,/g) || []).length;
+    const dots = (s.match(/\./g) || []).length;
+    if (commas > 0 && dots > 0) {
+      if (s.lastIndexOf(",") > s.lastIndexOf(".")) {
+        s = s.replace(/\./g, "").replace(",", ".");
+      } else {
+        s = s.replace(/,/g, "");
+      }
+    } else if (commas === 1) {
+      s = s.replace(",", ".");
+    } else if (commas > 1) {
+      s = s.replace(/,/g, "");
+    }
+    const n = parseFloat(s);
+    return Number.isFinite(n) ? n : 0;
+  }
+
+  function getUsdVndRate() {
+    try {
+      if (typeof state !== "undefined") {
+        const r = Number(state.usdVnd || state.manualUsdVnd || state.fxRate || state.rateUsdVnd);
+        if (r > 10000) return r;
+      }
+    } catch (e) {}
+    const bodyTxt = document.body ? document.body.innerText : "";
+    const m = bodyTxt.match(/USD\/VND[:\s]*([0-9.,]+)/i);
+    if (m) {
+      const parsed = Number(m[1].replace(/[.,]/g, ""));
+      if (parsed > 10000) return parsed;
+    }
+    return 25700;
+  }
+
+  function findDcaModal() {
+    const headings = Array.from(document.querySelectorAll("h1,h2,h3,h4,div,span"));
+    const title = headings.find(el => (el.textContent || "").trim() === "Mua thêm & Trung bình giá");
+    if (!title) return null;
+    let box = title.parentElement;
+    while (box && box !== document.body) {
+      if (box.querySelector("select") && box.querySelectorAll("input").length >= 2) return box;
+      box = box.parentElement;
+    }
+    return null;
+  }
+
+  function enhanceDcaModal() {
+    const modal = findDcaModal();
+    if (!modal) return;
+    const sel = modal.querySelector("select");
+    const inputs = Array.from(modal.querySelectorAll("input"));
+    if (!sel || inputs.length < 2) return;
+
+    const qtyInput = inputs[0];
+    const amtInput = inputs[1];
+
+    [qtyInput, amtInput].forEach(inp => {
+      if (inp.type === "number") {
+        inp.type = "text";
+        inp.setAttribute("inputmode", "decimal");
+      }
+    });
+
+    const optText = (sel.options[sel.selectedIndex]?.textContent || "").toUpperCase();
+    const isCrypto = optText.includes("BTC") || optText.includes("CRYPTO");
+
+    const labels = Array.from(modal.querySelectorAll("label, div, span"));
+    const amtLabel = labels.find(el => {
+      const t = (el.textContent || "").trim();
+      return t.startsWith("Tổng tiền mua thêm");
+    });
+
+    if (isCrypto) {
+      if (amtLabel && amtLabel.textContent.trim() !== "Tổng tiền mua thêm (USD)") {
+        amtLabel.textContent = "Tổng tiền mua thêm (USD)";
+      }
+      if (amtInput.placeholder !== "Ví dụ: 150 hoặc 150,5") {
+        amtInput.placeholder = "Ví dụ: 150 hoặc 150,5";
+      }
+      if (qtyInput.placeholder !== "Ví dụ: 0,0015") {
+        qtyInput.placeholder = "Ví dụ: 0,0015";
+      }
+    } else {
+      if (amtLabel && amtLabel.textContent.trim() !== "Tổng tiền mua thêm (VND)") {
+        amtLabel.textContent = "Tổng tiền mua thêm (VND)";
+      }
+    }
+
+    const previewBox = Array.from(modal.querySelectorAll("div")).find(el =>
+      (el.textContent || "").includes("Số lượng mới:") && (el.textContent || "").includes("Giá vốn mới:")
+    );
+
+    const qty = parseSmartNum(qtyInput.value);
+    const rawAmt = parseSmartNum(amtInput.value);
+    const rate = getUsdVndRate();
+
+    if (previewBox && isCrypto) {
+      const curMatch = (sel.options[sel.selectedIndex]?.textContent || "").match(/Hiện có:\s*([0-9.,]+).*?Vốn:\s*([0-9.,]+)/i);
+      const curQty = curMatch ? parseSmartNum(curMatch[1]) : 0;
+      const curVnd = curMatch ? parseSmartNum(curMatch[2]) : 0;
+      const curUsd = rate > 0 ? curVnd / rate : 0;
+
+      const addUsd = rawAmt;
+      const addVnd = Math.round(addUsd * rate);
+      const newQty = curQty + qty;
+      const newUsd = curUsd + addUsd;
+      const newVnd = curVnd + addVnd;
+      const avgUsd = newQty > 0 ? newUsd / newQty : 0;
+      const buyPriceUsd = qty > 0 ? addUsd / qty : 0;
+
+      const fmtQty = newQty.toLocaleString("vi-VN", { maximumFractionDigits: 8 });
+      const fmtVnd = Math.round(newVnd).toLocaleString("vi-VN");
+      const fmtUsd = newUsd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const fmtAvg = avgUsd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const fmtBuy = buyPriceUsd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      previewBox.innerHTML =
+        `<div>Số lượng mới: <b>${fmtQty}</b> · Giá vốn mới: <b>$${fmtUsd}</b> (≈ ${fmtVnd} ₫)</div>` +
+        `<div style="margin-top:4px;">Giá mua lệnh này: <b>$${fmtBuy}</b> · Giá vốn TB mới: <b>$${fmtAvg}</b></div>`;
+    }
+
+    const confirmBtn = Array.from(modal.querySelectorAll("button")).find(b =>
+      (b.textContent || "").includes("Xác nhận mua thêm")
+    );
+    if (confirmBtn && !confirmBtn.dataset.wosHooked) {
+      confirmBtn.dataset.wosHooked = "1";
+      confirmBtn.addEventListener("click", function() {
+        const qClean = parseSmartNum(qtyInput.value);
+        const aClean = parseSmartNum(amtInput.value);
+        const opt = (sel.options[sel.selectedIndex]?.textContent || "").toUpperCase();
+        const cryptoNow = opt.includes("BTC") || opt.includes("CRYPTO");
+        const r = getUsdVndRate();
+        qtyInput.value = qClean ? String(qClean) : "";
+        amtInput.value = aClean ? String(cryptoNow ? Math.round(aClean * r) : Math.round(aClean)) : "";
+      }, true);
+    }
+  }
+
+  setInterval(enhanceDcaModal, 250);
+})();
+// === END WEALTHOS_DCA_USD_COMMA_PATCH ===
+</script>
 </body>
 </html>
