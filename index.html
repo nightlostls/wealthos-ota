@@ -3602,6 +3602,8 @@ refreshAllMarketData();
 // === END WEALTHOS_THEME_TOGGLE_JS ===
 </script>
 <script>
+</script>
+<script>
 // === WEALTHOS_DCA_USD_COMMA_PATCH ===
 (function(){
   if (window.__wosDcaUsdCommaPatched) return;
@@ -3656,46 +3658,69 @@ refreshAllMarketData();
     return null;
   }
 
+  function findInputNearLabel(modal, prefixText) {
+    const labels = Array.from(modal.querySelectorAll("label, div, span"));
+    const lbl = labels.find(el => {
+      const t = (el.textContent || "").trim();
+      return t.startsWith(prefixText) && el.children.length === 0;
+    });
+    if (!lbl) return null;
+    let parent = lbl.parentElement;
+    for (let i = 0; i < 4 && parent && parent !== modal; i++) {
+      const inp = parent.querySelector("input");
+      if (inp) return { labelEl: lbl, inputEl: inp };
+      parent = parent.parentElement;
+    }
+    return { labelEl: lbl, inputEl: null };
+  }
+
+  function forceVisibleInput(inp, placeholderText) {
+    if (!inp) return;
+    if (inp.type === "number") {
+      inp.type = "text";
+    }
+    inp.setAttribute("inputmode", "decimal");
+    inp.style.setProperty("display", "block", "important");
+    inp.style.setProperty("visibility", "visible", "important");
+    inp.style.setProperty("opacity", "1", "important");
+    inp.style.setProperty("width", "100%", "important");
+    inp.style.setProperty("min-height", "38px", "important");
+    if (placeholderText && !inp.value) {
+      inp.placeholder = placeholderText;
+    }
+  }
+
   function enhanceDcaModal() {
     const modal = findDcaModal();
     if (!modal) return;
     const sel = modal.querySelector("select");
-    const inputs = Array.from(modal.querySelectorAll("input"));
-    if (!sel || inputs.length < 2) return;
+    if (!sel) return;
 
-    const qtyInput = inputs[0];
-    const amtInput = inputs[1];
+    const qtyFound = findInputNearLabel(modal, "Số lượng mua thêm");
+    const amtFound = findInputNearLabel(modal, "Tổng tiền mua thêm");
 
-    [qtyInput, amtInput].forEach(inp => {
-      if (inp.type === "number") {
-        inp.type = "text";
-        inp.setAttribute("inputmode", "decimal");
-      }
-    });
+    const allInputs = Array.from(modal.querySelectorAll("input")).filter(i => i.type !== "date");
+    const qtyInput = (qtyFound && qtyFound.inputEl) || allInputs[0];
+    const amtInput = (amtFound && amtFound.inputEl) || allInputs[1];
+    const amtLabel = amtFound ? amtFound.labelEl : null;
+
+    if (!qtyInput || !amtInput) return;
 
     const optText = (sel.options[sel.selectedIndex]?.textContent || "").toUpperCase();
     const isCrypto = optText.includes("BTC") || optText.includes("CRYPTO");
-
-    const labels = Array.from(modal.querySelectorAll("label, div, span"));
-    const amtLabel = labels.find(el => {
-      const t = (el.textContent || "").trim();
-      return t.startsWith("Tổng tiền mua thêm");
-    });
 
     if (isCrypto) {
       if (amtLabel && amtLabel.textContent.trim() !== "Tổng tiền mua thêm (USD)") {
         amtLabel.textContent = "Tổng tiền mua thêm (USD)";
       }
-      if (amtInput.placeholder !== "Ví dụ: 150 hoặc 150,5") {
-        amtInput.placeholder = "Ví dụ: 150 hoặc 150,5";
-      }
-      if (qtyInput.placeholder !== "Ví dụ: 0,0015") {
-        qtyInput.placeholder = "Ví dụ: 0,0015";
-      }
+      forceVisibleInput(qtyInput, "Ví dụ: 0,0015");
+      forceVisibleInput(amtInput, "Ví dụ: 150 hoặc 150,5");
     } else {
       if (amtLabel && amtLabel.textContent.trim() !== "Tổng tiền mua thêm (VND)") {
         amtLabel.textContent = "Tổng tiền mua thêm (VND)";
       }
+      forceVisibleInput(qtyInput, "Ví dụ: 2");
+      forceVisibleInput(amtInput, "Ví dụ: 28000000");
     }
 
     const previewBox = Array.from(modal.querySelectorAll("div")).find(el =>
@@ -3723,12 +3748,16 @@ refreshAllMarketData();
       const fmtQty = newQty.toLocaleString("vi-VN", { maximumFractionDigits: 8 });
       const fmtVnd = Math.round(newVnd).toLocaleString("vi-VN");
       const fmtUsd = newUsd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      const fmtAvg = avgUsd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      const fmtBuy = buyPriceUsd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const fmtAvg = (newQty > 0 && (qty > 0 || addUsd > 0))
+        ? "$" + avgUsd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        : "--";
+      const fmtBuy = (qty > 0 && addUsd > 0)
+        ? "$" + buyPriceUsd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        : "--";
 
       previewBox.innerHTML =
         `<div>Số lượng mới: <b>${fmtQty}</b> · Giá vốn mới: <b>$${fmtUsd}</b> (≈ ${fmtVnd} ₫)</div>` +
-        `<div style="margin-top:4px;">Giá mua lệnh này: <b>$${fmtBuy}</b> · Giá vốn TB mới: <b>$${fmtAvg}</b></div>`;
+        `<div style="margin-top:4px;">Giá mua lệnh này: <b>${fmtBuy}</b> · Giá vốn TB mới: <b>${fmtAvg}</b></div>`;
     }
 
     const confirmBtn = Array.from(modal.querySelectorAll("button")).find(b =>
